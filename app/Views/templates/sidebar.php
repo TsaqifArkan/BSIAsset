@@ -50,7 +50,7 @@
 
     <!-- Nav Item - Logout -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= base_url('logout'); ?>">
             <i class="fa-solid fa-fw fa-right-from-bracket"></i>
             <span>Logout</span></a>
     </li>
