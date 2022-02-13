@@ -5,7 +5,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">My Profile</h1>
+    <h1 class="h3 mb-4 text-gray-800">User List</h1>
 
 </div>
 
