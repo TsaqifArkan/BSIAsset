@@ -19,6 +19,19 @@
         </div>
     </div>
 
+    <!-- FLASH DATA -->
+    <?php if (session()->getFlashdata()) : ?>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong><?= session()->getFlashdata('alert'); ?></strong><?= session()->getFlashdata('msg'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <div class="row">
         <div class="col-lg-8">
@@ -47,10 +60,16 @@
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                 <span>Edit</span>
                                             </a>
-                                            <a href="<?= base_url('kategori/' . $category['id']); ?>" class="btn btn-danger mx-1">
-                                                <i class="fa-solid fa-trash"></i>
-                                                <span>Hapus</span>
-                                            </a>
+
+                                            <!-- konfigurasi tombol delete -->
+                                            <form action="/kategori/<?= $category['id']; ?>" method="POST" class="d-inline">
+                                                <?= csrf_field(); ?>
+                                                <input type="hidden" name="_method" id="" value="DELETE">
+                                                <button type="submit" class="btn btn-danger mx-1" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                    <span>Hapus</span>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

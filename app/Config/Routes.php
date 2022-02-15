@@ -38,6 +38,8 @@ $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/(:num)', 'Admin::detail/$1', ['filter' => 'role:admin']);
 $routes->get('/kategori', 'Kategori::index');
+$routes->delete('/kategori/(:num)', 'Kategori::delete/$1');
+$routes->get('/kategori/(:any)', 'Kategori::index');
 
 /*
  * --------------------------------------------------------------------

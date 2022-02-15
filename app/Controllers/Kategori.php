@@ -26,10 +26,31 @@ class Kategori extends BaseController
     {
         // dd($_POST);
         // dd($this->request->getVar());
-        // cara insert ke DB
+        // insert ke DB
         $this->kategoriModel->save([
             'nama' => $this->request->getVar('nama')
         ]);
+
+        // Flash Data
+        $dataFlash = [
+            'alert' => 'SUCCESS ! ',
+            'msg' => 'Data berhasil ditambahkan.'
+        ];
+        session()->setFlashdata($dataFlash);
+
+        return redirect()->to('/kategori');
+    }
+
+    public function delete($id)
+    {
+        $this->kategoriModel->delete($id);
+
+        // Flash Data
+        $dataFlash = [
+            'alert' => 'SUCCESS ! ',
+            'msg' => 'Data berhasil dihapus.'
+        ];
+        session()->setFlashdata($dataFlash);
 
         return redirect()->to('/kategori');
     }
