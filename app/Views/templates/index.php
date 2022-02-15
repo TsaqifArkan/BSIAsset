@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url(); ?>/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= base_url(); ?>/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <!-- My CSS -->
     <link rel="stylesheet" href="<?= base_url(); ?>/css/style.css">
@@ -98,9 +99,15 @@
     <!-- Custom scripts for all pages-->
     <script src="<?= base_url(); ?>/js/sb-admin-2.min.js"></script>
 
+    <!-- Page level plugins -->
+    <script src="<?= base_url(); ?>/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url(); ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="<?= base_url(); ?>/js/demo/datatables-demo.js"></script>
+
     <!-- My Javascript -->
     <script src="<?= base_url(); ?>/js/script.js"></script>
-
 
 
 </body>
