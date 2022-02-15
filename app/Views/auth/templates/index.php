@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-bsi-login">
 
     <?= $this->renderSection('content'); ?>
 
