@@ -13,6 +13,6 @@ class KategoriModel extends Model
     protected $allowedFields = ['nama'];
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
-    // protected $createdField = 'created_at';
-    // protected $updatedField = 'updated_at';
+    protected $createdField = '';
+    protected $updatedField = '';
 }

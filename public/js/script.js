@@ -29,3 +29,9 @@ for (let i = 0; i < aATLength; i++){
 // $(document).on('click', '.nav-item.active-toggler', function(){
 //     $(this).addClass('active').siblings().removeClass('active');
 // });
+
+
+// JQUERY - MODAL
+$('#formModal').on('shown.bs.modal', function() {
+    $('#nama').focus();
+})
