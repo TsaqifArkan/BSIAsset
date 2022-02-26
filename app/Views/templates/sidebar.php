@@ -34,6 +34,13 @@
         Kelola Barang
     </div>
 
+    <!-- Nav Item - Kelola Aset -->
+    <li class="nav-item active-toggler">
+        <a class="nav-link" href="<?= base_url('aset'); ?>">
+            <i class="fa-solid fa-fw fa-compass-drafting"></i>
+            <span>Kelola Aset</span></a>
+    </li>
+
     <!-- Nav Item - Kategori Barang -->
     <li class="nav-item active-toggler">
         <a class="nav-link" href="<?= base_url('kategori'); ?>">

@@ -35,7 +35,7 @@
                                         <td><?= $user->username; ?></td>
                                         <td><?= $user->email; ?></td>
                                         <td><?= $user->name; ?></td>
-                                        <td class="d-flex justify-content-center">
+                                        <td>
                                             <a href="<?= base_url('admin/' . $user->userid); ?>" class="btn btn-info">detail</a>
                                         </td>
                                     </tr>
