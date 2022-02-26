@@ -106,6 +106,9 @@
     <!-- Page level custom scripts -->
     <script src="<?= base_url(); ?>/js/demo/datatables-demo.js"></script>
 
+    <!-- Sweet Alert Javascript and JQuery (include CSS) -->
+    <script src="<?= base_url(); ?>/js/sweetalert2.all.min.js"></script>
+
     <!-- My Javascript -->
     <script src="<?= base_url(); ?>/js/script.js"></script>
 

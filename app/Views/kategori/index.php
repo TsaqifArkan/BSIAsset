@@ -20,8 +20,9 @@
     </div>
 
     <!-- FLASH DATA -->
+    <div class="flash-data" data-flashdata="<?= session()->getFlashdata('msg'); ?>"></div>
     <?php if (session()->getFlashdata()) : ?>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-lg-8">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong><?= session()->getFlashdata('alert'); ?></strong><?= session()->getFlashdata('msg'); ?>
@@ -30,7 +31,7 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> -->
     <?php endif; ?>
 
     <div class="row">

@@ -99,3 +99,43 @@ Catatan app/views/templates/sidebar.php
             <i class="fas fa-fw fa-table"></i>
             <span>Tables</span></a>
     </li>
+
+Catatan app/views/kategori/index.php bagian Flash Data (setelah button Tambah Kategori)
+
+    <!-- FLASH DATA -->
+    <?php if (session()->getFlashdata()) : ?>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong><?= session()->getFlashdata('alert'); ?></strong><?= session()->getFlashdata('msg'); ?>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+Catatan app/views/kategori/index.php bagian konfigurasi tombol delete
+
+    <!-- konfigurasi tombol delete -->
+    <form action="/kategori/<?= $category['id']; ?>" method="POST" class="d-inline">
+        <?= csrf_field(); ?>
+        <input type="hidden" name="_method" id="" value="DELETE">
+        <button type="submit" class="btn btn-danger mx-1" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');">
+            <i class="fa-solid fa-trash"></i>
+            <span>Hapus</span>
+        </button>
+    </form>
+
+Catatan app/views/kategori/index.php bagian konfigurasi tombol delete versi sweet alert (blm berhasil)
+
+    <!-- konfigurasi tombol delete -->
+    <form action="/kategori/<?= $category['id']; ?>" method="POST" class="d-inline">
+        <?= csrf_field(); ?>
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit" class="btn btn-danger mx-1 tombol-hapus" data-id="/kategori">
+            <i class="fa-solid fa-trash"></i>
+            <span>Hapus</span>
+        </button>
+    </form>
