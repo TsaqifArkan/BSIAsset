@@ -43,6 +43,7 @@ $routes->delete('/kategori/(:num)', 'Kategori::delete/$1');
 $routes->get('/kategori/(:any)', 'Kategori::index');
 
 $routes->get('/aset', 'Aset::index');
+$routes->get('/aset/(:num)', 'Aset::detail/$1');
 
 /*
  * --------------------------------------------------------------------

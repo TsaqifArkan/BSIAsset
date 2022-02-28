@@ -60,8 +60,8 @@
                                         <th scope="row"><?= $i++; ?></th>
                                         <td><?= $aset['nama']; ?></td>
                                         <td><?= $aset['tgl_perolehan']; ?></td>
-                                        <td><?= $aset['harga']; ?></td>
-                                        <td><?= $aset['usia_teknis']; ?></td>
+                                        <td><?= numfmt_format($numFmt, $aset['harga']); ?></td>
+                                        <td><?= $aset['usia_teknis']; ?> bulan</td>
                                         <td class="d-flex justify-content-center">
                                             <a href="<?= base_url('aset/' . $aset['id']); ?>" class="btn btn-info mx-1">
                                                 <span>Detail</span>
