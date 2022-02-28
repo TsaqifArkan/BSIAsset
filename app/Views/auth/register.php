@@ -47,8 +47,16 @@
                                 <!-- <div class="text-center">
                                     <a class="small" href="forgot-password.html">Forgot Password?</a>
                                 </div> -->
+                                <!-- <div class="text-center">
+                                    <p> <? // echo lang('Auth.alreadyRegistered'); 
+                                        ?> <a class="small" href="<? // echo route_to('login'); 
+                                                                    ?>"><? // echo lang('Auth.signIn'); 
+                                                                        ?></a></p>
+                                </div> -->
                                 <div class="text-center">
-                                    <p> <?= lang('Auth.alreadyRegistered'); ?> <a class="small" href="<?= route_to('login'); ?>"><?= lang('Auth.signIn'); ?></a></p>
+                                    <p> <?= lang('Auth.alreadyRegistered');
+                                        ?> <a class="small" href="<?= route_to('login');
+                                                                    ?>">Login</a></p>
                                 </div>
                             </div>
                         </div>

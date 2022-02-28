@@ -19,7 +19,9 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4"><?= lang('Auth.loginTitle'); ?></h1>
+                                    <!-- <h1 class="h4 text-gray-900 mb-4"><?php // echo lang('Auth.loginTitle'); 
+                                                                            ?></h1> -->
+                                    <h1 class="h4 text-gray-900 mb-4">Login</h1>
                                 </div>
 
                                 <?= view('Myth\Auth\Views\_message_block'); ?>
@@ -59,8 +61,12 @@
                                         </div>
                                     <?php endif; ?>
 
+                                    <!-- <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <?php // echo lang('Auth.loginAction'); 
+                                        ?>
+                                    </button> -->
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        <?= lang('Auth.loginAction'); ?>
+                                        Login
                                     </button>
                                 </form>
 
