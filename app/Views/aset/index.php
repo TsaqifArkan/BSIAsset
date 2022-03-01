@@ -4,6 +4,17 @@
 
 <div class="container-fluid">
 
+    <!-- BreadCrumb -->
+    <div class="row">
+        <div class="col-lg-8">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Aset</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Daftar Aset Bank</h1>
     <?php // dd($assets);
