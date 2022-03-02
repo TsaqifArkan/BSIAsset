@@ -8,6 +8,49 @@
         <div class="sidebar-brand-text mx-3">BSI Asset</div>
     </a>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        User Profile
+    </div>
+
+    <!-- Nav Item - My Profile -->
+    <li class="nav-item active-toggler">
+        <a class="nav-link default-a-index" href="<?= base_url('user'); ?>">
+            <i class="fa-solid fa-fw fa-user"></i>
+            <span>My Profile</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Kelola Barang
+    </div>
+
+    <!-- Nav Item - Kelola Aset -->
+    <li class="nav-item active-toggler">
+        <a class="nav-link" href="<?= base_url('aset'); ?>">
+            <i class="fa-solid fa-fw fa-compass-drafting"></i>
+            <span>Kelola Aset</span></a>
+    </li>
+
+    <!-- Nav Item - Kelola Aset -->
+    <li class="nav-item active-toggler">
+        <a class="nav-link" href="<?= base_url('sewa'); ?>">
+            <i class="fa-solid fa-fw fa-truck-ramp-box"></i>
+            <span>Sewa Barang</span></a>
+    </li>
+
+    <!-- Nav Item - Kategori Barang -->
+    <li class="nav-item active-toggler">
+        <a class="nav-link" href="<?= base_url('kategori'); ?>">
+            <i class="fa-solid fa-fw fa-list"></i>
+            <span>Kategori Barang</span></a>
+    </li>
 
     <?php if (in_groups('admin')) : ?>
         <!-- Divider -->
@@ -31,43 +74,6 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Kelola Barang
-    </div>
-
-    <!-- Nav Item - Kelola Aset -->
-    <li class="nav-item active-toggler">
-        <a class="nav-link" href="<?= base_url('aset'); ?>">
-            <i class="fa-solid fa-fw fa-compass-drafting"></i>
-            <span>Kelola Aset</span></a>
-    </li>
-
-    <!-- Nav Item - Kategori Barang -->
-    <li class="nav-item active-toggler">
-        <a class="nav-link" href="<?= base_url('kategori'); ?>">
-            <i class="fa-solid fa-fw fa-list"></i>
-            <span>Kategori Barang</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        User Profile
-    </div>
-
-    <!-- Nav Item - My Profile -->
-    <li class="nav-item active-toggler">
-        <a class="nav-link default-a-index" href="<?= base_url('user'); ?>">
-            <i class="fa-solid fa-fw fa-user"></i>
-            <span>My Profile</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
         Settings
     </div>
 
@@ -85,6 +91,5 @@
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
 
 </ul>
