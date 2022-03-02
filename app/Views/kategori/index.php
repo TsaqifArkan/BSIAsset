@@ -61,16 +61,9 @@
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                 <span>Edit</span>
                                             </a>
-
                                             <!-- konfigurasi tombol delete -->
-                                            <form action="/kategori/<?= $category['id']; ?>" method="POST" class="d-inline">
-                                                <?= csrf_field(); ?>
-                                                <input type="hidden" name="_method" id="" value="DELETE">
-                                                <button type="submit" class="btn btn-danger mx-1" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                    <span>Hapus</span>
-                                                </button>
-                                            </form>
+                                            <a href="<?= base_url(); ?>/kategori/<?= $category['id']; ?>" class="btn btn-danger mx-1 tombol-hapus">
+                                                <i class="fa-solid fa-trash"></i><span> Hapus</span></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -85,7 +78,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+<div class="modal fade mt-5" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
