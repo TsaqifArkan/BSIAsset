@@ -65,13 +65,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1; ?>
-                                <?php foreach ($assets as $aset) : ?>
+                                <?php $i = 1;
+                                $j = 0; ?>
+                                <?php // dd($assets);
+                                ?>
+                                <?php foreach ($assets['majority'] as $aset) : ?>
+                                    <?php
+                                    // dd($assets);
+                                    // dd($aset);
+                                    ?>
                                     <tr>
                                         <th scope="row"><?= $i++; ?></th>
                                         <td><?= $aset['nama']; ?></td>
-                                        <td><?= $aset['tgl_perolehan']; ?></td>
-                                        <td><?= numfmt_format($numFmt, $aset['harga']); ?></td>
+                                        <td><?= $assets['dateFmtr'][$j]; ?></td>
+                                        <td><?= $assets['numFmtr'][$j]; ?></td>
                                         <td><?= $aset['usia_teknis']; ?> bulan</td>
                                         <td class="d-flex justify-content-center">
                                             <a href="<?= base_url('aset/' . $aset['id']); ?>" class="btn btn-info mx-1">
@@ -79,6 +86,7 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    <?php $j++; ?>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -91,7 +99,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+<div class="modal fade mt-5" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -114,10 +122,18 @@
                     </div>
                     <div class="form-group">
                         <label for="hargaPerolehan">Harga Perolehan</label>
-                        <input type="number" class="form-control" id="hargaPerolehan" name="hargaPerolehan">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Rp</span>
+                            </div>
+                            <input type="number" class="form-control" id="hargaPerolehan" name="hargaPerolehan">
+                            <div class="input-group-append">
+                                <span class="input-group-text">,00</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="usiaTeknis">Usia Teknis</label>
+                        <label for="usiaTeknis">Usia Teknis (bulan)</label>
                         <input type="number" class="form-control" id="usiaTeknis" name="usiaTeknis">
                     </div>
             </div>

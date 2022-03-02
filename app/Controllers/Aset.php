@@ -3,31 +3,41 @@
 namespace App\Controllers;
 
 use App\Models\AsetModel;
-use DateTime;
-use NumberFormatter;
-use PhpParser\Node\Stmt\Echo_;
 
 class Aset extends BaseController
 {
-    protected $asetModel, $db, $builder, $numfmt;
+    protected $asetModel, $db, $builder;
 
     public function __construct()
     {
         $this->asetModel    = new AsetModel();
         $this->db           = \Config\Database::connect();
         $this->builder      = $this->db->table('aset');
-        // Percobaan NumberFormatter
-        $this->numfmt = new NumberFormatter('id_ID', NumberFormatter::CURRENCY);
     }
 
     public function index()
     {
-        $result = $this->asetModel->findAll();
+        $results = $this->asetModel->findAll();
+
+        // Specify a Generality
+        $datefmtr = [];
+        $numfmtr = [];
+        foreach ($results as $result) {
+            // Change Date Format
+            array_push($datefmtr, date_format(date_create($result['tgl_perolehan']), "d/m/Y"));
+            // Change Number Formatter
+            array_push($numfmtr, numfmt_format($this->numfmt, $result['harga']));
+        }
 
         $data = [
             'title' => 'Kelola Aset',
-            'assets' => $result,
-            'numFmt' => $this->numfmt
+            'assets' => [
+                'majority' => $results,
+                'dateFmtr' => $datefmtr,
+                'numFmtr' => $numfmtr
+            ]
+            // 'numFmt' => $this->numfmt
+            // 'dateFmt' => $datefmt
         ];
 
         return view('aset/index', $data);
