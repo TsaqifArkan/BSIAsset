@@ -17,9 +17,90 @@
     </div>
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Detail Aset</h1>
-    <?php // d($aset);
-    ?>
+    <div class="row">
+        <div class="col-lg">
+            <h1 class="h3 mb-4 text-gray-800">Detail Aset</h1>
+            <?php // d($aset);
+            ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-3">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Detail Aset</h6>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-2 font-weight-bold">
+                                Nama Barang
+                            </div>
+                            <div class="col pl-4 m-auto">
+                                <?= $aset->nama; ?>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2 font-weight-bold">
+                                Tanggal Perolehan
+                            </div>
+                            <div class="col pl-4 m-auto">
+                                <?= $aset->tgl_perolehan; ?>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2 font-weight-bold">
+                                Harga Perolehan
+                            </div>
+                            <div class="col pl-4 m-auto">
+                                <?= $harga; ?>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2 font-weight-bold">
+                                Usia Teknis
+                            </div>
+                            <div class="col pl-4 m-auto">
+                                <?= $aset->usia_teknis; ?> (bulan)
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2 font-weight-bold">
+                                Nilai Buku
+                            </div>
+                            <div class="col pl-4 m-auto">
+                                <?= $nilaiBuku; ?>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2 font-weight-bold">
+                                Sisa Usia Teknis
+                            </div>
+                            <div class="col pl-4 m-auto">
+                                <?= $sisaUTeknis; ?> (bulan)
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-2 font-weight-bold">
+                                Batas Akhir Usia Teknis
+                            </div>
+                            <div class="col pl-4 m-auto">
+                                <?= $aset->exp_date; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-lg-2">
