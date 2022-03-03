@@ -51,10 +51,10 @@
                                 <tr>
                                     <th scope="col">No.</th>
                                     <th scope="col">Nama Barang</th>
-                                    <th scope="col">Tanggal Perolehan</th>
-                                    <th scope="col">Harga Perolehan</th>
-                                    <th scope="col">Usia Teknis</th>
-                                    <th scope="col">Aksi</th>
+                                    <th scope="col" class="col-tglPrlh">Tanggal Perolehan</th>
+                                    <th scope="col" class="col-hrgPrlh">Harga Perolehan</th>
+                                    <th scope="col" class="col-usiaTeknis">Usia Teknis</th>
+                                    <th scope="col" class="col-aksi">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,14 +73,17 @@
                                         <td><?= $assets['dateFmtr'][$j]; ?></td>
                                         <td><?= $assets['numFmtr'][$j]; ?></td>
                                         <td><?= $aset['usia_teknis']; ?> bulan</td>
-                                        <!-- <td class="d-flex justify-content-center"> -->
-                                        <td class="m-auto">
-                                            <a href="<?= base_url('aset/' . $aset['id']); ?>" class="btn btn-info mx-1">
-                                                <span>Detail</span>
+                                        <td>
+                                            <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info">
+                                                Detail
+                                            </a>
+                                            <a href="<?= base_url('aset/edit/' . $aset['id']); ?>" class="btn btn-warning">
+                                                Edit
+                                            </a>
+                                            <a href="<?= base_url('aset/delete/' . $aset['id']); ?>" class="btn btn-danger">
+                                                Hapus
                                             </a>
                                         </td>
-
-                                        <!-- </td> -->
                                     </tr>
                                     <?php $j++; ?>
                                 <?php endforeach; ?>

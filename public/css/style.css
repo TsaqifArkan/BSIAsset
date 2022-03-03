@@ -16,7 +16,50 @@
 	background-size: cover;
 }
 
-table {
+/* Konfigurasi Tabel */
+.col-tglPrlh,
+.col-hrgPrlh {
+	width: 12%;
+}
+
+.col-usiaTeknis {
+	width: 8%;
+}
+
+.col-aksi {
+	width: 15%;
+}
+
+/* table {
 	width: 50%;
 	border-spacing: 0px;
+} */
+
+/* .class-aksi {
+	justify-content: center;
+	align-items: stretch;
 }
+
+.class-aksi a {
+	margin: 2px;
+} */
+
+/* BELAJAR GRID */
+/* .tes-container {
+	width: 60%;
+	margin: 50px auto;
+	display: grid;
+	grid-template-columns: 100px 25% 200px;
+	grid-template-rows: 100px;
+}
+
+.tes-item {
+	background-color: rgb(138, 209, 254);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.tes-item:nth-child(even) {
+	background-color: rgb(255, 142, 142);
+} */
