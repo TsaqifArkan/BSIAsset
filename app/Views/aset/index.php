@@ -6,7 +6,7 @@
 
     <!-- BreadCrumb -->
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item active" aria-current="page">Aset</li>
@@ -16,12 +16,17 @@
     </div>
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Daftar Aset Bank</h1>
+    <div class="row mb-2">
+        <div class="col">
+            <h1 class="h3 text-gray-800">Daftar Aset Bank</h1>
+        </div>
+    </div>
+
     <?php // dd($assets);
     ?>
 
-    <div class="row mb-4">
-        <div class="col-lg-8">
+    <div class="row mb-3">
+        <div class="col">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-facebook tombolTambahKategori" data-toggle="modal" data-target="#formModal">
                 <!-- value data-bs-target harus sama dg nama modalnya -->
@@ -32,21 +37,9 @@
 
     <!-- FLASH DATA -->
     <div class="flash-data" data-flashdata="<?= session()->getFlashdata('msg'); ?>"></div>
-    <?php if (session()->getFlashdata()) : ?>
-        <!-- <div class="row">
-            <div class="col-lg-8">
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong><?= session()->getFlashdata('alert'); ?></strong><?= session()->getFlashdata('msg'); ?>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            </div>
-        </div> -->
-    <?php endif; ?>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Tabel Aset Barang</h6>
@@ -80,11 +73,14 @@
                                         <td><?= $assets['dateFmtr'][$j]; ?></td>
                                         <td><?= $assets['numFmtr'][$j]; ?></td>
                                         <td><?= $aset['usia_teknis']; ?> bulan</td>
-                                        <td class="d-flex justify-content-center">
+                                        <!-- <td class="d-flex justify-content-center"> -->
+                                        <td class="m-auto">
                                             <a href="<?= base_url('aset/' . $aset['id']); ?>" class="btn btn-info mx-1">
                                                 <span>Detail</span>
                                             </a>
                                         </td>
+
+                                        <!-- </td> -->
                                     </tr>
                                     <?php $j++; ?>
                                 <?php endforeach; ?>
