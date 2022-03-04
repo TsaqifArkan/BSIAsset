@@ -10,7 +10,7 @@ class AsetModel extends Model
     protected $primaryKey = 'id';
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['nama', 'tgl_perolehan', 'harga', 'usia_teknis', 'nilai_buku', 'sisa_u_teknis'];
+    protected $allowedFields = ['nama', 'tgl_perolehan', 'harga', 'usia_teknis'];
     protected $useTimestamps = true;
     protected $dateFormat = 'date';
     protected $createdField = '';
