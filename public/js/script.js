@@ -70,3 +70,58 @@ $('.tombol-hapus').on('click', function(e){
         }
       })
 });
+
+
+// // SCRIPT DATATABLE
+// $(document).ready( function () {
+//     $('#dataTable').DataTable();
+// } );
+
+// SCRIPT MODAL TABEL ASET (TAMBAH DAN UBAH)
+$(function(){
+    $('.tombolTambahData').on('click', function(){
+        $('#judulModal').html('Tambah Aset Data');
+        // dibawah ini adalah CSS Selector
+        $('.modal-footer button[type=submit]').html('Tambah Data');
+
+        $('#nama').val('');
+        $('#tglPerolehan').val('');
+        $('#hargaPerolehan').val('');
+        $('#usiaTeknis').val('');
+
+    });
+
+    $('.tampilModalEdit').on('click', function(){
+        $('#judulModal').html('Ubah Aset Data');
+        // dibawah ini adalah CSS Selector
+        $('.modal-footer button[type=submit]').html('Ubah Data');
+        $('.modal-body form').attr('action', 'http://localhost:8080/aset/edit');
+
+        // this disini merujuk pada tombol apapun yg diklik (based on parent terdekat, dlm kasus ini saat menyeleksi class tampilModalEdit)
+        const id = $(this).data('id');
+        console.log(id); // didapatkan id untuk aset tertentu
+
+        $('#nama').val('');
+        $('#tglPerolehan').val('');
+        $('#hargaPerolehan').val('');
+        $('#usiaTeknis').val('');
+
+        $.ajax({
+            url: 'http://localhost:8080/aset/getedit',
+            // id sebelah kiri adalah nama data yg dikirimkan, yg sblh kanan adalah isi datanya
+            data: {id : id},
+            method: 'POST',
+            dataType: 'JSON',
+            // bila permintaan Ajax ke url berhasil, bila ada data yg akan dikembalikan, maka akan ditangkap oleh variabel data
+            success: function(data){
+                // console.log(data);
+                $('#nama').val(data.nama);
+                $('#tglPerolehan').val(data.tgl_perolehan);
+                $('#hargaPerolehan').val(data.harga);
+                $('#usiaTeknis').val(data.usia_teknis);
+                $('#id').val(data.id);
+            }
+        });
+
+    });
+});

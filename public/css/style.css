@@ -17,6 +17,10 @@
 }
 
 /* Konfigurasi Tabel */
+.col-no {
+	width: 5%;
+}
+
 .col-tglPrlh,
 .col-hrgPrlh {
 	width: 12%;

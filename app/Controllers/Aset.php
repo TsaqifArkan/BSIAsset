@@ -102,4 +102,55 @@ class Aset extends BaseController
 
         return view('aset/detail', $data);
     }
+
+    public function delete($id)
+    {
+        $this->asetModel->delete($id);
+
+        // Flash Data
+        $dataFlash = [
+            'alert' => 'SUCCESS ! ',
+            'msg' => 'Data berhasil dihapus.'
+        ];
+        session()->setFlashdata($dataFlash);
+
+        return redirect()->to('/aset');
+    }
+
+    public function getEdit()
+    {
+        // echo 'data akan segera dikirimkan gan';
+        // echo $_POST["id"];
+        // dd($this->detail($_POST["id"]));
+
+        $this->builder->select('*');
+        $this->builder->where('aset.id', $_POST["id"]);
+        $query = $this->builder->get()->getRow();
+        echo json_encode($query);
+    }
+
+    public function edit()
+    {
+        // dd($_POST);
+
+        // Update ke DB
+        $data = [
+            'nama' => $_POST["nama"],
+            'tgl_perolehan'  => $_POST["tglPerolehan"],
+            'harga'  => $_POST["hargaPerolehan"],
+            'usia_teknis' => $_POST["usiaTeknis"]
+        ];
+
+        $this->builder->where('id', $_POST["id"]);
+        $this->builder->update($data);
+
+        // Flash Data
+        $dataFlash = [
+            'alert' => 'SUCCESS ! ',
+            'msg' => 'Data berhasil diubah.'
+        ];
+        session()->setFlashdata($dataFlash);
+
+        return redirect()->to('/aset');
+    }
 }

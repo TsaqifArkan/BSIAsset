@@ -28,7 +28,7 @@
     <div class="row mb-3">
         <div class="col">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-facebook tombolTambahKategori" data-toggle="modal" data-target="#formModal">
+            <button type="button" class="btn btn-facebook tombolTambahData" data-toggle="modal" data-target="#formModal">
                 <!-- value data-bs-target harus sama dg nama modalnya -->
                 Tambah Aset Data
             </button>
@@ -49,7 +49,7 @@
                         <table class="table table-bordered" id="dataTable">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col">No.</th>
+                                    <th scope="col" class="col-no">No.</th>
                                     <th scope="col">Nama Barang</th>
                                     <th scope="col" class="col-tglPrlh">Tanggal Perolehan</th>
                                     <th scope="col" class="col-hrgPrlh">Harga Perolehan</th>
@@ -77,10 +77,10 @@
                                             <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info">
                                                 Detail
                                             </a>
-                                            <a href="<?= base_url('aset/edit/' . $aset['id']); ?>" class="btn btn-warning">
+                                            <a href="<?= base_url('aset/edit/' . $aset['id']); ?>" class="btn btn-warning tampilModalEdit" data-toggle="modal" data-target="#formModal" data-id="<?= $aset['id']; ?>">
                                                 Edit
                                             </a>
-                                            <a href="<?= base_url('aset/delete/' . $aset['id']); ?>" class="btn btn-danger">
+                                            <a href="<?= base_url('aset/delete/' . $aset['id']); ?>" class="btn btn-danger tombol-hapus">
                                                 Hapus
                                             </a>
                                         </td>
@@ -111,6 +111,7 @@
 
                 <form action="<?= base_url(); ?>/aset/tambah" method="POST" autocomplete="off">
                     <?= csrf_field(); ?>
+                    <input type="hidden" name="id" id="id">
                     <div class="form-group">
                         <label for="nama">Nama Barang</label>
                         <input type="text" class="form-control" id="nama" name="nama">
