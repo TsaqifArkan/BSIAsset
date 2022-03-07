@@ -71,11 +71,10 @@ $('.tombol-hapus').on('click', function(e){
       })
 });
 
-
-// // SCRIPT DATATABLE
-// $(document).ready( function () {
-//     $('#dataTable').DataTable();
-// } );
+// Call the dataTables jQuery plugin
+$(document).ready(function() {
+    $('#dataTable').DataTable();
+});
 
 // SCRIPT MODAL TABEL ASET (TAMBAH DAN UBAH)
 $(function(){
