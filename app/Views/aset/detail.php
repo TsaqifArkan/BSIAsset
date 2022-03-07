@@ -92,7 +92,7 @@
                                 Batas Akhir Usia Teknis
                             </div>
                             <div class="col pl-4 m-auto">
-                                <?= $aset->exp_date; ?>
+                                <?= $aset->maks_u_teknis; ?>
                             </div>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                                     <?= $sisaUTeknis; ?> (bulan)
                                 </li>
                                 <li class="list-group-item">
-                                    <?= $aset->exp_date; ?>
+                                    <?= $aset->maks_u_teknis; ?>
                                 </li>
                             </ul>
                         </div>

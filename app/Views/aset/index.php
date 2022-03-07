@@ -58,20 +58,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1;
-                                $j = 0; ?>
-                                <?php // dd($assets);
-                                ?>
-                                <?php foreach ($assets['majority'] as $aset) : ?>
-                                    <?php
-                                    // dd($assets);
-                                    // dd($aset);
-                                    ?>
+                                <?php foreach ($assets['majority'] as $i => $aset) : ?>
                                     <tr>
-                                        <th scope="row"><?= $i++; ?></th>
+                                        <th scope="row"><?= $i + 1; ?></th>
                                         <td><?= $aset['nama']; ?></td>
-                                        <td><?= $assets['dateFmtr'][$j]; ?></td>
-                                        <td><?= $assets['numFmtr'][$j]; ?></td>
+                                        <td><?= $assets['dateFmtr'][$i]; ?></td>
+                                        <td><?= $assets['numFmtr'][$i]; ?></td>
                                         <td><?= $aset['usia_teknis']; ?> bulan</td>
                                         <td>
                                             <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info">
@@ -85,7 +77,6 @@
                                             </a>
                                         </td>
                                     </tr>
-                                    <?php $j++; ?>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>

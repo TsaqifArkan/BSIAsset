@@ -77,9 +77,9 @@ class Aset extends BaseController
 
         // Percobaan Sisa Usia Teknis menggunakan Detik
         // $dateNow = new DateTime(date('Y-m-d'));
-        // $dateExp = new DateTime(date($data['aset']->exp_date));
+        // $dateExp = new DateTime(date($data['aset']->maks_u_teknis));
         $dateNow = strtotime(date('Y-m-d'));
-        $dateExp = strtotime($data['aset']->exp_date);
+        $dateExp = strtotime($data['aset']->maks_u_teknis);
         $interval = ($dateExp - $dateNow) / 60 / 60 / 24 / 30;
         $interval = ($interval > 0) ? ceil($interval) : 0;
 
