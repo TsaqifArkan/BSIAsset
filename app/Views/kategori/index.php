@@ -35,7 +35,7 @@
     <?php endif; ?>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Tabel Kategori Barang</h6>
@@ -45,9 +45,9 @@
                         <table class="table table-bordered" id="dataTable">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th scope="col" class="col-1">No.</th>
-                                    <th scope="col" class="col-5">Nama Kategori</th>
-                                    <th scope="col" class="col-2">Aksi</th>
+                                    <th scope="col" style="width: 10px;">No.</th>
+                                    <th scope="col">Nama Kategori</th>
+                                    <th scope="col" style="width: 100px;">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -74,6 +74,48 @@
             </div>
         </div>
     </div>
+
+    <!-- Percobaan implementasi GRID -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Tabel Kategori Barang</h6>
+                </div>
+                <div class="card-body">
+                    <div class="tes-container">
+                        <div class="tes-item">1</div>
+                        <div class="tes-item">2</div>
+                        <div class="tes-item">3</div>
+                        <div class="tes-item">4</div>
+                        <div class="tes-item">5</div>
+                        <div class="tes-item">6</div>
+                        <div class="tes-item">7</div>
+                        <div class="tes-item">8</div>
+                        <div class="tes-item">9</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </div>
 
