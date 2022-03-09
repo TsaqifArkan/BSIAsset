@@ -45,24 +45,54 @@ class Aset extends BaseController
 
     public function tambah()
     {
-        // dd($_POST);
-        // dd($this->request->getVar());
-        // insert ke DB
-        $this->asetModel->save([
-            'nama' => $this->request->getVar('nama'),
-            'tgl_perolehan' => $this->request->getVar('tglPerolehan'),
-            'harga' => $this->request->getVar('hargaPerolehan'),
-            'usia_teknis' => $this->request->getVar('usiaTeknis')
-        ]);
+        // Validation
+        if ($this->request->isAJAX()) {
+            $validation = \Config\Services::validation();
+            $valid = $this->validate([
+                'nama' => [
+                    'label' => 'Nama Barang',
+                    'rules' => 'required|is_unique[aset.nama]',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!',
+                        'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
+                    ]
+                ],
+                'tglPerolehan' => [
+                    'label' => 'Tanggal Perolehan',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ]
+            ]);
+            $msg = [];
+            if (!$valid) {
+                $msg = [
+                    'error' => [
+                        'nama' => $validation->getError('nama'),
+                        'tglPerolehan' => $validation->getError('tglPerolehan')
+                    ]
+                ];
+            } else {
+                // insert ke DB
+                $this->asetModel->save([
+                    'nama' => $this->request->getVar('nama'),
+                    'tgl_perolehan' => $this->request->getVar('tglPerolehan'),
+                    'harga' => $this->request->getVar('hargaPerolehan'),
+                    'usia_teknis' => $this->request->getVar('usiaTeknis')
+                ]);
 
-        // Flash Data
-        $dataFlash = [
-            'alert' => 'SUCCESS ! ',
-            'msg' => 'Data berhasil ditambahkan.'
-        ];
-        session()->setFlashdata($dataFlash);
-
-        return redirect()->to('/aset');
+                // Flash Data
+                $dataFlash = [
+                    'alert' => 'SUCCESS ! ',
+                    'msg' => 'Data berhasil ditambahkan.'
+                ];
+                session()->setFlashdata($dataFlash);
+            }
+            echo json_encode($msg);
+        } else {
+            exit("Woops! seems you're quite curious..");
+        }
     }
 
     public function detail($id = 0)
@@ -152,5 +182,17 @@ class Aset extends BaseController
         session()->setFlashdata($dataFlash);
 
         return redirect()->to('/aset');
+    }
+
+    public function formTambah()
+    {
+        if ($this->request->isAJAX()) {
+            $msg = [
+                'data' => view('aset/modaltambah')
+            ];
+            echo json_encode($msg);
+        } else {
+            exit("Woops! seems you're quite curious..");
+        }
     }
 }

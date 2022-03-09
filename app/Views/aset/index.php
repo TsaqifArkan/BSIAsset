@@ -28,9 +28,9 @@
     <div class="row mb-3">
         <div class="col">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-facebook tombolTambahData" data-toggle="modal" data-target="#formModal">
+            <button type="button" class="btn btn-facebook tombolTambah" data-toggle="modal" data-target="#formModal">
                 <!-- value data-bs-target harus sama dg nama modalnya -->
-                Tambah Aset Data
+                <i class="fa-solid fa-fw fa-circle-plus mr-1"></i>Tambah Aset Data
             </button>
         </div>
     </div>
@@ -87,54 +87,6 @@
     </div>
 
 </div>
-
-<!-- Modal -->
-<div class="modal fade mt-5" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title font-weight-bold" id="judulModal">Tambah Aset Data</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <form action="<?= base_url(); ?>/aset/tambah" method="POST" autocomplete="off">
-                    <?= csrf_field(); ?>
-                    <input type="hidden" name="id" id="id">
-                    <div class="form-group">
-                        <label for="nama">Nama Barang</label>
-                        <input type="text" class="form-control" id="nama" name="nama">
-                    </div>
-                    <div class="form-group">
-                        <label for="tglPerolehan">Tanggal Perolehan</label>
-                        <input type="date" class="form-control" id="tglPerolehan" name="tglPerolehan">
-                    </div>
-                    <div class="form-group">
-                        <label for="hargaPerolehan">Harga Perolehan</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Rp</span>
-                            </div>
-                            <input type="number" class="form-control" id="hargaPerolehan" name="hargaPerolehan">
-                            <div class="input-group-append">
-                                <span class="input-group-text">,00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="usiaTeknis">Usia Teknis (bulan)</label>
-                        <input type="number" class="form-control" id="usiaTeknis" name="usiaTeknis">
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Tambah Data</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="viewModal" style="display: none;"></div>
 
 <?= $this->endSection(); ?>
