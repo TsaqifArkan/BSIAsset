@@ -1,9 +1,9 @@
 <!-- Modal -->
-<div class="modal fade mt-5" id="modalTambah" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+<div class="modal fade mt-5" id="modalTambahAset" tabindex="-1" aria-labelledby="judulModalAset" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title font-weight-bold" id="judulModal">Tambah Aset Data</h5>
+                <h5 class="modal-title font-weight-bold" id="judulModalAset">Tambah Aset Data</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,16 +15,12 @@
                 <div class="form-group">
                     <label for="nama">Nama Barang</label>
                     <input type="text" class="form-control" id="nama" name="nama">
-                    <div class="invalid-feedback errorNama">
-
-                    </div>
+                    <div class="invalid-feedback errorNama"></div>
                 </div>
                 <div class="form-group">
                     <label for="tglPerolehan">Tanggal Perolehan</label>
                     <input type="date" class="form-control" id="tglPerolehan" name="tglPerolehan">
-                    <div class="invalid-feedback errorTgl">
-
-                    </div>
+                    <div class="invalid-feedback errorTgl"></div>
                 </div>
                 <div class="form-group">
                     <label for="hargaPerolehan">Harga Perolehan</label>
@@ -36,11 +32,13 @@
                         <div class="input-group-append">
                             <span class="input-group-text">,00</span>
                         </div>
+                        <div class="invalid-feedback errorHrg"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="usiaTeknis">Usia Teknis (bulan)</label>
                     <input type="number" class="form-control" id="usiaTeknis" name="usiaTeknis">
+                    <div class="invalid-feedback errorUsia"></div>
                 </div>
 
             </div>
@@ -87,8 +85,24 @@
                             $('#tglPerolehan').removeClass('is-invalid');
                             $('.errorTgl').html('');
                         }
+
+                        if (response.error.hargaPerolehan) {
+                            $('#hargaPerolehan').addClass('is-invalid');
+                            $('.errorHrg').html(response.error.hargaPerolehan);
+                        } else {
+                            $('#hargaPerolehan').removeClass('is-invalid');
+                            $('.errorHrg').html('');
+                        }
+
+                        if (response.error.usiaTeknis) {
+                            $('#usiaTeknis').addClass('is-invalid');
+                            $('.errorUsia').html(response.error.usiaTeknis);
+                        } else {
+                            $('#usiaTeknis').removeClass('is-invalid');
+                            $('.errorUsia').html('');
+                        }
                     } else {
-                        $('#modalTambah').modal('hide');
+                        $('#modalTambahAset').modal('hide');
                         // simulates similar behavior as an HTTP redirect
                         window.location.replace("http://localhost:8080/aset");
                     }

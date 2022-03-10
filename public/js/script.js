@@ -124,23 +124,3 @@ $(function(){
 
     });
 });
-
-// Konfigurasi Modal Tambah Aset di index.php (aset)
-$(document).ready(function() {
-    $('.tombolTambah').click(function(e) {
-        e.preventDefault();
-        $.ajax({
-            url: "http://localhost:8080/aset/formtambah",
-            dataType: "json",
-            success: function (response) {
-                $('.viewModal').html(response.data).show();
-
-                $('#modalTambah').modal('show');
-            },
-            error: function (xhr, ajaxOptions, thrownError) {  
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-            }
-        });
-    });
-});
-

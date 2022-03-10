@@ -21,6 +21,9 @@
 
     <!-- My CSS -->
     <link rel="stylesheet" href="<?= base_url(); ?>/css/style.css">
+
+    <!-- Jquery Default File -->
+    <script src="<?= base_url(); ?>/vendor/jquery/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -90,7 +93,6 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="<?= base_url(); ?>/vendor/jquery/jquery.min.js"></script>
     <script src="<?= base_url(); ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -111,9 +113,6 @@
 
     <!-- Page level custom scripts -->
     <script src="<?= base_url(); ?>/js/demo/datatables-demo.js"></script>
-
-
-
 
 </body>
 

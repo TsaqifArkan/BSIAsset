@@ -43,6 +43,19 @@ class Aset extends BaseController
         return view('aset/index', $data);
     }
 
+    public function formTambah()
+    {
+        if ($this->request->isAJAX()) {
+            $msg = [
+                'data' => view('aset/modaltambah')
+            ];
+            echo json_encode($msg);
+        } else {
+            $data['title'] = 'Woops!';
+            return view('templates/404', $data);
+        }
+    }
+
     public function tambah()
     {
         // Validation
@@ -63,6 +76,20 @@ class Aset extends BaseController
                     'errors' => [
                         'required' => '{field} tidak boleh kosong!'
                     ]
+                ],
+                'hargaPerolehan' => [
+                    'label' => 'Harga Perolehan',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
+                'usiaTeknis' => [
+                    'label' => 'Usia Teknis',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
                 ]
             ]);
             $msg = [];
@@ -70,7 +97,9 @@ class Aset extends BaseController
                 $msg = [
                     'error' => [
                         'nama' => $validation->getError('nama'),
-                        'tglPerolehan' => $validation->getError('tglPerolehan')
+                        'tglPerolehan' => $validation->getError('tglPerolehan'),
+                        'hargaPerolehan' => $validation->getError('hargaPerolehan'),
+                        'usiaTeknis' => $validation->getError('usiaTeknis')
                     ]
                 ];
             } else {
@@ -182,17 +211,5 @@ class Aset extends BaseController
         session()->setFlashdata($dataFlash);
 
         return redirect()->to('/aset');
-    }
-
-    public function formTambah()
-    {
-        if ($this->request->isAJAX()) {
-            $msg = [
-                'data' => view('aset/modaltambah')
-            ];
-            echo json_encode($msg);
-        } else {
-            exit("Woops! seems you're quite curious..");
-        }
     }
 }

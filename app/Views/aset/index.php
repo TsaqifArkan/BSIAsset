@@ -28,7 +28,7 @@
     <div class="row mb-3">
         <div class="col">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-facebook tombolTambah" data-toggle="modal" data-target="#formModal">
+            <button type="button" class="btn btn-facebook tombolTambahAset" data-toggle="modal" data-target="#formModalAset">
                 <!-- value data-bs-target harus sama dg nama modalnya -->
                 <i class="fa-solid fa-fw fa-circle-plus mr-1"></i>Tambah Aset Data
             </button>
@@ -87,6 +87,27 @@
     </div>
 
 </div>
-<div class="viewModal" style="display: none;"></div>
+<div class="viewModalAset" style="display: none;"></div>
+
+<script>
+    // Konfigurasi Modal Tambah Aset di index.php (aset)
+    $(document).ready(function() {
+        $('.tombolTambahAset').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "http://localhost:8080/aset/formtambah",
+                dataType: "JSON",
+                success: function(response) {
+                    $('.viewModalAset').html(response.data).show();
+
+                    $('#modalTambahAset').modal('show');
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+        });
+    });
+</script>
 
 <?= $this->endSection(); ?>
