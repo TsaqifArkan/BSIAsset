@@ -75,6 +75,7 @@
                             $('.errorNama').html(response.error.nama);
                         } else {
                             $('#nama').removeClass('is-invalid');
+                            $('#nama').addClass('is-valid');
                             $('.errorNama').html('');
                         }
 
@@ -83,6 +84,7 @@
                             $('.errorTgl').html(response.error.tglPerolehan);
                         } else {
                             $('#tglPerolehan').removeClass('is-invalid');
+                            $('#tglPerolehan').addClass('is-valid');
                             $('.errorTgl').html('');
                         }
 
@@ -91,6 +93,7 @@
                             $('.errorHrg').html(response.error.hargaPerolehan);
                         } else {
                             $('#hargaPerolehan').removeClass('is-invalid');
+                            $('#hargaPerolehan').addClass('is-valid');
                             $('.errorHrg').html('');
                         }
 
@@ -99,6 +102,7 @@
                             $('.errorUsia').html(response.error.usiaTeknis);
                         } else {
                             $('#usiaTeknis').removeClass('is-invalid');
+                            $('#usiaTeknis').addClass('is-valid');
                             $('.errorUsia').html('');
                         }
                     } else {
