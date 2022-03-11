@@ -47,7 +47,7 @@
                                 Tanggal Perolehan
                             </div>
                             <div class="col pl-4 m-auto">
-                                <?= $aset['tgl_perolehan']; ?>
+                                <?= $tglPerolehan; ?>
                             </div>
                         </div>
                         <hr>
@@ -92,7 +92,7 @@
                                 Batas Akhir Usia Teknis
                             </div>
                             <div class="col pl-4 m-auto">
-                                <?= $aset['maks_u_teknis']; ?>
+                                <?= $maksUTeknis; ?>
                             </div>
                         </div>
                     </div>

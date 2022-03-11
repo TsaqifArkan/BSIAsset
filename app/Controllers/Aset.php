@@ -283,9 +283,11 @@ class Aset extends BaseController
         $nilaiBuku = ($data['aset']['harga'] / $data['aset']['usia_teknis']) * $intervalMonth;
 
         // Memasukkan ke dalam objek
+        $data['tglPerolehan'] = date_format(date_create($data['aset']['tgl_perolehan']), "d/m/Y");
         $data['harga'] = numfmt_format($this->numfmt, $data['aset']['harga']);
         $data['sisaUTeknis'] = $intervalMonth;
         $data['nilaiBuku'] = numfmt_format($this->numfmt, $nilaiBuku);
+        $data['maksUTeknis'] = date_format(date_create($data['aset']['maks_u_teknis']), "d/m/Y");
 
         // dd($data['sisaUTeknis']);
 
