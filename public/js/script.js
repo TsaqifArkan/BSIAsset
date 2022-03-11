@@ -47,29 +47,29 @@ if(flashData){
     });
 }
 // 2.Konfigurasi tombol hapus
-$('.tombol-hapus').on('click', function(e){
-    e.preventDefault();
-    const href = $(this).attr('href');
-    // console.log(href);
-    // console.log(base_url(href));
-    // console.log(window.location.replace(href));
+// $('.tombol-hapus').on('click', function(e){
+//     e.preventDefault();
+//     const href = $(this).attr('href');
+//     // console.log(href);
+//     // console.log(base_url(href));
+//     // console.log(window.location.replace(href));
 
-    Swal.fire({
-        title: 'Are you sure ?',
-        text: "You won't be able to undo this action!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-            document.location.href = href;
-            // window.location.replace(href);
-            // window.location.href = href;
-        }
-      })
-});
+//     Swal.fire({
+//         title: 'Are you sure ?',
+//         text: "You won't be able to undo this action!",
+//         icon: 'warning',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Yes, delete it!'
+//       }).then((result) => {
+//         if (result.isConfirmed) {
+//             document.location.href = href;
+//             // window.location.replace(href);
+//             // window.location.href = href;
+//         }
+//       })
+// });
 
 // Call the dataTables jQuery plugin
 $(document).ready(function() {

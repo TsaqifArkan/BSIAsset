@@ -189,15 +189,8 @@ class Aset extends BaseController
 
     public function edit()
     {
-        // Cek Nama Barang Before
-        // $komikLama = $this->komikModel->getKomik($this->request->getVar('slug'));
-        // if ($komikLama['judul'] == $this->request->getVar('judul')) {
-        //     $rule_judul = 'required';
-        // } else {
-        //     $rule_judul = 'required|is_unique[komik.judul]';
-        // }
-
         if ($this->request->isAJAX()) {
+            // Cek Nama Barang Before
             $id = $this->request->getVar('id');
             $result = $this->asetModel->find($id);
             if ($result['nama'] == $this->request->getVar('nama')) {
@@ -272,7 +265,25 @@ class Aset extends BaseController
         }
     }
 
-    public function delete($id)
+    public function delete()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $this->asetModel->delete($id);
+
+            $msg = [];
+            // Flash Data
+            $dataFlash = [
+                'alert' => 'SUCCESS ! ',
+                'msg' => 'Data berhasil dihapus.'
+            ];
+            session()->setFlashdata($dataFlash);
+        }
+        echo json_encode($msg);
+    }
+
+
+    public function deleteAAAAA($id)
     {
         $this->asetModel->delete($id);
 

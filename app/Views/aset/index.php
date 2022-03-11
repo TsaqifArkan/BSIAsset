@@ -68,10 +68,7 @@
                                         <td>
                                             <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info">Detail</a>
                                             <button type="button" class="btn btn-warning" onclick="ubah('<?= $aset['id']; ?>')">Edit</button>
-
-                                            <a href="<?= base_url('aset/delete/' . $aset['id']); ?>" class="btn btn-danger tombol-hapus">
-                                                Hapus
-                                            </a>
+                                            <button type="button" class="btn btn-danger" onclick="hapus('<?= $aset['id']; ?>')">Hapus</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -122,6 +119,37 @@
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
             }
         });
+    }
+
+    // Konfigurasi Tombol Hapus
+    function hapus(id) {
+        Swal.fire({
+            title: 'Are you sure ?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url('aset/delete'); ?>",
+                    data: {
+                        id: id
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        // simulates similar behavior as an HTTP redirect
+                        window.location.replace("http://localhost:8080/aset");
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    }
+                });
+            }
+        })
     }
 </script>
 
