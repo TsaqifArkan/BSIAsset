@@ -43,6 +43,44 @@ class Aset extends BaseController
         return view('aset/index', $data);
     }
 
+    public function detail($id = 0)
+    {
+        $data['title'] = 'Detail Aset';
+
+        $this->builder->select('*');
+        $this->builder->where('aset.id', $id);
+        $query = $this->builder->get();
+
+        $data['aset'] = $query->getRow();
+
+        // Percobaan Sisa Usia Teknis menggunakan Detik
+        // $dateNow = new DateTime(date('Y-m-d'));
+        // $dateExp = new DateTime(date($data['aset']->maks_u_teknis));
+        $dateNow = strtotime(date('Y-m-d'));
+        $dateExp = strtotime($data['aset']->maks_u_teknis);
+        $interval = ($dateExp - $dateNow) / 60 / 60 / 24 / 30;
+        $interval = ($interval > 0) ? ceil($interval) : 0;
+
+        // d($interval);
+
+        // SUCCESS!
+        // Percobaan menghitung nilai buku
+        $nilaiBuku = ($data['aset']->harga / $data['aset']->usia_teknis) * $interval;
+
+        // d(numfmt_format($numfmt, $nilaiBuku));
+
+        // Memasukkan ke dalam objek
+        $data['harga'] = numfmt_format($this->numfmt, $data['aset']->harga);
+        $data['sisaUTeknis'] = $interval;
+        $data['nilaiBuku'] = numfmt_format($this->numfmt, $nilaiBuku);
+
+        if (empty($data['aset'])) {
+            return redirect()->to('/aset');
+        }
+
+        return view('aset/detail', $data);
+    }
+
     public function formTambah()
     {
         if ($this->request->isAJAX()) {
@@ -58,7 +96,6 @@ class Aset extends BaseController
 
     public function tambah()
     {
-        // Validation
         if ($this->request->isAJAX()) {
             $validation = \Config\Services::validation();
             $valid = $this->validate([
@@ -120,46 +157,119 @@ class Aset extends BaseController
             }
             echo json_encode($msg);
         } else {
-            exit("Woops! seems you're quite curious..");
+            // exit("Woops! seems you're quite curious..");
+            $data['title'] = 'Woops!';
+            return view('templates/404', $data);
         }
     }
 
-    public function detail($id = 0)
+    public function formEdit()
     {
-        $data['title'] = 'Detail Aset';
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $result = $this->asetModel->find($id);
 
-        $this->builder->select('*');
-        $this->builder->where('aset.id', $id);
-        $query = $this->builder->get();
+            $data = [
+                'id' => $result['id'],
+                'nama' => $result['nama'],
+                'tglPerolehan' => $result['tgl_perolehan'],
+                'hargaPerolehan' => $result['harga'],
+                'usiaTeknis' => $result['usia_teknis']
+            ];
 
-        $data['aset'] = $query->getRow();
-
-        // Percobaan Sisa Usia Teknis menggunakan Detik
-        // $dateNow = new DateTime(date('Y-m-d'));
-        // $dateExp = new DateTime(date($data['aset']->maks_u_teknis));
-        $dateNow = strtotime(date('Y-m-d'));
-        $dateExp = strtotime($data['aset']->maks_u_teknis);
-        $interval = ($dateExp - $dateNow) / 60 / 60 / 24 / 30;
-        $interval = ($interval > 0) ? ceil($interval) : 0;
-
-        // d($interval);
-
-        // SUCCESS!
-        // Percobaan menghitung nilai buku
-        $nilaiBuku = ($data['aset']->harga / $data['aset']->usia_teknis) * $interval;
-
-        // d(numfmt_format($numfmt, $nilaiBuku));
-
-        // Memasukkan ke dalam objek
-        $data['harga'] = numfmt_format($this->numfmt, $data['aset']->harga);
-        $data['sisaUTeknis'] = $interval;
-        $data['nilaiBuku'] = numfmt_format($this->numfmt, $nilaiBuku);
-
-        if (empty($data['aset'])) {
-            return redirect()->to('/aset');
+            $msg = [
+                'data' => view('aset/modaledit', $data)
+            ];
+            echo json_encode($msg);
+        } else {
+            $data['title'] = 'Woops!';
+            return view('templates/404', $data);
         }
+    }
 
-        return view('aset/detail', $data);
+    public function edit()
+    {
+        // Cek Nama Barang Before
+        // $komikLama = $this->komikModel->getKomik($this->request->getVar('slug'));
+        // if ($komikLama['judul'] == $this->request->getVar('judul')) {
+        //     $rule_judul = 'required';
+        // } else {
+        //     $rule_judul = 'required|is_unique[komik.judul]';
+        // }
+
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $result = $this->asetModel->find($id);
+            if ($result['nama'] == $this->request->getVar('nama')) {
+                $rule_nama = 'required';
+            } else {
+                $rule_nama = 'required|is_unique[aset.nama]';
+            }
+
+            $validation = \Config\Services::validation();
+            $valid = $this->validate([
+                'nama' => [
+                    'label' => 'Nama Barang',
+                    'rules' => $rule_nama,
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!',
+                        'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
+                    ]
+                ],
+                'tglPerolehan' => [
+                    'label' => 'Tanggal Perolehan',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
+                'hargaPerolehan' => [
+                    'label' => 'Harga Perolehan',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
+                'usiaTeknis' => [
+                    'label' => 'Usia Teknis',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ]
+            ]);
+            $msg = [];
+            if (!$valid) {
+                $msg = [
+                    'error' => [
+                        'nama' => $validation->getError('nama'),
+                        'tglPerolehan' => $validation->getError('tglPerolehan'),
+                        'hargaPerolehan' => $validation->getError('hargaPerolehan'),
+                        'usiaTeknis' => $validation->getError('usiaTeknis')
+                    ]
+                ];
+            } else {
+                // update ke DB
+                $updatedData = [
+                    'nama' => $this->request->getVar('nama'),
+                    'tgl_perolehan' => $this->request->getVar('tglPerolehan'),
+                    'harga' => $this->request->getVar('hargaPerolehan'),
+                    'usia_teknis' => $this->request->getVar('usiaTeknis')
+                ];
+                $this->asetModel->update($id, $updatedData);
+
+                // Flash Data
+                $dataFlash = [
+                    'alert' => 'SUCCESS ! ',
+                    'msg' => 'Data berhasil diubah.'
+                ];
+                session()->setFlashdata($dataFlash);
+            }
+            echo json_encode($msg);
+        } else {
+            $data['title'] = 'Woops!';
+            return view('templates/404', $data);
+        }
     }
 
     public function delete($id)
@@ -188,7 +298,7 @@ class Aset extends BaseController
         echo json_encode($query);
     }
 
-    public function edit()
+    public function editAAAA()
     {
         // dd($_POST);
 

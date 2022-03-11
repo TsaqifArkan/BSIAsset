@@ -66,12 +66,9 @@
                                         <td><?= $assets['numFmtr'][$i]; ?></td>
                                         <td><?= $aset['usia_teknis']; ?> bulan</td>
                                         <td>
-                                            <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info">
-                                                Detail
-                                            </a>
-                                            <a href="<?= base_url('aset/edit/' . $aset['id']); ?>" class="btn btn-warning tampilModalEdit" data-toggle="modal" data-target="#formModal" data-id="<?= $aset['id']; ?>">
-                                                Edit
-                                            </a>
+                                            <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info">Detail</a>
+                                            <button type="button" class="btn btn-warning" onclick="ubah('<?= $aset['id']; ?>')">Edit</button>
+
                                             <a href="<?= base_url('aset/delete/' . $aset['id']); ?>" class="btn btn-danger tombol-hapus">
                                                 Hapus
                                             </a>
@@ -95,11 +92,10 @@
         $('.tombolTambahAset').click(function(e) {
             e.preventDefault();
             $.ajax({
-                url: "http://localhost:8080/aset/formtambah",
+                url: "<?= base_url('aset/formtambah'); ?>",
                 dataType: "JSON",
                 success: function(response) {
                     $('.viewModalAset').html(response.data).show();
-
                     $('#modalTambahAset').modal('show');
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
@@ -108,6 +104,25 @@
             });
         });
     });
+
+    // Konfigurasi Tombol Edit
+    function ubah(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url('aset/formedit'); ?>",
+            data: {
+                id: id
+            },
+            dataType: "JSON",
+            success: function(response) {
+                $('.viewModalAset').html(response.data).show();
+                $('#modalEditAset').modal('show');
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
 </script>
 
 <?= $this->endSection(); ?>
