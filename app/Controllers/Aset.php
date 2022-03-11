@@ -273,16 +273,22 @@ class Aset extends BaseController
 
     public function detail($id = 0)
     {
+        // Fetch Data
         $data['title'] = 'Detail Aset';
         $data['aset'] = $this->asetModel->find($id);
+
+        // Configure dateNow and dateMax
         $dateNow = new DateTime(date('Y-m-d'));
         $dateExp = new DateTime($data['aset']['maks_u_teknis']);
+
+        // different date and interval month
         $dateInterval = date_diff($dateNow, $dateExp);
         $intervalMonth = $dateInterval->invert ? 0 : ($dateInterval->m + ($dateInterval->d != 0));
 
+        // Menghitung nilaiBuku
         $nilaiBuku = ($data['aset']['harga'] / $data['aset']['usia_teknis']) * $intervalMonth;
 
-        // Memasukkan ke dalam objek
+        // Memasukkan data ke dalam objek
         $data['tglPerolehan'] = date_format(date_create($data['aset']['tgl_perolehan']), "d/m/Y");
         $data['harga'] = numfmt_format($this->numfmt, $data['aset']['harga']);
         $data['sisaUTeknis'] = $intervalMonth;
@@ -296,57 +302,5 @@ class Aset extends BaseController
         }
 
         return view('aset/detail', $data);
-    }
-
-
-    public function deleteAAAAA($id)
-    {
-        $this->asetModel->delete($id);
-
-        // Flash Data
-        $dataFlash = [
-            'alert' => 'SUCCESS ! ',
-            'msg' => 'Data berhasil dihapus.'
-        ];
-        session()->setFlashdata($dataFlash);
-
-        return redirect()->to('/aset');
-    }
-
-    public function getEdit()
-    {
-        // echo 'data akan segera dikirimkan gan';
-        // echo $_POST["id"];
-        // dd($this->detail($_POST["id"]));
-
-        $this->builder->select('*');
-        $this->builder->where('aset.id', $_POST["id"]);
-        $query = $this->builder->get()->getRow();
-        echo json_encode($query);
-    }
-
-    public function editAAAA()
-    {
-        // dd($_POST);
-
-        // Update ke DB
-        $data = [
-            'nama' => $_POST["nama"],
-            'tgl_perolehan'  => $_POST["tglPerolehan"],
-            'harga'  => $_POST["hargaPerolehan"],
-            'usia_teknis' => $_POST["usiaTeknis"]
-        ];
-
-        $this->builder->where('id', $_POST["id"]);
-        $this->builder->update($data);
-
-        // Flash Data
-        $dataFlash = [
-            'alert' => 'SUCCESS ! ',
-            'msg' => 'Data berhasil diubah.'
-        ];
-        session()->setFlashdata($dataFlash);
-
-        return redirect()->to('/aset');
     }
 }
