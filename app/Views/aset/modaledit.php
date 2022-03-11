@@ -106,9 +106,15 @@
                             $('.errorUsia').html('');
                         }
                     } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'SUCCESS !',
+                            text: response.flashData,
+                        })
                         $('#modalEditAset').modal('hide');
                         // simulates similar behavior as an HTTP redirect
-                        window.location.replace("http://localhost:8080/aset");
+                        // window.location.replace("http://localhost:8080/aset");
+                        tableAset();
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

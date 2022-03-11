@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\AsetModel;
+use DateInterval;
+use DateTime;
 
 class Aset extends BaseController
 {
@@ -17,68 +19,44 @@ class Aset extends BaseController
 
     public function index()
     {
-        $results = $this->asetModel->findAll();
-
-        // Specify a Generality
-        $datefmtr = [];
-        $numfmtr = [];
-        foreach ($results as $result) {
-            // Change Date Format
-            array_push($datefmtr, date_format(date_create($result['tgl_perolehan']), "d/m/Y"));
-            // Change Number Formatter
-            array_push($numfmtr, numfmt_format($this->numfmt, $result['harga']));
-        }
-
-        $data = [
-            'title' => 'Kelola Aset',
-            'assets' => [
-                'majority' => $results,
-                'dateFmtr' => $datefmtr,
-                'numFmtr' => $numfmtr
-            ]
-            // 'numFmt' => $this->numfmt
-            // 'dateFmt' => $datefmt
-        ];
-
+        $data['title'] = 'Kelola Aset';
         return view('aset/index', $data);
     }
 
-    public function detail($id = 0)
+    public function getData()
     {
-        $data['title'] = 'Detail Aset';
+        if ($this->request->isAJAX()) {
 
-        $this->builder->select('*');
-        $this->builder->where('aset.id', $id);
-        $query = $this->builder->get();
+            $results = $this->asetModel->findAll();
 
-        $data['aset'] = $query->getRow();
+            // Specify a Generality
+            $datefmtr = [];
+            $numfmtr = [];
+            foreach ($results as $result) {
+                // Change Date Format
+                array_push($datefmtr, date_format(date_create($result['tgl_perolehan']), "d/m/Y"));
+                // Change Number Formatter
+                array_push($numfmtr, numfmt_format($this->numfmt, $result['harga']));
+            }
 
-        // Percobaan Sisa Usia Teknis menggunakan Detik
-        // $dateNow = new DateTime(date('Y-m-d'));
-        // $dateExp = new DateTime(date($data['aset']->maks_u_teknis));
-        $dateNow = strtotime(date('Y-m-d'));
-        $dateExp = strtotime($data['aset']->maks_u_teknis);
-        $interval = ($dateExp - $dateNow) / 60 / 60 / 24 / 30;
-        $interval = ($interval > 0) ? ceil($interval) : 0;
+            $data = [
+                'assets' => [
+                    'majority' => $results,
+                    'dateFmtr' => $datefmtr,
+                    'numFmtr' => $numfmtr
+                ]
+                // 'numFmt' => $this->numfmt
+                // 'dateFmt' => $datefmt
+            ];
 
-        // d($interval);
-
-        // SUCCESS!
-        // Percobaan menghitung nilai buku
-        $nilaiBuku = ($data['aset']->harga / $data['aset']->usia_teknis) * $interval;
-
-        // d(numfmt_format($numfmt, $nilaiBuku));
-
-        // Memasukkan ke dalam objek
-        $data['harga'] = numfmt_format($this->numfmt, $data['aset']->harga);
-        $data['sisaUTeknis'] = $interval;
-        $data['nilaiBuku'] = numfmt_format($this->numfmt, $nilaiBuku);
-
-        if (empty($data['aset'])) {
-            return redirect()->to('/aset');
+            $msg = [
+                'data' => view('aset/tableasetdata', $data)
+            ];
+            echo json_encode($msg);
+        } else {
+            $data['title'] = 'Woops!';
+            return view('templates/404', $data);
         }
-
-        return view('aset/detail', $data);
     }
 
     public function formTambah()
@@ -141,19 +119,26 @@ class Aset extends BaseController
                 ];
             } else {
                 // insert ke DB
-                $this->asetModel->save([
+                $inputData = [
                     'nama' => $this->request->getVar('nama'),
                     'tgl_perolehan' => $this->request->getVar('tglPerolehan'),
                     'harga' => $this->request->getVar('hargaPerolehan'),
                     'usia_teknis' => $this->request->getVar('usiaTeknis')
-                ]);
+                ];
+
+                $this->asetModel->save($inputData);
 
                 // Flash Data
-                $dataFlash = [
-                    'alert' => 'SUCCESS ! ',
-                    'msg' => 'Data berhasil ditambahkan.'
+                // $dataFlash = [
+                //     'alert' => 'SUCCESS ! ',
+                //     'msg' => 'Data berhasil ditambahkan.'
+                // ];
+
+                $msg = [
+                    'flashData' => 'Data aset berhasil ditambahkan.'
                 ];
-                session()->setFlashdata($dataFlash);
+
+                // session()->setFlashdata($dataFlash);
             }
             echo json_encode($msg);
         } else {
@@ -231,7 +216,6 @@ class Aset extends BaseController
                     ]
                 ]
             ]);
-            $msg = [];
             if (!$valid) {
                 $msg = [
                     'error' => [
@@ -252,11 +236,14 @@ class Aset extends BaseController
                 $this->asetModel->update($id, $updatedData);
 
                 // Flash Data
-                $dataFlash = [
-                    'alert' => 'SUCCESS ! ',
-                    'msg' => 'Data berhasil diubah.'
+                // $dataFlash = [
+                //     'alert' => 'SUCCESS ! ',
+                //     'msg' => 'Data berhasil diubah.'
+                // ];
+                // session()->setFlashdata($dataFlash);
+                $msg = [
+                    'flashData' => 'Data aset berhasil diupdate.'
                 ];
-                session()->setFlashdata($dataFlash);
             }
             echo json_encode($msg);
         } else {
@@ -271,15 +258,42 @@ class Aset extends BaseController
             $id = $this->request->getVar('id');
             $this->asetModel->delete($id);
 
-            $msg = [];
-            // Flash Data
-            $dataFlash = [
-                'alert' => 'SUCCESS ! ',
-                'msg' => 'Data berhasil dihapus.'
+            $msg = [
+                'flashData' => 'Data aset berhasil dihapus.'
             ];
-            session()->setFlashdata($dataFlash);
+            // Flash Data
+            // $dataFlash = [
+            //     'alert' => 'SUCCESS ! ',
+            //     'msg' => 'Data berhasil dihapus.'
+            // ];
+            // session()->setFlashdata($dataFlash);
         }
         echo json_encode($msg);
+    }
+
+    public function detail($id = 0)
+    {
+        $data['title'] = 'Detail Aset';
+        $data['aset'] = $this->asetModel->find($id);
+        $dateNow = new DateTime(date('Y-m-d'));
+        $dateExp = new DateTime($data['aset']['maks_u_teknis']);
+        $dateInterval = date_diff($dateNow, $dateExp);
+        $intervalMonth = $dateInterval->invert ? 0 : ($dateInterval->m + ($dateInterval->d != 0));
+
+        $nilaiBuku = ($data['aset']['harga'] / $data['aset']['usia_teknis']) * $intervalMonth;
+
+        // Memasukkan ke dalam objek
+        $data['harga'] = numfmt_format($this->numfmt, $data['aset']['harga']);
+        $data['sisaUTeknis'] = $intervalMonth;
+        $data['nilaiBuku'] = numfmt_format($this->numfmt, $nilaiBuku);
+
+        // dd($data['sisaUTeknis']);
+
+        if (empty($data['aset'])) {
+            return redirect()->to('/aset');
+        }
+
+        return view('aset/detail', $data);
     }
 
 

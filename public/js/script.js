@@ -31,21 +31,21 @@ for (let i = 0; i < aATLength; i++){
 // });
 
 // JQUERY - MODAL
-$('#formModal').on('shown.bs.modal', function() {
-    $('#nama').focus();
-})
+// $('#formModal').on('shown.bs.modal', function() {
+//     $('#nama').focus();
+// })
 
 // SweetAlert2 - JQuery
 // 1.Konfigurasi flash data
-const flashData = $('.flash-data').data('flashdata');
-// console.log(flashData);
-if(flashData){
-    Swal.fire({
-        title : 'SUCCESS !',
-        text : flashData,
-        icon : 'success'
-    });
-}
+// const flashData = $('.flash-data').data('flashdata');
+// // console.log(flashData);
+// if(flashData){
+//     Swal.fire({
+//         title : 'SUCCESS !',
+//         text : flashData,
+//         icon : 'success'
+//     });
+// }
 // 2.Konfigurasi tombol hapus
 // $('.tombol-hapus').on('click', function(e){
 //     e.preventDefault();
@@ -72,9 +72,9 @@ if(flashData){
 // });
 
 // Call the dataTables jQuery plugin
-$(document).ready(function() {
-    $('#dataTable').DataTable();
-});
+// $(document).ready(function() {
+//     $('#dataTable').DataTable();
+// });
 
 // SCRIPT MODAL TABEL ASET (TAMBAH DAN UBAH)
 // $(function(){

@@ -53,6 +53,9 @@
 <script>
     // Konfigurasi Modal Tambah Aset di modaltambah.php
     $(document).ready(function() {
+        $('#modalTambahAset').on('shown.bs.modal', function() {
+            $('#nama').focus();
+        })
         $('.formAset').submit(function(e) {
             e.preventDefault();
             $.ajax({
@@ -106,9 +109,15 @@
                             $('.errorUsia').html('');
                         }
                     } else {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'SUCCESS !',
+                            text: response.flashData,
+                        })
                         $('#modalTambahAset').modal('hide');
                         // simulates similar behavior as an HTTP redirect
-                        window.location.replace("http://localhost:8080/aset");
+                        // window.location.replace("http://localhost:8080/aset");
+                        tableAset();
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {

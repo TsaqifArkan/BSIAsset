@@ -38,7 +38,7 @@
                                 Nama Barang
                             </div>
                             <div class="col pl-4 m-auto">
-                                <?= $aset->nama; ?>
+                                <?= $aset['nama']; ?>
                             </div>
                         </div>
                         <hr>
@@ -47,7 +47,7 @@
                                 Tanggal Perolehan
                             </div>
                             <div class="col pl-4 m-auto">
-                                <?= $aset->tgl_perolehan; ?>
+                                <?= $aset['tgl_perolehan']; ?>
                             </div>
                         </div>
                         <hr>
@@ -65,7 +65,7 @@
                                 Usia Teknis
                             </div>
                             <div class="col pl-4 m-auto">
-                                <?= $aset->usia_teknis; ?> (bulan)
+                                <?= $aset['usia_teknis']; ?> (bulan)
                             </div>
                         </div>
                         <hr>
@@ -92,78 +92,8 @@
                                 Batas Akhir Usia Teknis
                             </div>
                             <div class="col pl-4 m-auto">
-                                <?= $aset->maks_u_teknis; ?>
+                                <?= $aset['maks_u_teknis']; ?>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-lg-2">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                    <div class="col-md-12">
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <h4>Nama Barang</h4>
-                                </li>
-                                <li class="list-group-item">
-                                    Tanggal Perolehan
-                                </li>
-                                <li class="list-group-item">
-                                    Harga Perolehan
-                                </li>
-                                <li class="list-group-item">
-                                    Usia Teknis
-                                </li>
-                                <li class="list-group-item">
-                                    Nilai Buku
-                                </li>
-                                <li class="list-group-item">
-                                    Sisa Usia Teknis
-                                </li>
-                                <li class="list-group-item">
-                                    Expired Date
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                    <div class="col-md-12">
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <h4><?= $aset->nama; ?></h4>
-                                </li>
-                                <li class="list-group-item">
-                                    <?= $aset->tgl_perolehan; ?>
-                                </li>
-                                <li class="list-group-item">
-                                    <?= $harga; ?>
-                                </li>
-                                <li class="list-group-item">
-                                    <?= $aset->usia_teknis; ?> (bulan)
-                                </li>
-                                <li class="list-group-item">
-                                    <?= $nilaiBuku; ?>
-                                </li>
-                                <li class="list-group-item">
-                                    <?= $sisaUTeknis; ?> (bulan)
-                                </li>
-                                <li class="list-group-item">
-                                    <?= $aset->maks_u_teknis; ?>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
