@@ -36,9 +36,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="usiaTeknis">Usia Teknis (bulan)</label>
-                    <input type="number" class="form-control" id="usiaTeknis" name="usiaTeknis" value="<?= $usiaTeknis; ?>">
-                    <div class="invalid-feedback errorUsia"></div>
+                    <label for="usiaTeknis">Usia Teknis</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="usiaTeknis" name="usiaTeknis" value="<?= $usiaTeknis; ?>">
+                        <div class="input-group-append">
+                            <span class="input-group-text">bulan</span>
+                        </div>
+                        <div class="invalid-feedback errorUsia"></div>
+                    </div>
                 </div>
 
             </div>

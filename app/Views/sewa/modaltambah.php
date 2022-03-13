@@ -23,9 +23,14 @@
                     <div class="invalid-feedback errorTgl"></div>
                 </div>
                 <div class="form-group">
-                    <label for="periodeSewa">Periode Sewa (bulan)</label>
-                    <input type="number" class="form-control" id="periodeSewa" name="periodeSewa">
-                    <div class="invalid-feedback errorPeriode"></div>
+                    <label for="periodeSewa">Periode Sewa</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="periodeSewa" name="periodeSewa">
+                        <div class="input-group-append">
+                            <span class="input-group-text">bulan</span>
+                        </div>
+                        <div class="invalid-feedback errorPeriode"></div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="hargaSewa">Harga Sewa</label>
