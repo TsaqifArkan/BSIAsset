@@ -31,6 +31,13 @@
         Kelola Barang
     </div>
 
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active-toggler">
+        <a class="nav-link" href="<?= base_url('notifikasi'); ?>">
+            <i class="fa-solid fa-fw fa-bell"></i>
+            <span>Notifikasi</span></a>
+    </li>
+
     <!-- Nav Item - Kelola Aset -->
     <li class="nav-item active-toggler">
         <a class="nav-link" href="<?= base_url('aset'); ?>">

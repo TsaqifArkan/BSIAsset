@@ -7,7 +7,7 @@
                 <th scope="col">Tanggal Sewa</th>
                 <th scope="col">Periode Sewa</th>
                 <th scope="col">Harga Sewa</th>
-                <th scope="col">Sisa Hari</th>
+                <th scope="col">Sisa Waktu</th>
                 <th scope="col">Jatuh Tempo</th>
                 <th scope="col">Aksi</th>
             </tr>
@@ -18,20 +18,14 @@
                     <th scope="row"><?= $i + 1; ?></th>
                     <td><?= $rent['nama']; ?></td>
                     <td><?= $rents['dateFmtrSewa'][$i]; ?></td>
-                    <td><?= $rent['periode_sewa']; ?></td>
+                    <td><?= $rent['periode_sewa']; ?> bulan</td>
                     <td><?= $rents['numFmtr'][$i]; ?></td>
-                    <td> - </td>
+                    <td><?= $rents['timeLeft'][$i]; ?> hari</td>
                     <td><?= $rents['dateFmtrTempo'][$i]; ?></td>
                     <td>
                         <button type="button" class="btn btn-warning" onclick="ubah('<?= $rent['id']; ?>')">Edit</button>
                         <button type="button" class="btn btn-danger" onclick="hapus('<?= $rent['id']; ?>')">Hapus</button>
                     </td>
-                    <!-- <td class="d-flex justify-content-center">
-                                            <a href="<?php // echo base_url('aset/' . $aset['id']); 
-                                                        ?>" class="btn btn-info mx-1">
-                                                <span>Detail</span>
-                                            </a>
-                                        </td> -->
                 </tr>
             <?php endforeach; ?>
         </tbody>
