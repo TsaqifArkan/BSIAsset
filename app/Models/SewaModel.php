@@ -10,7 +10,7 @@ class SewaModel extends Model
     protected $primaryKey = 'id';
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['nama', 'tgl_sewa', 'harga', 'jatuh_tempo'];
+    protected $allowedFields = ['nama', 'tgl_sewa', 'periode_sewa', 'harga', 'jatuh_tempo'];
     protected $useTimestamps = true;
     protected $dateFormat = 'date';
     protected $createdField = '';

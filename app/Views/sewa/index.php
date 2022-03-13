@@ -4,59 +4,46 @@
 
 <div class="container-fluid">
 
+    <!-- BreadCrumb -->
+    <div class="row">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Sewa</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Daftar Sewa Barang</h1>
+    <div class="row mb-2">
+        <div class="col">
+            <h1 class="h3 text-gray-800">Daftar Sewa Barang</h1>
+        </div>
+    </div>
+
     <?php // dd($rents);
     ?>
 
-    <div class="row mb-4">
-        <div class="col-lg-8">
+    <div class="row mb-3">
+        <div class="col">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-facebook tombolTambahKategori" data-toggle="modal" data-target="#formModal">
+            <button type="button" class="btn btn-facebook tombolTambahSewa" data-toggle="modal" data-target="#formModalSewa">
                 <!-- value data-bs-target harus sama dg nama modalnya -->
-                Tambah Sewa Barang
+                <i class="fa-solid fa-fw fa-circle-plus mr-1"></i>Tambah Sewa
             </button>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Tabel Sewa Barang</h6>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">No.</th>
-                                    <th scope="col">Nama Barang</th>
-                                    <th scope="col">Tanggal Sewa</th>
-                                    <th scope="col">Harga Sewa</th>
-                                    <th scope="col">Jatuh Tempo</th>
-                                    <th scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $i = 1; ?>
-                                <?php foreach ($rents as $rent) : ?>
-                                    <tr>
-                                        <th scope="row"><?= $i++; ?></th>
-                                        <td><?= $rent['nama']; ?></td>
-                                        <td><?= $rent['tgl_sewa']; ?></td>
-                                        <td><?= numfmt_format($numFmt, $rent['harga']); ?></td>
-                                        <td><?= $rent['jatuh_tempo']; ?></td>
-                                        <!-- <td class="d-flex justify-content-center">
-                                            <a href="<?php // echo base_url('aset/' . $aset['id']); 
-                                                        ?>" class="btn btn-info mx-1">
-                                                <span>Detail</span>
-                                            </a>
-                                        </td> -->
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                    <div class="sectionsewadata">
+
                     </div>
                 </div>
             </div>
@@ -64,5 +51,25 @@
     </div>
 
 </div>
+<div class="viewModalSewa" style="display: none;"></div>
 
+<script>
+    function tableSewa() {
+        $.ajax({
+            url: "<?= base_url('sewa/getData'); ?>",
+            dataType: "JSON",
+            success: function(response) {
+                $('.sectionsewadata').html(response.data);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
+
+    // Konfigurasi Modal Tambah Sewa di index.php (sewa)
+    $(document).ready(function() {
+        tableSewa();
+    });
+</script>
 <?= $this->endSection(); ?>
