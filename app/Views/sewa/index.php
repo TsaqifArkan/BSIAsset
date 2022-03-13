@@ -70,6 +70,20 @@
     // Konfigurasi Modal Tambah Sewa di index.php (sewa)
     $(document).ready(function() {
         tableSewa();
+        $('.tombolTambahSewa').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= base_url('sewa/formtambah'); ?>",
+                dataType: "JSON",
+                success: function(response) {
+                    $('.viewModalSewa').html(response.data).show();
+                    $('#modalTambahSewa').modal('show');
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+        });
     });
 </script>
 <?= $this->endSection(); ?>

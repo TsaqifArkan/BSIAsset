@@ -80,4 +80,79 @@ class Sewa extends BaseController
             return view('templates/404', $data);
         }
     }
+
+    public function tambah()
+    {
+        if ($this->request->isAJAX()) {
+            $validation = \Config\Services::validation();
+            $valid = $this->validate([
+                'nama' => [
+                    'label' => 'Nama Barang',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
+                'tglSewa' => [
+                    'label' => 'Tanggal Sewa',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
+                'periodeSewa' => [
+                    'label' => 'Periode Sewa',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
+                'hargaSewa' => [
+                    'label' => 'Harga Sewa',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ]
+            ]);
+            $msg = [];
+            if (!$valid) {
+                $msg = [
+                    'error' => [
+                        'nama' => $validation->getError('nama'),
+                        'tglSewa' => $validation->getError('tglSewa'),
+                        'periodeSewa' => $validation->getError('periodeSewa'),
+                        'hargaSewa' => $validation->getError('hargaSewa')
+                    ]
+                ];
+            } else {
+                // insert ke DB
+                $inputData = [
+                    'nama' => $this->request->getVar('nama'),
+                    'tgl_sewa' => $this->request->getVar('tglSewa'),
+                    'periode_sewa' => $this->request->getVar('periodeSewa'),
+                    'harga' => $this->request->getVar('hargaSewa')
+                ];
+
+                $this->sewaModel->save($inputData);
+
+                // Flash Data
+                // $dataFlash = [
+                //     'alert' => 'SUCCESS ! ',
+                //     'msg' => 'Data berhasil ditambahkan.'
+                // ];
+
+                $msg = [
+                    'flashData' => 'Data sewa berhasil ditambahkan.'
+                ];
+
+                // session()->setFlashdata($dataFlash);
+            }
+            echo json_encode($msg);
+        } else {
+            // exit("Woops! seems you're quite curious..");
+            $data['title'] = 'Woops!';
+            return view('templates/404', $data);
+        }
+    }
 }
