@@ -75,6 +75,10 @@ for (let i = 0; i < aATLength; i++){
 // $(document).ready(function() {
 //     $('#dataTable').DataTable();
 // });
+// $(document).ready(function() {
+    // $('table.dataTableDisplay').DataTable();
+    // $('#dataTable').DataTable();
+// });
 
 // SCRIPT MODAL TABEL ASET (TAMBAH DAN UBAH)
 // $(function(){

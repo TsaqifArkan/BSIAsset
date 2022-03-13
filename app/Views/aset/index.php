@@ -56,7 +56,7 @@
 <script>
     function tableAset() {
         $.ajax({
-            url: "<?= base_url('aset/getData');  ?>",
+            url: "<?= base_url('aset/getData'); ?>",
             dataType: "JSON",
             success: function(response) {
                 $('.sectionasetdata').html(response.data);

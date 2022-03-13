@@ -1,5 +1,5 @@
 <div class="table-responsive">
-    <table class="table table-bordered table-hover dataTableDisplay" id="dataTable-Sewa">
+    <table class="table table-bordered table-hover" id="dataTable-Sewa">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">No.</th>
@@ -22,6 +22,10 @@
                     <td><?= $rents['numFmtr'][$i]; ?></td>
                     <td> - </td>
                     <td><?= $rents['dateFmtrTempo'][$i]; ?></td>
+                    <td>
+                        <button type="button" class="btn btn-warning" onclick="ubah('<?= $rent['id']; ?>')">Edit</button>
+                        <button type="button" class="btn btn-danger" onclick="hapus('<?= $rent['id']; ?>')">Hapus</button>
+                    </td>
                     <!-- <td class="d-flex justify-content-center">
                                             <a href="<?php // echo base_url('aset/' . $aset['id']); 
                                                         ?>" class="btn btn-info mx-1">
@@ -34,7 +38,7 @@
     </table>
 </div>
 <script>
-    // $(document).ready(function() {
-    //     $('#dataTable-Sewa').DataTable();
-    // });
+    $(document).ready(function() {
+        $('#dataTable-Sewa').DataTable();
+    });
 </script>
