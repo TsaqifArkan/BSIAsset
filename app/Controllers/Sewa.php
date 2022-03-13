@@ -115,7 +115,6 @@ class Sewa extends BaseController
                     ]
                 ]
             ]);
-            $msg = [];
             if (!$valid) {
                 $msg = [
                     'error' => [
@@ -154,5 +153,126 @@ class Sewa extends BaseController
             $data['title'] = 'Woops!';
             return view('templates/404', $data);
         }
+    }
+
+    public function formEdit()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $result = $this->sewaModel->find($id);
+
+            $now = strtotime(date('Y-m-d'));
+            $sisaWaktu = (strtotime($result['jatuh_tempo']) - $now) / 86400;
+            $timeleft = ($sisaWaktu > 0) ? $sisaWaktu : 0;
+
+            $data = [
+                'id' => $result['id'],
+                'nama' => $result['nama'],
+                'tglSewa' => $result['tgl_sewa'],
+                'periodeSewa' => $result['periode_sewa'],
+                'hargaSewa' => $result['harga'],
+                'sisaWaktu' => $timeleft,
+                'jatuhTempo' => $result['jatuh_tempo']
+            ];
+
+            $msg = [
+                'data' => view('sewa/modaledit', $data)
+            ];
+            echo json_encode($msg);
+        } else {
+            $data['title'] = 'Woops!';
+            return view('templates/404', $data);
+        }
+    }
+
+    public function edit()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $validation = \Config\Services::validation();
+            $valid = $this->validate([
+                'nama' => [
+                    'label' => 'Nama Barang',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
+                'tglSewa' => [
+                    'label' => 'Tanggal Sewa',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
+                'periodeSewa' => [
+                    'label' => 'Periode Sewa',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
+                'hargaSewa' => [
+                    'label' => 'Harga Sewa',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ]
+            ]);
+            if (!$valid) {
+                $msg = [
+                    'error' => [
+                        'nama' => $validation->getError('nama'),
+                        'tglSewa' => $validation->getError('tglSewa'),
+                        'periodeSewa' => $validation->getError('periodeSewa'),
+                        'hargaSewa' => $validation->getError('hargaSewa')
+                    ]
+                ];
+            } else {
+                // update ke DB
+                $updatedData = [
+                    'nama' => $this->request->getVar('nama'),
+                    'tgl_sewa' => $this->request->getVar('tglSewa'),
+                    'periode_sewa' => $this->request->getVar('periodeSewa'),
+                    'harga' => $this->request->getVar('hargaSewa')
+                ];
+
+                $this->sewaModel->update($id, $updatedData);
+
+                // Flash Data
+                // $dataFlash = [
+                //     'alert' => 'SUCCESS ! ',
+                //     'msg' => 'Data berhasil diubah.'
+                // ];
+                // session()->setFlashdata($dataFlash);
+                $msg = [
+                    'flashData' => 'Data sewa berhasil diupdate.'
+                ];
+            }
+            echo json_encode($msg);
+        } else {
+            $data['title'] = 'Woops!';
+            return view('templates/404', $data);
+        }
+    }
+
+    public function delete()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $this->sewaModel->delete($id);
+
+            $msg = [
+                'flashData' => 'Data sewa berhasil dihapus.'
+            ];
+            // Flash Data
+            // $dataFlash = [
+            //     'alert' => 'SUCCESS ! ',
+            //     'msg' => 'Data berhasil dihapus.'
+            // ];
+            // session()->setFlashdata($dataFlash);
+        }
+        echo json_encode($msg);
     }
 }
