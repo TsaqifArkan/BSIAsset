@@ -116,6 +116,13 @@
                                 <?= $maksUTeknis; ?>
                             </div>
                         </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col text-center">
+                                <a href="<?= base_url('aset'); ?>" class="btn btn-dark font-weight-bold">
+                                    <i class="fa-solid fa-fw fa-arrow-left"></i> Kembali ke Daftar Aset</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
