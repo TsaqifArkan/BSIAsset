@@ -18,13 +18,6 @@ class Cetak extends BaseController
     public function index()
     {
         $data['title'] = 'Barang Cetakan';
-        $results = $this->cetakModel->findAll();
-
-        foreach ($results as $i => $result) {
-            $results[$i]['code'] = str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '-' . date_format(date_create($result['tanggal']), 'd/m/y');
-        }
-        $data['datas'] = $results;
-
         return (view('cetak/index', $data));
     }
 
@@ -34,6 +27,7 @@ class Cetak extends BaseController
 
             $results = $this->cetakModel->findAll();
 
+            $saldo = 0;
             // Penambahan data pada array results utama
             foreach ($results as $i => $result) {
                 // Change Date Format Tanggal Cetak
@@ -42,6 +36,9 @@ class Cetak extends BaseController
                 $results[$i]['numfmtr'] = numfmt_format($this->numfmt, $result['harga']);
                 // Pembuatan Kode Barang
                 $results[$i]['code'] = str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '-' . date_format(date_create($result['tanggal']), 'd/m/y');
+                // Coba implement saldo
+                $saldo += $result['masuk'] - $result['keluar'];
+                $results[$i]['saldo'] = $saldo;
             }
 
             $data['cetaks'] = $results;

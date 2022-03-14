@@ -9,6 +9,7 @@
                 <th scope="col">Harga Satuan</th>
                 <th scope="col">Keluar</th>
                 <th scope="col">Masuk</th>
+                <th scope="col">Saldo</th>
                 <th scope="col">Keterangan</th>
                 <th scope="col">Aksi</th>
             </tr>
@@ -24,6 +25,7 @@
                     <td><?= $cetak['numfmtr']; ?></td>
                     <td><?= $cetak['keluar']; ?></td>
                     <td><?= $cetak['masuk']; ?></td>
+                    <td><?= $cetak['saldo']; ?></td>
                     <td><?= $cetak['keterangan']; ?></td>
                     <td>
                         <button type="button" class="btn btn-danger" onclick="hapus('<?= $cetak['id']; ?>')">Hapus</button>
