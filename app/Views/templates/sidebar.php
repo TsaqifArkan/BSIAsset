@@ -2,8 +2,8 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fa-solid fa-database"></i>
+        <div class="sidebar-brand-icon mx-3">
+            <img src="<?= base_url() ?>/img/logo-bsi.png" alt="logo-bsi" width="80%" height="80%">
         </div>
         <div class="sidebar-brand-text mx-3">BSI Asset</div>
     </a>
