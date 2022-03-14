@@ -122,6 +122,11 @@
                                 <a href="<?= base_url('aset'); ?>" class="btn btn-dark font-weight-bold">
                                     <i class="fa-solid fa-fw fa-arrow-left"></i> Kembali ke Daftar Aset</a>
                             </div>
+                            <div class="col text-center">
+                                <a href="<?= base_url('aset/barcode/' . $aset['id']); ?>" type="button" class="btn btn-primary" target="_blank">
+                                    <i class="fa-solid fa-fw fa-barcode mr-2"></i>Cetak Barcode
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

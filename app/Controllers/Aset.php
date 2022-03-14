@@ -303,4 +303,16 @@ class Aset extends BaseController
 
         return view('aset/detail', $data);
     }
+
+    public function barcode($id)
+    {
+        $result = $this->asetModel->find($id);
+
+        $code = 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '-' . date_format(date_create($result['tgl_perolehan']), 'd/m/y');
+
+        // dd($code);
+
+        $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+        file_put_contents('img/' . 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '.png', $generator->getBarcode($code, $generator::TYPE_CODE_128, 3, 50));
+    }
 }

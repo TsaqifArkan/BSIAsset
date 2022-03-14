@@ -35,7 +35,7 @@
         </div>
         <div class="col text-right">
             <a href="cetak/print" type="button" class="btn btn-primary" target="_blank">
-                <i class="fa-solid fa-fw fa-print mr-2"></i>Cetak</a>
+                <i class="fa-solid fa-fw fa-print mr-2"></i>Print</a>
         </div>
     </div>
 

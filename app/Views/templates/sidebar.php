@@ -60,11 +60,12 @@
     </li>
 
     <!-- Nav Item - Kategori Barang -->
-    <li class="nav-item active-toggler">
-        <a class="nav-link" href="<?= base_url('kategori'); ?>">
+    <!-- <li class="nav-item active-toggler">
+        <a class="nav-link" href="<? // echo base_url('kategori'); 
+                                    ?>">
             <i class="fa-solid fa-fw fa-list"></i>
             <span>Kategori Barang</span></a>
-    </li>
+    </li> -->
 
     <?php if (in_groups('admin')) : ?>
         <!-- Divider -->
