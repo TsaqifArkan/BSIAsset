@@ -31,7 +31,7 @@
         Kelola Barang
     </div>
 
-    <!-- Nav Item - Dashboard -->
+    <!-- Nav Item - Notifikasi -->
     <li class="nav-item active-toggler">
         <a class="nav-link" href="<?= base_url('notifikasi'); ?>">
             <i class="fa-solid fa-fw fa-bell"></i>
@@ -50,6 +50,13 @@
         <a class="nav-link" href="<?= base_url('sewa'); ?>">
             <i class="fa-solid fa-fw fa-truck-ramp-box"></i>
             <span>Sewa Barang</span></a>
+    </li>
+
+    <!-- Nav Item - Barang Cetakan -->
+    <li class="nav-item active-toggler">
+        <a class="nav-link" href="<?= base_url('cetak'); ?>">
+            <i class="fa-solid fa-fw fa-dice-d6"></i>
+            <span>Barang Cetakan</span></a>
     </li>
 
     <!-- Nav Item - Kategori Barang -->
