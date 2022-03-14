@@ -33,6 +33,10 @@
                 <i class="fa-solid fa-fw fa-circle-plus mr-1"></i>Tambah Barang Cetak
             </button>
         </div>
+        <div class="col text-right">
+            <a href="cetak/print" type="button" class="btn btn-primary" target="_blank">
+                <i class="fa-solid fa-fw fa-print mr-2"></i>Cetak</a>
+        </div>
     </div>
 
     <div class="row">

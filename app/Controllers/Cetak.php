@@ -142,4 +142,34 @@ class Cetak extends BaseController
         }
         echo json_encode($msg);
     }
+
+    public function print()
+    {
+        $results = $this->cetakModel->findAll();
+        $saldo = 0;
+        // Penambahan data pada array results utama
+        foreach ($results as $i => $result) {
+            // Pembuatan Kode Barang
+            $results[$i]['code'] = str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '-' . date_format(date_create($result['tanggal']), 'd/m/y');
+            // Coba implement saldo
+            $saldo += $result['masuk'] - $result['keluar'];
+            $results[$i]['saldo'] = $saldo;
+        }
+        $data['cetaks'] = $results;
+        $filename = 'print_' . date('YmdHis') . '.csv';
+        header("Content-Description: File Transfer");
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: application/csv;");
+
+        // file creation
+        $file = fopen('php://output', 'w');
+        // $header = array_keys($results[0]);
+        $header = ['id', 'tanggal', 'nama', 'harga', 'keluar', 'masuk', 'keterangan', 'code', 'saldo'];
+        fputcsv($file, $header);
+        foreach ($results as $result) {
+            fputcsv($file, $result);
+        }
+        fclose($file);
+        exit;
+    }
 }
