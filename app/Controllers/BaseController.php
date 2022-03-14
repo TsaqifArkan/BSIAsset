@@ -52,15 +52,15 @@ class BaseController extends Controller
         // E.g.: $this->session = \Config\Services::session();
         $this->numfmt = new NumberFormatter('id_ID', NumberFormatter::CURRENCY);
 
-        // Session untuk notifikasi jatuh tempo
-        $sessionNotif = session();
-        if (!$sessionNotif->has('notif')) {
-            $model = new SewaModel();
-            $result = $model->builder()
-                ->select('nama, jatuh_tempo')
-                ->where('jatuh_tempo <= ', date('Y-m-d'))
-                ->get()->getResultArray();
-            $sessionNotif->set('notif', $result);
-        }
+        // Session untuk notifikasi jatuh tempo [DEPRECATED]
+        // $sessionNotif = session();
+        // if (!$sessionNotif->has('notif')) {
+        //     $model = new SewaModel();
+        //     $result = $model->builder()
+        //         ->select('nama, jatuh_tempo')
+        //         ->where('jatuh_tempo <= ', date('Y-m-d'))
+        //         ->get()->getResultArray();
+        //     $sessionNotif->set('notif', $result);
+        // }
     }
 }
