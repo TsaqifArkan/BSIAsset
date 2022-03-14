@@ -1,9 +1,9 @@
 <!-- Modal -->
-<div class="modal fade mt-5" id="modalEditSewa" tabindex="-1" aria-labelledby="judulModalAset" aria-hidden="true">
+<div class="modal fade mt-5" id="modalEditSewa" tabindex="-1" aria-labelledby="judulModalSewa" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title font-weight-bold" id="judulModalAset">Edit Sewa Barang</h5>
+                <h5 class="modal-title font-weight-bold" id="judulModalSewa">Edit Sewa Barang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
