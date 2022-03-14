@@ -10,9 +10,9 @@ class CetakModel extends Model
     protected $primaryKey = 'id';
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['tanggal', 'nama', 'harga', 'keluar', 'masuk', 'keterangan'];
+    protected $allowedFields = ['nama', 'harga', 'keluar', 'masuk', 'keterangan'];
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
-    protected $createdField = '';
+    protected $createdField = 'tanggal';
     protected $updatedField = '';
 }

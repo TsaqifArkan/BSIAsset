@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <?php d($datas);
+    <?php // d($cetaks);
     ?>
 
     <div class="row mb-3">
@@ -43,42 +43,7 @@
                 </div>
                 <div class="card-body">
                     <div class="sectioncetakdata">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover" id="dataTable-Cetak">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">No.</th>
-                                        <th scope="col">Tanggal</th>
-                                        <th scope="col">Nama Barang</th>
-                                        <th scope="col">Kode Barang</th>
-                                        <th scope="col">Harga Satuan</th>
-                                        <th scope="col">Keluar</th>
-                                        <th scope="col">Masuk</th>
-                                        <th scope="col">Keterangan</th>
-                                        <th scope="col">Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($datas as $i => $data) :
-                                    ?>
-                                        <tr>
-                                            <td><?= $i + 1; ?></td>
-                                            <td><?= $data['tanggal']; ?></td>
-                                            <td><?= $data['nama']; ?></td>
-                                            <td><?= $data['code']; ?></td>
-                                            <td><?= $data['harga']; ?></td>
-                                            <td><?= $data['keluar']; ?></td>
-                                            <td><?= $data['masuk']; ?></td>
-                                            <td><?= $data['keterangan']; ?></td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger" onclick="alert('belum bisa menghapus data T_T')">Hapus</button>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach;
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -86,5 +51,39 @@
     </div>
 
 </div>
+<div class="viewModalCetak" style="display: none;"></div>
 
+<script>
+    function tableCetak() {
+        $.ajax({
+            url: "<?= base_url('cetak/getData'); ?>",
+            dataType: "JSON",
+            success: function(response) {
+                $('.sectioncetakdata').html(response.data);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+            }
+        });
+    }
+
+    // Konfigurasi Modal Tambah Barang Cetak di index.php (cetak)
+    $(document).ready(function() {
+        tableCetak();
+        $('.tombolTambahCetak').click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?= base_url('cetak/formtambah'); ?>",
+                dataType: "JSON",
+                success: function(response) {
+                    $('.viewModalCetak').html(response.data).show();
+                    $('#modalTambahCetak').modal('show');
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                }
+            });
+        });
+    });
+</script>
 <?= $this->endSection(); ?>
