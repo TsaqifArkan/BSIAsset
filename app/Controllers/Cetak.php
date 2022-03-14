@@ -126,4 +126,23 @@ class Cetak extends BaseController
             return view('templates/404', $data);
         }
     }
+
+    public function delete()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $this->cetakModel->delete($id);
+
+            $msg = [
+                'flashData' => 'Data barang cetak berhasil dihapus.'
+            ];
+            // Flash Data
+            // $dataFlash = [
+            //     'alert' => 'SUCCESS ! ',
+            //     'msg' => 'Data berhasil dihapus.'
+            // ];
+            // session()->setFlashdata($dataFlash);
+        }
+        echo json_encode($msg);
+    }
 }
