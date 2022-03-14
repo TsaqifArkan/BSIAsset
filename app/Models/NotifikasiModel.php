@@ -10,7 +10,7 @@ class NotifikasiModel extends Model
     protected $primaryKey = 'id';
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['judul', 'konten', 'sub_konten', 'waktu', 'tipe'];
+    protected $allowedFields = ['judul', 'konten', 'sub_konten', 'info', 'tipe', 'waktu'];
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
     protected $createdField = '';

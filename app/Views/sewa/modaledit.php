@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <label for="sisaWaktu">Sisa Waktu</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="sisaWaktu" name="sisaWaktu" value="<?= $sisaWaktu; ?>" readonly>
+                        <input type="number" class="form-control" id="sisaWaktu" name="sisaWaktu" value="<?= $sisaWaktu; ?>" disabled>
                         <div class="input-group-append">
                             <span class="input-group-text">hari</span>
                         </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                     <label for="jatuhTempo">Jatuh Tempo</label>
-                    <input type="date" class="form-control" id="jatuhTempo" name="jatuhTempo" value="<?= $jatuhTempo; ?>" readonly>
+                    <input type="date" class="form-control" id="jatuhTempo" name="jatuhTempo" value="<?= $jatuhTempo; ?>" disabled>
                 </div>
 
             </div>

@@ -28,7 +28,7 @@
                                     <small><?= $notif['sub_konten']; ?></small>
                                 </div>
                                 <p class="mb-1 font-weight-bolder"><?= $notif['konten']; ?></p>
-                                <small><?= $notif['waktu']; ?></small>
+                                <small><?= $notif['info']; ?></small>
                                 <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?= $notif['id']; ?>">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
