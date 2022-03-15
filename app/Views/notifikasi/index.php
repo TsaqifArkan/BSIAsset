@@ -5,17 +5,17 @@
 <?php // dd($notifikasi);
 ?>
 
-<div class="container-fluid">
-    <div class="row mb-2">
+<div class="container">
+    <!-- <div class="row mb-2">
         <div class="col">
             <h1 class="h3 text-gray-800">Daftar Notifikasi</h1>
         </div>
-    </div>
+    </div> -->
     <div class="row">
         <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">List Notifikasi</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Daftar Notifikasi</h6>
                 </div>
                 <div class="card-body">
                     <div class="list-group">

@@ -9,4 +9,10 @@ class User extends BaseController
         $data['title'] = 'My Profile';
         return view('user/index', $data);
     }
+
+    public function hello()
+    {
+        $data['title'] = 'Welcome!';
+        return view('user/hello', $data);
+    }
 }

@@ -1,7 +1,14 @@
-<ul class="navbar-nav bg-gradient-bsi sidebar sidebar-dark accordion parent-active-toggler" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-bsi sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <?php
+    function url($needle)
+    {
+        return (substr(uri_string(), 0, strlen($needle)) === $needle ? 'active' : '');
+    }
+    ?>
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user/hello'); ?>">
         <div class="sidebar-brand-icon mx-3">
             <img src="<?= base_url() ?>/img/logo-bsi.png" alt="logo-bsi" width="80%" height="80%">
         </div>
@@ -17,8 +24,8 @@
     </div>
 
     <!-- Nav Item - My Profile -->
-    <li class="nav-item active-toggler">
-        <a class="nav-link default-a-index" href="<?= base_url('user'); ?>">
+    <li class="nav-item <?= (substr(uri_string(), 0, strlen('user')) === 'user' || uri_string() === '/' ? 'active' : ''); ?>">
+        <a class="nav-link" href="<?= base_url('user'); ?>">
             <i class="fa-solid fa-fw fa-user"></i>
             <span>My Profile</span></a>
     </li>
@@ -32,35 +39,35 @@
     </div>
 
     <!-- Nav Item - Notifikasi -->
-    <li class="nav-item active-toggler">
+    <li class="nav-item <?= url('notifikasi'); ?>">
         <a class="nav-link" href="<?= base_url('notifikasi'); ?>">
             <i class="fa-solid fa-fw fa-bell"></i>
             <span>Notifikasi</span></a>
     </li>
 
     <!-- Nav Item - Kelola Aset -->
-    <li class="nav-item active-toggler">
+    <li class="nav-item <?= url('aset'); ?>">
         <a class="nav-link" href="<?= base_url('aset'); ?>">
             <i class="fa-solid fa-fw fa-compass-drafting"></i>
             <span>Kelola Aset</span></a>
     </li>
 
     <!-- Nav Item - Kelola Aset -->
-    <li class="nav-item active-toggler">
+    <li class="nav-item <?= url('sewa'); ?>">
         <a class="nav-link" href="<?= base_url('sewa'); ?>">
             <i class="fa-solid fa-fw fa-truck-ramp-box"></i>
             <span>Sewa Barang</span></a>
     </li>
 
     <!-- Nav Item - Barang Cetakan -->
-    <li class="nav-item active-toggler">
+    <li class="nav-item <?= url('cetak'); ?>">
         <a class="nav-link" href="<?= base_url('cetak'); ?>">
             <i class="fa-solid fa-fw fa-dice-d6"></i>
             <span>Barang Cetakan</span></a>
     </li>
 
     <!-- Nav Item - Kategori Barang -->
-    <!-- <li class="nav-item active-toggler">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="<? // echo base_url('kategori'); 
                                     ?>">
             <i class="fa-solid fa-fw fa-list"></i>
@@ -77,7 +84,7 @@
         </div>
 
         <!-- Nav Item - User List -->
-        <li class="nav-item active-toggler">
+        <li class="nav-item <?= url('admin'); ?>">
             <a class="nav-link" href="<?= base_url('admin'); ?>">
                 <i class="fa-solid fa-fw fa-users"></i>
                 <span>User List</span></a>
@@ -93,7 +100,7 @@
     </div>
 
     <!-- Nav Item - Logout -->
-    <li class="nav-item active-toggler">
+    <li class="nav-item <?= url('logout'); ?>">
         <a class="nav-link" href="<?= base_url('logout'); ?>">
             <i class="fa-solid fa-fw fa-right-from-bracket"></i>
             <span>Logout</span></a>

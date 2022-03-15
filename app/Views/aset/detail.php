@@ -2,32 +2,11 @@
 
 <?= $this->section('page-content'); ?>
 
-<div class="container-fluid">
-
-    <!-- BreadCrumb -->
-    <div class="row">
-        <div class="col">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="<?= base_url('aset'); ?>">Aset</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Detail</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-
-    <!-- Page Heading -->
-    <div class="row">
-        <div class="col">
-            <h1 class="h3 mb-4 text-gray-800">Detail Aset</h1>
-            <?php // d($aset);
-            ?>
-        </div>
-    </div>
+<div class="container">
 
     <div class="row">
         <div class="col">
-            <div class="card mb-3 border-bottom-primary">
+            <div class="card mb-3 border-bottom-primary shadow">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Detail Aset</h6>
                 </div>
