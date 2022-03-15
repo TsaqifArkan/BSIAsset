@@ -6,11 +6,13 @@
 ?>
 
 <div class="container">
-    <!-- <div class="row mb-2">
+    <div class="row">
         <div class="col">
-            <h1 class="h3 text-gray-800">Daftar Notifikasi</h1>
+            <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                <strong>Perhatian!</strong> Anda dapat menghapus notifikasi secara permanen dengan menghapus data <strong>barang sewa</strong> yang sudah jatuh tempo.
+            </div>
         </div>
-    </div> -->
+    </div>
     <div class="row">
         <div class="col">
             <div class="card shadow mb-4">
@@ -27,7 +29,9 @@
                                     <h5 class="mb-1 font-weight-bold text-gray-800"><?= $notif['judul']; ?></h5>
                                     <small><?= $notif['sub_konten']; ?></small>
                                 </div>
-                                <p class="mb-1 font-weight-bolder"><?= $notif['konten']; ?></p>
+                                <p class="mb-1 font-weight-bolder">
+                                    <a href="<?= base_url($notif['link']); ?>" class="alert-link"><?= $notif['konten']; ?></a>
+                                </p>
                                 <small><?= $notif['info']; ?></small>
                                 <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?= $notif['id']; ?>">
                                     <span aria-hidden="true">&times;</span>

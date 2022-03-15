@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             <?php foreach ($rents['majority'] as $i => $rent) : ?>
-                <tr>
+                <tr class="<?= $rents['highlight'][$i]; ?>">
                     <th scope="row"><?= $i + 1; ?></th>
                     <td><?= $rent['nama']; ?></td>
                     <td><?= $rents['dateFmtrSewa'][$i]; ?></td>

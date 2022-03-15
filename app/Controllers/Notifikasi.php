@@ -21,7 +21,7 @@ class Notifikasi extends BaseController
         $data['notifikasi'] = $result;
 
         // $data['notifikasi'] = $this->notifikasiModel->findAll();
-
+        // dd($data);
         // DEPRECATED!
         // $session = session();
         // if ($session->has('notif')) {

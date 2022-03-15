@@ -18,13 +18,20 @@ class Sewa extends BaseController
 
     public function index()
     {
+        // $data['getSearch'] = $this->request->getGet('search');
+        // dd($_GET);
         $data['title'] = 'Sewa Barang';
+        $data['get']['id'] = $this->request->getGet('id');
+        $data['get']['hghlt'] = $this->request->getGet('hghlt');
         return view('sewa/index', $data);
     }
 
     public function getData()
     {
         if ($this->request->isAJAX()) {
+            // terima data dari index.php sewa
+            $notifId = $this->request->getVar('dGetId');
+            $notifHg = $this->request->getVar('dGetHg');
 
             $results = $this->sewaModel->findAll();
 
@@ -33,6 +40,7 @@ class Sewa extends BaseController
             $datefmtrtempo = [];
             $numfmtr = [];
             $timeleft = [];
+            $highlight = [];
             $now = strtotime(date('Y-m-d'));
             foreach ($results as $result) {
                 // Change Date Format Tanggal Sewa
@@ -44,6 +52,9 @@ class Sewa extends BaseController
                 // Count sisa hari
                 $sisaWaktu = (strtotime($result['jatuh_tempo']) - $now) / 86400;
                 array_push($timeleft, $sisaWaktu > 0 ? $sisaWaktu : 0);
+                // Catat notif ke highlight
+                if ($notifId == $result['id']) array_push($highlight, ($notifHg == 'exp') ? 'font-weight-bold table-danger' : (($notifHg == 'warn') ? 'font-weight-bold table-warning' : 'font-weight-bold table-secondary'));
+                else array_push($highlight, '');
             }
 
             $data = [
@@ -52,7 +63,8 @@ class Sewa extends BaseController
                     'dateFmtrSewa' => $datefmtrsewa,
                     'dateFmtrTempo' => $datefmtrtempo,
                     'numFmtr' => $numfmtr,
-                    'timeLeft' => $timeleft
+                    'timeLeft' => $timeleft,
+                    'highlight' => $highlight
                 ]
                 // 'numFmt' => $this->numfmt
                 // 'dateFmt' => $datefmt
