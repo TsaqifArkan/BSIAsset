@@ -128,7 +128,7 @@
                             icon: 'success',
                             title: 'SUCCESS !',
                             text: response.flashData,
-                        })
+                        });
                         $('#modalEditSewa').modal('hide');
                         // simulates similar behavior as an HTTP redirect
                         // window.location.replace("http://localhost:8080/sewa");

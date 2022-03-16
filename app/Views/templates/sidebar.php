@@ -8,7 +8,7 @@
     ?>
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user/hello'); ?>">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user'); ?>">
         <div class="sidebar-brand-icon mx-3">
             <img src="<?= base_url() ?>/img/logo-bsi.png" alt="logo-bsi" width="80%" height="80%">
         </div>
