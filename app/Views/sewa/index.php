@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <?php // dd($rents);
+    <?php // dd($getSearch);
     ?>
 
     <div class="row mb-3">
@@ -46,9 +46,15 @@
     function tableSewa() {
         $.ajax({
             url: "<?= base_url('sewa/getData'); ?>",
+            data: {
+                dGetId: '<?= $get['id']; ?>',
+                dGetHg: '<?= $get['hghlt']; ?>'
+            },
             dataType: "JSON",
             success: function(response) {
                 $('.sectionsewadata').html(response.data);
+                // document.querySelector("#dataTable-Sewa_filter > label > input").value = "<?php // $getSearch ? $getSearch : ''; 
+                                                                                                ?>";
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
