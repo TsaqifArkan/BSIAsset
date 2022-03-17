@@ -28,7 +28,7 @@
                     <td><?= $cetak['saldo']; ?></td>
                     <td><?= $cetak['keterangan']; ?></td>
                     <td>
-                        <button type="button" class="btn btn-danger" onclick="hapus('<?= $cetak['id']; ?>')">Hapus</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="hapus('<?= $cetak['id']; ?>')">Hapus</button>
                     </td>
                 </tr>
             <?php endforeach;

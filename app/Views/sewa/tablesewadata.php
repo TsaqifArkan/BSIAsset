@@ -23,8 +23,8 @@
                     <td><?= $rents['timeLeft'][$i]; ?> hari</td>
                     <td><?= $rents['dateFmtrTempo'][$i]; ?></td>
                     <td>
-                        <button type="button" class="btn btn-warning" onclick="ubah('<?= $rent['id']; ?>')">Edit</button>
-                        <button type="button" class="btn btn-danger" onclick="hapus('<?= $rent['id']; ?>')">Hapus</button>
+                        <button type="button" class="btn btn-warning btn-sm" onclick="ubah('<?= $rent['id']; ?>')">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="hapus('<?= $rent['id']; ?>')">Hapus</button>
                     </td>
                 </tr>
             <?php endforeach; ?>

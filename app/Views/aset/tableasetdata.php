@@ -19,9 +19,9 @@
                     <td><?= $assets['numFmtr'][$i]; ?></td>
                     <td><?= $aset['usia_teknis']; ?> bulan</td>
                     <td>
-                        <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info">Detail</a>
-                        <button type="button" class="btn btn-warning" onclick="ubah('<?= $aset['id']; ?>')">Edit</button>
-                        <button type="button" class="btn btn-danger" onclick="hapus('<?= $aset['id']; ?>')">Hapus</button>
+                        <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info btn-sm">Detail</a>
+                        <button type="button" class="btn btn-warning btn-sm" onclick="ubah('<?= $aset['id']; ?>')">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="hapus('<?= $aset['id']; ?>')">Hapus</button>
                     </td>
                 </tr>
             <?php endforeach; ?>
