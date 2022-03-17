@@ -55,22 +55,22 @@ class User extends BaseController
         if ($this->request->isAJAX()) {
             // Cek email dan username sebelumnya
             $result = user();
-            $rule_email = ($result->email == $this->request->getVar('email')) ? 'required' : 'required|is_unique[users.email]';
             $rule_username = ($result->username == $this->request->getVar('username')) ? 'required' : 'required|is_unique[users.username]';
+            $rule_email = ($result->email == $this->request->getVar('email')) ? 'required' : 'required|is_unique[users.email]';
 
             $validation = \Config\Services::validation();
             $valid = $this->validate([
-                'email' => [
-                    'label' => 'Email Address',
-                    'rules' => $rule_email,
+                'username' => [
+                    'label' => 'Username',
+                    'rules' => $rule_username,
                     'errors' => [
                         'required' => '{field} tidak boleh kosong!',
                         'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
                     ]
                 ],
-                'username' => [
-                    'label' => 'Username',
-                    'rules' => $rule_username,
+                'email' => [
+                    'label' => 'Email Address',
+                    'rules' => $rule_email,
                     'errors' => [
                         'required' => '{field} tidak boleh kosong!',
                         'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
@@ -80,16 +80,16 @@ class User extends BaseController
             if (!$valid) {
                 $msg = [
                     'error' => [
-                        'email' => $validation->getError('email'),
-                        'username' => $validation->getError('username')
+                        'username' => $validation->getError('username'),
+                        'email' => $validation->getError('email')
                     ]
                 ];
             } else {
                 // update ke DB
                 $updatedData = [
-                    'email' => $this->request->getVar('email'),
                     'username' => $this->request->getVar('username'),
-                    'fullname' => $this->request->getVar('fullname')
+                    'fullname' => $this->request->getVar('fullname'),
+                    'email' => $this->request->getVar('email')
                 ];
 
                 $id = $result->id;

@@ -11,13 +11,6 @@
             <?= form_open('user/edit', ['class' => 'formUser']); ?>
             <div class="modal-body">
                 <?= csrf_field(); ?>
-                <!-- <input type="hidden" name="id" id="id" value="<?php // echo $id; 
-                                                                    ?>"> -->
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?= $email; ?>">
-                    <div class="invalid-feedback errorEmail"></div>
-                </div>
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" name="username" value="<?= $username; ?>">
@@ -26,7 +19,11 @@
                 <div class="form-group">
                     <label for="fullname">Fullname</label>
                     <input type="text" class="form-control" id="fullname" name="fullname" value="<?= $fullname; ?>" placeholder="(opsional)">
-                    <!-- <div class="invalid-feedback errorFullname"></div> -->
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<?= $email; ?>">
+                    <div class="invalid-feedback errorEmail"></div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -57,15 +54,6 @@
                 },
                 success: function(response) {
                     if (response.error) {
-                        if (response.error.email) {
-                            $('#email').addClass('is-invalid');
-                            $('.errorEmail').html(response.error.email);
-                        } else {
-                            $('#email').removeClass('is-invalid');
-                            $('#email').addClass('is-valid');
-                            $('.errorEmail').html('');
-                        }
-
                         if (response.error.username) {
                             $('#username').addClass('is-invalid');
                             $('.errorUsername').html(response.error.username);
@@ -73,6 +61,15 @@
                             $('#username').removeClass('is-invalid');
                             $('#username').addClass('is-valid');
                             $('.errorUsername').html('');
+                        }
+
+                        if (response.error.email) {
+                            $('#email').addClass('is-invalid');
+                            $('.errorEmail').html(response.error.email);
+                        } else {
+                            $('#email').removeClass('is-invalid');
+                            $('#email').addClass('is-valid');
+                            $('.errorEmail').html('');
                         }
                     } else {
                         Swal.fire({
