@@ -24,15 +24,15 @@
                         <?php foreach ($notifikasi as $notif) : ?>
                             <?php // for ($i = 0; $i < 10; $i++) : 
                             ?>
-                            <div class="alert alert-<?= $notif['tipe']; ?> alert-dismissible fade show" role="alert">
+                            <div class="alert alert-<?= esc($notif['tipe']); ?> alert-dismissible fade show" role="alert">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1 font-weight-bold text-gray-800"><?= $notif['judul']; ?></h5>
-                                    <small><?= $notif['sub_konten']; ?></small>
+                                    <h5 class="mb-1 font-weight-bold text-gray-800"><?= esc($notif['judul']); ?></h5>
+                                    <small><?= esc($notif['sub_konten']); ?></small>
                                 </div>
                                 <p class="mb-1 font-weight-bolder">
-                                    <a href="<?= base_url($notif['link']); ?>" class="alert-link"><?= $notif['konten']; ?></a>
+                                    <a href="<?= base_url($notif['link']); ?>" class="alert-link"><?= esc($notif['konten']); ?></a>
                                 </p>
-                                <small><?= $notif['info']; ?></small>
+                                <small><?= esc($notif['info']); ?></small>
                                 <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?= $notif['id']; ?>">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

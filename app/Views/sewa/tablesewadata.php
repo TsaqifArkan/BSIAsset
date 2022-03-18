@@ -16,12 +16,12 @@
             <?php foreach ($rents['majority'] as $i => $rent) : ?>
                 <tr class="<?= $rents['highlight'][$i]; ?>">
                     <th scope="row"><?= $i + 1; ?></th>
-                    <td><?= $rent['nama']; ?></td>
-                    <td><?= $rents['dateFmtrSewa'][$i]; ?></td>
-                    <td><?= $rent['periode_sewa']; ?> bulan</td>
-                    <td><?= $rents['numFmtr'][$i]; ?></td>
-                    <td><?= $rents['timeLeft'][$i]; ?> hari</td>
-                    <td><?= $rents['dateFmtrTempo'][$i]; ?></td>
+                    <td><?= esc($rent['nama']); ?></td>
+                    <td><?= esc($rents['dateFmtrSewa'][$i]); ?></td>
+                    <td><?= esc($rent['periode_sewa']); ?> bulan</td>
+                    <td><?= esc($rents['numFmtr'][$i]); ?></td>
+                    <td><?= esc($rents['timeLeft'][$i]); ?> hari</td>
+                    <td><?= esc($rents['dateFmtrTempo'][$i]); ?></td>
                     <td>
                         <button type="button" class="btn btn-warning btn-sm" onclick="ubah('<?= $rent['id']; ?>')">Edit</button>
                         <button type="button" class="btn btn-danger btn-sm" onclick="hapus('<?= $rent['id']; ?>')">Hapus</button>

@@ -14,18 +14,18 @@
                 <input type="hidden" name="id" id="id" value="<?= $id; ?>">
                 <div class="form-group">
                     <label for="nama">Nama Barang</label>
-                    <input type="text" class="form-control" id="nama" name="nama" value="<?= $nama; ?>">
+                    <input type="text" class="form-control" id="nama" name="nama" value="<?= esc($nama); ?>">
                     <div class="invalid-feedback errorNama"></div>
                 </div>
                 <div class="form-group">
                     <label for="tglSewa">Tanggal Sewa</label>
-                    <input type="date" class="form-control" id="tglSewa" name="tglSewa" value="<?= $tglSewa; ?>">
+                    <input type="date" class="form-control" id="tglSewa" name="tglSewa" value="<?= esc($tglSewa); ?>">
                     <div class="invalid-feedback errorTgl"></div>
                 </div>
                 <div class="form-group">
                     <label for="periodeSewa">Periode Sewa</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="periodeSewa" name="periodeSewa" value="<?= $periodeSewa; ?>">
+                        <input type="number" class="form-control" id="periodeSewa" name="periodeSewa" value="<?= esc($periodeSewa); ?>">
                         <div class="input-group-append">
                             <span class="input-group-text">bulan</span>
                         </div>
@@ -38,7 +38,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Rp</span>
                         </div>
-                        <input type="number" class="form-control" id="hargaSewa" name="hargaSewa" value="<?= $hargaSewa; ?>">
+                        <input type="number" class="form-control" id="hargaSewa" name="hargaSewa" value="<?= esc($hargaSewa); ?>">
                         <div class="input-group-append">
                             <span class="input-group-text">,00</span>
                         </div>
@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <label for="sisaWaktu">Sisa Waktu</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="sisaWaktu" name="sisaWaktu" value="<?= $sisaWaktu; ?>" disabled>
+                        <input type="number" class="form-control" id="sisaWaktu" name="sisaWaktu" value="<?= esc($sisaWaktu); ?>" disabled>
                         <div class="input-group-append">
                             <span class="input-group-text">hari</span>
                         </div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                     <label for="jatuhTempo">Jatuh Tempo</label>
-                    <input type="date" class="form-control" id="jatuhTempo" name="jatuhTempo" value="<?= $jatuhTempo; ?>" disabled>
+                    <input type="date" class="form-control" id="jatuhTempo" name="jatuhTempo" value="<?= esc($jatuhTempo); ?>" disabled>
                 </div>
 
             </div>

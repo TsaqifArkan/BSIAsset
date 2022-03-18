@@ -20,14 +20,14 @@
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    <h4><?= $user->username; ?></h4>
+                                    <h4><?= esc($user->username); ?></h4>
                                 </li>
                                 <?php if ($user->fullname) : ?>
-                                    <li class="list-group-item"><?= $user->fullname; ?></li>
+                                    <li class="list-group-item"><?= esc($user->fullname); ?></li>
                                 <?php endif; ?>
-                                <li class="list-group-item"><?= $user->email; ?></li>
+                                <li class="list-group-item"><?= esc($user->email); ?></li>
                                 <li class="list-group-item">
-                                    <span class="badge badge-<?= ($user->name == 'admin') ? 'success' : 'warning'; ?>"><?= $user->name; ?></span>
+                                    <span class="badge badge-<?= ($user->name == 'admin') ? 'success' : 'warning'; ?>"><?= esc($user->name); ?></span>
                                 </li>
                                 <li class="list-group-item">
                                     <small>

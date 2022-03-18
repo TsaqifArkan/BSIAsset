@@ -28,13 +28,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1; ?>
-                                <?php foreach ($users as $user) : ?>
+                                <?php foreach ($users as $i => $user) : ?>
                                     <tr>
-                                        <th scope="row"><?= $i++; ?></th>
-                                        <td><?= $user->username; ?></td>
-                                        <td><?= $user->email; ?></td>
-                                        <td><?= $user->name; ?></td>
+                                        <th scope="row"><?= $i + 1; ?></th>
+                                        <td><?= esc($user->username); ?></td>
+                                        <td><?= esc($user->email); ?></td>
+                                        <td><?= esc($user->name); ?></td>
                                         <td>
                                             <a href="<?= base_url('admin/' . $user->userid); ?>" class="btn btn-info">detail</a>
                                         </td>

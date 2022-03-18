@@ -14,10 +14,10 @@
             <?php foreach ($assets['majority'] as $i => $aset) : ?>
                 <tr>
                     <th scope="row"><?= $i + 1; ?></th>
-                    <td><?= $aset['nama']; ?></td>
-                    <td><?= $assets['dateFmtr'][$i]; ?></td>
-                    <td><?= $assets['numFmtr'][$i]; ?></td>
-                    <td><?= $aset['usia_teknis']; ?> bulan</td>
+                    <td><?= esc($aset['nama']); ?></td>
+                    <td><?= esc($assets['dateFmtr'][$i]); ?></td>
+                    <td><?= esc($assets['numFmtr'][$i]); ?></td>
+                    <td><?= esc($aset['usia_teknis']); ?> bulan</td>
                     <td>
                         <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info btn-sm">Detail</a>
                         <button type="button" class="btn btn-warning btn-sm" onclick="ubah('<?= $aset['id']; ?>')">Edit</button>

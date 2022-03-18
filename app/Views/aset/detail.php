@@ -20,7 +20,7 @@
                                 :
                             </div>
                             <div class="col m-auto">
-                                <?= $aset['nama']; ?>
+                                <?= esc($aset['nama']); ?>
                             </div>
                         </div>
                         <hr>
@@ -32,7 +32,7 @@
                                 :
                             </div>
                             <div class="col m-auto">
-                                <?= $tglPerolehan; ?>
+                                <?= esc($tglPerolehan); ?>
                             </div>
                         </div>
                         <hr>
@@ -44,7 +44,7 @@
                                 :
                             </div>
                             <div class="col m-auto">
-                                <?= $harga; ?>
+                                <?= esc($harga); ?>
                             </div>
                         </div>
                         <hr>
@@ -56,7 +56,7 @@
                                 :
                             </div>
                             <div class="col m-auto">
-                                <?= $aset['usia_teknis']; ?> (bulan)
+                                <?= esc($aset['usia_teknis']); ?> (bulan)
                             </div>
                         </div>
                         <hr>
@@ -68,7 +68,7 @@
                                 :
                             </div>
                             <div class="col m-auto">
-                                <?= $nilaiBuku; ?>
+                                <?= esc($nilaiBuku); ?>
                             </div>
                         </div>
                         <hr>
@@ -80,7 +80,7 @@
                                 :
                             </div>
                             <div class="col m-auto">
-                                <?= $sisaUTeknis; ?> (bulan)
+                                <?= esc($sisaUTeknis); ?> (bulan)
                             </div>
                         </div>
                         <hr>
@@ -92,7 +92,7 @@
                                 :
                             </div>
                             <div class="col m-auto">
-                                <?= $maksUTeknis; ?>
+                                <?= esc($maksUTeknis); ?>
                             </div>
                         </div>
                         <hr>

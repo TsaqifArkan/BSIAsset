@@ -14,12 +14,12 @@
                 <input type="hidden" name="id" id="id" value="<?= $id; ?>">
                 <div class="form-group">
                     <label for="nama">Nama Barang</label>
-                    <input type="text" class="form-control" id="nama" name="nama" value="<?= $nama; ?>">
+                    <input type="text" class="form-control" id="nama" name="nama" value="<?= esc($nama); ?>">
                     <div class="invalid-feedback errorNama"></div>
                 </div>
                 <div class="form-group">
                     <label for="tglPerolehan">Tanggal Perolehan</label>
-                    <input type="date" class="form-control" id="tglPerolehan" name="tglPerolehan" value="<?= $tglPerolehan; ?>">
+                    <input type="date" class="form-control" id="tglPerolehan" name="tglPerolehan" value="<?= esc($tglPerolehan); ?>">
                     <div class="invalid-feedback errorTgl"></div>
                 </div>
                 <div class="form-group">
@@ -28,7 +28,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Rp</span>
                         </div>
-                        <input type="number" class="form-control" id="hargaPerolehan" name="hargaPerolehan" value="<?= $hargaPerolehan; ?>">
+                        <input type="number" class="form-control" id="hargaPerolehan" name="hargaPerolehan" value="<?= esc($hargaPerolehan); ?>">
                         <div class="input-group-append">
                             <span class="input-group-text">,00</span>
                         </div>
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label for="usiaTeknis">Usia Teknis</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="usiaTeknis" name="usiaTeknis" value="<?= $usiaTeknis; ?>">
+                        <input type="number" class="form-control" id="usiaTeknis" name="usiaTeknis" value="<?= esc($usiaTeknis); ?>">
                         <div class="input-group-append">
                             <span class="input-group-text">bulan</span>
                         </div>

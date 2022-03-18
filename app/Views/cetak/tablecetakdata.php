@@ -19,14 +19,14 @@
             ?>
                 <tr>
                     <td><?= $i + 1; ?></td>
-                    <td><?= $cetak['datefmtrcetak']; ?></td>
-                    <td><?= $cetak['nama']; ?></td>
-                    <td><?= $cetak['code']; ?></td>
-                    <td><?= $cetak['numfmtr']; ?></td>
-                    <td><?= $cetak['keluar']; ?></td>
-                    <td><?= $cetak['masuk']; ?></td>
-                    <td><?= $cetak['saldo']; ?></td>
-                    <td><?= $cetak['keterangan']; ?></td>
+                    <td><?= esc($cetak['datefmtrcetak']); ?></td>
+                    <td><?= esc($cetak['nama']); ?></td>
+                    <td><?= esc($cetak['code']); ?></td>
+                    <td><?= esc($cetak['numfmtr']); ?></td>
+                    <td><?= esc($cetak['keluar']); ?></td>
+                    <td><?= esc($cetak['masuk']); ?></td>
+                    <td><?= esc($cetak['saldo']); ?></td>
+                    <td><?= esc($cetak['keterangan']); ?></td>
                     <td>
                         <button type="button" class="btn btn-danger btn-sm" onclick="hapus('<?= $cetak['id']; ?>')">Hapus</button>
                     </td>

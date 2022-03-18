@@ -13,16 +13,16 @@
                 <?= csrf_field(); ?>
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" value="<?= $username; ?>">
+                    <input type="text" class="form-control" id="username" name="username" value="<?= esc($username); ?>">
                     <div class="invalid-feedback errorUsername"></div>
                 </div>
                 <div class="form-group">
                     <label for="fullname">Fullname</label>
-                    <input type="text" class="form-control" id="fullname" name="fullname" value="<?= $fullname; ?>" placeholder="(opsional)">
+                    <input type="text" class="form-control" id="fullname" name="fullname" value="<?= esc($fullname); ?>" placeholder="(opsional)">
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?= $email; ?>">
+                    <input type="email" class="form-control" id="email" name="email" value="<?= esc($email); ?>">
                     <div class="invalid-feedback errorEmail"></div>
                 </div>
             </div>
