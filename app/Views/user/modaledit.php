@@ -8,10 +8,31 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open('user/edit', ['class' => 'formUser']); ?>
+            <?= form_open_multipart('user/edit', ['class' => 'formUser']); ?>
             <div class="modal-body">
                 <?= csrf_field(); ?>
+                <!-- menyimpan nama file user_image lama -->
+                <input type="hidden" name="oldUserImage" value="<?= esc($profilePict); ?>">
+
                 <div class="form-group">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <img src="/img/<?= esc($profilePict); ?>" alt="" class="img-thumbnail d-block m-auto rounded-circle img-preview" style="height:200px; width:200px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="profilePict">Profil Picture</label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="profilePict" name="profilePict" onchange="previewImg()">
+                                <label class="custom-file-label" for="profilePict"><?= esc($profilePict); ?></label>
+                                <div class="invalid-feedback errorProfilePict"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" name="username" value="<?= esc($username); ?>">
                     <div class="invalid-feedback errorUsername"></div>
@@ -41,6 +62,8 @@
             e.preventDefault();
             $.ajax({
                 type: "POST",
+                enctype: 'multipart/form-data',
+                processData: false, // Important!
                 url: $(this).attr('action'),
                 data: $(this).serialize(),
                 dataType: "JSON",
@@ -71,6 +94,15 @@
                             $('#email').addClass('is-valid');
                             $('.errorEmail').html('');
                         }
+
+                        if (response.error.profilePict) {
+                            $('#profilePict').addClass('is-invalid');
+                            $('.errorProfilePict').html(response.error.profilePict);
+                        } else {
+                            $('#profilePict').removeClass('is-invalid');
+                            $('#profilePict').addClass('is-valid');
+                            $('.errorProfilePict').html('');
+                        }
                     } else {
                         Swal.fire({
                             icon: 'success',
@@ -86,6 +118,11 @@
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
+                    // cara dd() di Ajax
+                    let w = window.open('about:blank');
+                    w.document.open();
+                    w.document.write(xhr.responseText);
+                    w.document.close();
                     alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
                 }
             });
