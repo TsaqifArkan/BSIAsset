@@ -114,9 +114,10 @@ class Sewa extends BaseController
                 ],
                 'periodeSewa' => [
                     'label' => 'Periode Sewa',
-                    'rules' => 'required',
+                    'rules' => 'required|is_natural_no_zero',
                     'errors' => [
-                        'required' => '{field} tidak boleh kosong!'
+                        'required' => '{field} tidak boleh kosong!',
+                        'is_natural_no_zero' => '{field} harus positif!'
                     ]
                 ],
                 'hargaSewa' => [
@@ -219,9 +220,10 @@ class Sewa extends BaseController
                 ],
                 'periodeSewa' => [
                     'label' => 'Periode Sewa',
-                    'rules' => 'required',
+                    'rules' => 'required|is_natural_no_zero',
                     'errors' => [
-                        'required' => '{field} tidak boleh kosong!'
+                        'required' => '{field} tidak boleh kosong!',
+                        'is_natural_no_zero' => '{field} harus positif!'
                     ]
                 ],
                 'hargaSewa' => [

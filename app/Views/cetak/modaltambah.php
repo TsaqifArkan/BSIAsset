@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label for="keluar">Keluar</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="keluar" name="keluar">
+                        <input type="number" class="form-control" id="keluar" name="keluar" placeholder="(min 0)">
                         <div class="input-group-append">
                             <span class="input-group-text">(pcs)</span>
                         </div>
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label for="masuk">Masuk</label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="masuk" name="masuk">
+                        <input type="number" class="form-control" id="masuk" name="masuk" placeholder="(min 0)">
                         <div class="input-group-append">
                             <span class="input-group-text">(pcs)</span>
                         </div>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
-                    <textarea name="keterangan" id="keterangan" class="form-control" cols="10" rows="3"></textarea>
+                    <textarea name="keterangan" id="keterangan" class="form-control" cols="10" rows="3" placeholder="(opsional)"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -102,6 +102,24 @@
                             $('#hargaSatuan').removeClass('is-invalid');
                             $('#hargaSatuan').addClass('is-valid');
                             $('.errorHrg').html('');
+                        }
+
+                        if (response.error.keluar) {
+                            $('#keluar').addClass('is-invalid');
+                            $('.errorKeluar').html(response.error.keluar);
+                        } else {
+                            $('#keluar').removeClass('is-invalid');
+                            $('#keluar').addClass('is-valid');
+                            $('.errorKeluar').html('');
+                        }
+
+                        if (response.error.masuk) {
+                            $('#masuk').addClass('is-invalid');
+                            $('.errorMasuk').html(response.error.masuk);
+                        } else {
+                            $('#masuk').removeClass('is-invalid');
+                            $('#masuk').addClass('is-valid');
+                            $('.errorMasuk').html('');
                         }
                     } else {
                         Swal.fire({

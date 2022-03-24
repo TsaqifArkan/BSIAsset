@@ -83,13 +83,29 @@ class Cetak extends BaseController
                     'errors' => [
                         'required' => '{field} tidak boleh kosong!'
                     ]
+                ],
+                'keluar' => [
+                    'label' => 'Jumlah Keluar',
+                    'rules' => 'is_natural',
+                    'errors' => [
+                        'is_natural' => '{field} harus positif!'
+                    ]
+                ],
+                'masuk' => [
+                    'label' => 'Jumlah Masuk',
+                    'rules' => 'is_natural',
+                    'errors' => [
+                        'is_natural' => '{field} harus positif!'
+                    ]
                 ]
             ]);
             if (!$valid) {
                 $msg = [
                     'error' => [
                         'nama' => $validation->getError('nama'),
-                        'hargaSatuan' => $validation->getError('hargaSatuan')
+                        'hargaSatuan' => $validation->getError('hargaSatuan'),
+                        'keluar' => $validation->getError('keluar'),
+                        'masuk' => $validation->getError('masuk')
                     ]
                 ];
             } else {
