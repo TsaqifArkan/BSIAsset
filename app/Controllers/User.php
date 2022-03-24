@@ -29,87 +29,89 @@ class User extends BaseController
 
     public function formEdit()
     {
-        if ($this->request->isAJAX()) {
-            // $id = $this->request->getVar('id');
-            $result = user();
+        $result = user();
+        $data = [
+            'title' => 'Edit Profile',
+            'email' => $result->email,
+            'username' => $result->username,
+            'fullname' => $result->fullname,
+            'profilePict' => $result->user_image,
+            'validation' => \Config\Services::validation()
+        ];
 
-            $data = [
-                // 'id' => $result->id,
-                'email' => $result->email,
-                'username' => $result->username,
-                'fullname' => $result->fullname
-            ];
-
-            $msg = [
-                'data' => view('user/modaledit', $data)
-            ];
-            echo json_encode($msg);
-        } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
-        }
+        return view('user/editprofile', $data);
     }
 
     public function edit()
     {
-        if ($this->request->isAJAX()) {
-            // Cek email dan username sebelumnya
-            $result = user();
-            $rule_username = ($result->username == $this->request->getVar('username')) ? 'required' : 'required|is_unique[users.username]';
-            $rule_email = ($result->email == $this->request->getVar('email')) ? 'required' : 'required|is_unique[users.email]';
+        // Cek email dan username sebelumnya
+        $result = user();
+        $rule_username = ($result->username == $this->request->getVar('username')) ? 'required' : 'required|is_unique[users.username]';
+        $rule_email = ($result->email == $this->request->getVar('email')) ? 'required' : 'required|is_unique[users.email]';
 
-            $validation = \Config\Services::validation();
-            $valid = $this->validate([
-                'username' => [
-                    'label' => 'Username',
-                    'rules' => $rule_username,
-                    'errors' => [
-                        'required' => '{field} tidak boleh kosong!',
-                        'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
-                    ]
-                ],
-                'email' => [
-                    'label' => 'Email Address',
-                    'rules' => $rule_email,
-                    'errors' => [
-                        'required' => '{field} tidak boleh kosong!',
-                        'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
-                    ]
+        // $validation = \Config\Services::validation();
+        $valid = $this->validate([
+            'username' => [
+                'label' => 'Username',
+                'rules' => $rule_username,
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong!',
+                    'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
                 ]
-            ]);
-            if (!$valid) {
-                $msg = [
-                    'error' => [
-                        'username' => $validation->getError('username'),
-                        'email' => $validation->getError('email')
-                    ]
-                ];
-            } else {
-                // update ke DB
-                $updatedData = [
-                    'username' => $this->request->getVar('username'),
-                    'fullname' => $this->request->getVar('fullname'),
-                    'email' => $this->request->getVar('email')
-                ];
+            ],
+            'email' => [
+                'label' => 'Email Address',
+                'rules' => $rule_email,
+                'errors' => [
+                    'required' => '{field} tidak boleh kosong!',
+                    'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
+                ]
+            ],
+            'profilePict' => [
+                'label' => 'Profile Picture',
+                'rules' => 'max_size[profilePict,1024]|is_image[profilePict]|mime_in[profilePict,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar terlalu besar! (max size: 1 MB)',
+                    'is_image' => 'File yang Anda upload bukan gambar!',
+                    'mime_in' => 'File yang Anda upload bukan gambar!'
+                ]
+            ]
+        ]);
 
-                $id = $result->id;
-
-                $this->userModel->builder()->update($updatedData, "id = $id");
-
-                // Flash Data
-                // $dataFlash = [
-                //     'alert' => 'SUCCESS ! ',
-                //     'msg' => 'Data berhasil diubah.'
-                // ];
-                // session()->setFlashdata($dataFlash);
-                $msg = [
-                    'flashData' => 'Data user berhasil diupdate.'
-                ];
-            }
-            echo json_encode($msg);
-        } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+        if (!$valid) {
+            return redirect()->to('user/formedit')->withInput();
         }
+
+        // kelola gambar - pindahkan gambar - insert ke dalam database
+        $fileUserImage = $this->request->getFile('profilePict');
+        // cek gambar, apakah tetap menggunakan gambar lama. If user tdk mengupload foto baru, berarti error == 4 (tidak ada file yg diupload)
+        if ($fileUserImage->getError() == 4) $namaUserImage = $this->request->getVar('oldUserImage');
+        else { // jika ada file baru yg diupload
+            // generate nama file random
+            $namaUserImage = $fileUserImage->getRandomName();
+            // pindahkan gambar
+            $fileUserImage->move('img', $namaUserImage);
+            // hapus file yang lama (bila sampul tidak default.png)
+            if ($this->request->getVar('oldUserImage') != 'default.png') {
+                unlink('img/' . $this->request->getVar('oldUserImage'));
+            }
+        }
+
+        // update ke DB
+        $updatedData = [
+            'username' => $this->request->getVar('username'),
+            'fullname' => $this->request->getVar('fullname'),
+            'email' => $this->request->getVar('email'),
+            'user_image' => $namaUserImage
+        ];
+
+        $id = $result->id;
+
+        $this->userModel->builder()->update($updatedData, "id = $id");
+
+        // pembuatan flashdata data diubah
+        session()->setFlashdata('pesan', 'Data user berhasil diupdate.');
+
+        return redirect()->to('user');
     }
 }

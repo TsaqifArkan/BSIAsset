@@ -1,3 +1,28 @@
+// Preview Image
+function previewImg() {
+    const usrImage = document.querySelector('#profilePict');
+    const imgPreview = document.querySelector('.img-preview');
+
+    const filePP = new FileReader();
+    filePP.readAsDataURL(usrImage.files[0]);
+
+    filePP.onload = function(e) {
+        imgPreview.src = e.target.result;
+    }
+}
+
+// SweetAlert2 - JQuery
+// >> Konfigurasi flash data
+const flashData = $('.flash-data').data('flashdata');
+// console.log(flashData);
+if(flashData){
+    Swal.fire({
+        title : 'SUCCESS !',
+        text : flashData,
+        icon : 'success'
+    });
+}
+
 // const currentLocation = location.href;
 // console.log(currentLocation);
 // // const aActiveToggler = document.querySelectorAll('ul.parent-active-toggler li.active-toggler a');
