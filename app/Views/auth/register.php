@@ -22,7 +22,7 @@
                                     <?= csrf_field(); ?>
 
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user <?php if (session('errors.username')) : ?>is-invalid<?php endif; ?>" id="exampleInputUsername" placeholder="<?= lang('Auth.username'); ?>" name="username" value="<?= old('username'); ?>">
+                                        <input type="text" class="form-control form-control-user <?php if (session('errors.username')) : ?>is-invalid<?php endif; ?>" id="exampleInputUsername" placeholder="<?= lang('Auth.username'); ?>" name="username" value="<?= old('username'); ?>" autofocus>
                                     </div>
 
                                     <div class="form-group">
