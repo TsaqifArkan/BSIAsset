@@ -27,7 +27,7 @@ class User extends BaseController
         return view('user/index', $data);
     }
 
-    public function formEdit()
+    public function editprofile()
     {
         $result = user();
         $data = [
@@ -39,7 +39,7 @@ class User extends BaseController
             'validation' => \Config\Services::validation()
         ];
 
-        return view('user/editprofile', $data);
+        return view('user/formedit', $data);
     }
 
     public function edit()

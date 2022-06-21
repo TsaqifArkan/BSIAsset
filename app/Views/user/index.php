@@ -40,7 +40,7 @@
                                 <?php endif; ?>
                                 <li class="list-group-item"><?= esc($userdata->email); ?></li>
                                 <li class="list-group-item">
-                                    <a href="<?= base_url('user/formedit/'); ?>" class="btn btn-warning">Edit</a>
+                                    <a href="<?= base_url('user/editprofile/'); ?>" class="btn btn-warning">Edit</a>
                                 </li>
                             </ul>
                         </div>
