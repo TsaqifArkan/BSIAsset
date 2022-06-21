@@ -25,7 +25,7 @@
             <div class="card mb-3 shadow" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4 text-center">
-                        <img src="<?= base_url('img/' . esc($userdata->user_image)); ?>" width="100%" height="auto" alt="<?= esc($userdata->username); ?>" class="img-thumbnail rounded-circle">
+                        <img src="<?= base_url('img/' . esc($userdata->user_image)); ?>" alt="<?= esc($userdata->username); ?>" class="img-thumbnail rounded-circle" style="height: auto; width: 100%;">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
