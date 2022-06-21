@@ -74,37 +74,43 @@
             <span>Kategori Barang</span></a>
     </li> -->
 
-    <?php if (in_groups('admin')) : ?>
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Admin Panel
-        </div>
-
-        <!-- Nav Item - User List -->
-        <li class="nav-item <?= url('admin'); ?>">
-            <a class="nav-link" href="<?= base_url('admin'); ?>">
-                <i class="fa-solid fa-fw fa-users"></i>
-                <span>User List</span></a>
-        </li>
-    <?php endif; ?>
-
+    <?php // if (in_groups('admin')) : 
+    ?>
     <!-- Divider -->
-    <hr class="sidebar-divider">
+    <!-- <hr class="sidebar-divider"> -->
 
     <!-- Heading -->
-    <div class="sidebar-heading">
-        Settings
-    </div>
+    <!-- <div class="sidebar-heading"> -->
+    <!-- Admin Panel -->
+    <!-- </div> -->
+
+    <!-- Nav Item - User List -->
+    <!-- <li class="nav-item <?php // echo url('admin'); 
+                                ?>"> -->
+    <!-- <a class="nav-link" href="<?php // echo base_url('admin'); 
+                                    ?>"> -->
+    <!-- <i class="fa-solid fa-fw fa-users"></i> -->
+    <!-- <span>User List</span></a> -->
+    <!-- </li> -->
+    <?php // endif; 
+    ?>
+
+    <!-- Divider -->
+    <!-- <hr class="sidebar-divider"> -->
+
+    <!-- Heading -->
+    <!-- <div class="sidebar-heading"> -->
+    <!-- Settings -->
+    <!-- </div> -->
 
     <!-- Nav Item - Logout -->
-    <li class="nav-item <?= url('logout'); ?>">
-        <a class="nav-link" href="<?= base_url('logout'); ?>">
-            <i class="fa-solid fa-fw fa-right-from-bracket"></i>
-            <span>Logout</span></a>
-    </li>
+    <!-- <li class="nav-item <?php //echo url('logout'); 
+                                ?>"> -->
+    <!-- <a class="nav-link" href="<?php //echo base_url('logout'); 
+                                    ?>"> -->
+    <!-- <i class="fa-solid fa-fw fa-right-from-bracket"></i> -->
+    <!-- <span>Logout</span></a> -->
+    <!-- </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
