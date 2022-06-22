@@ -17,6 +17,16 @@
     <?php // dd($assets);
     ?>
 
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-secondary">
+                <strong>Perhatian!</strong> untuk mengupload foto aset, tambah sebuah data aset terlebih dahulu, lalu klik ikon <i class="fa-solid fa-fw fa-image"></i> pada kolom <b>Aksi</b> pada data terkait. <br>
+                Warna <strong>hijau</strong> menunjukkan foto aset telah diubah. <br>
+            </div>
+        </div>
+    </div>
+
+
     <div class="row mb-3">
         <div class="col">
             <!-- Button trigger modal -->
