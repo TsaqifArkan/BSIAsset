@@ -13,6 +13,12 @@
                 <div class="card-body">
                     <div class="container">
                         <div class="row">
+                            <div class="col">
+                                <img src="/img/<?= esc($aset['gambar_aset']); ?>" alt="" class="img-fluid img-thumbnail d-block m-auto rounded img-preview" style="height:auto; width:500px;">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
                             <div class="col font-weight-bold text-center">
                                 Nama Barang
                             </div>

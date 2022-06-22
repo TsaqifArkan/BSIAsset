@@ -23,7 +23,7 @@
                         <div class="form-group">
                             <div class="row mb-3">
                                 <div class="col">
-                                    <img src="/img/<?= esc($aset['gambar_aset']); ?>" alt="" class="img-thumbnail d-block m-auto rounded-circle img-preview" style="height:200px; width:200px;">
+                                    <img src="/img/<?= esc($aset['gambar_aset']); ?>" alt="" class="img-thumbnail d-block m-auto rounded img-preview" style="height:200px; width:200px;">
                                 </div>
                             </div>
                             <div class="row">
