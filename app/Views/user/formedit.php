@@ -30,7 +30,7 @@
                                     <label for="uploadPict">Profil Picture</label>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input <?= ($validation->hasError('profilePict')) ? 'is-invalid' : ''; ?>" id="uploadPict" name="profilePict" onchange="previewImg()">
-                                        <label class="custom-file-label" for="uploadPict"><?= esc($profilePict); ?></label>
+                                        <label class="custom-file-label" for="uploadPict">Choose a file..</label>
                                         <div class="invalid-feedback">
                                             <?= $validation->getError('profilePict'); ?>
                                         </div>

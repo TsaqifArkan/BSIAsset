@@ -32,7 +32,7 @@
                                     <div class="custom-file">
                                         <!-- validation disini -->
                                         <input type="file" class="custom-file-input <?= ($validation->hasError('asetPict')) ? 'is-invalid' : ''; ?>" id="uploadPict" name="asetPict" onchange="previewImg()">
-                                        <label class="custom-file-label" for="uploadPict"><?= (esc($aset['gambar_aset']) == 'default_aset.jpg') ? 'Choose a file..' : esc($aset['gambar_aset']); ?></label>
+                                        <label class="custom-file-label" for="uploadPict">Choose a file..</label>
                                         <div class="invalid-feedback">
                                             <?= $validation->getError('asetPict'); ?>
                                         </div>
