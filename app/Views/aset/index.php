@@ -4,6 +4,9 @@
 
 <div class="container-fluid">
 
+    <!-- FLASH DATA -->
+    <div class="flash-data" data-flashdata="<?= session()->getFlashdata('pesan'); ?>"></div>
+
     <!-- Page Heading -->
     <div class="row mb-2">
         <div class="col">

@@ -27,10 +27,10 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <label for="profilePict">Profil Picture</label>
+                                    <label for="uploadPict">Profil Picture</label>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input <?= ($validation->hasError('profilePict')) ? 'is-invalid' : ''; ?>" id="profilePict" name="profilePict" onchange="previewImg()">
-                                        <label class="custom-file-label" for="profilePict"><?= esc($profilePict); ?></label>
+                                        <input type="file" class="custom-file-input <?= ($validation->hasError('profilePict')) ? 'is-invalid' : ''; ?>" id="uploadPict" name="profilePict" onchange="previewImg()">
+                                        <label class="custom-file-label" for="uploadPict"><?= esc($profilePict); ?></label>
                                         <div class="invalid-feedback">
                                             <?= $validation->getError('profilePict'); ?>
                                         </div>

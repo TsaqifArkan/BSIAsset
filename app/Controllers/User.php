@@ -79,7 +79,7 @@ class User extends BaseController
         ]);
 
         if (!$valid) {
-            return redirect()->to('user/formedit')->withInput();
+            return redirect()->to('user/editprofile')->withInput();
         }
 
         // kelola gambar - pindahkan gambar - insert ke dalam database

@@ -1,12 +1,14 @@
 // Preview Image
 function previewImg() {
-    const usrImage = document.querySelector('#profilePict');
+    const uploadImg = document.querySelector('#uploadPict');
     const imgPreview = document.querySelector('.img-preview');
 
     const filePP = new FileReader();
-    filePP.readAsDataURL(usrImage.files[0]);
-
+    filePP.readAsDataURL(uploadImg.files[0]);
+    
     filePP.onload = function(e) {
+        uploadImg.labels[1].innerHTML = uploadImg.files[0].name;
+        // console.log(uploadImg.labels);
         imgPreview.src = e.target.result;
     }
 }

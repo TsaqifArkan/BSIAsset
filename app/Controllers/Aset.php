@@ -317,4 +317,66 @@ class Aset extends BaseController
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
         file_put_contents('img/' . 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '.png', $generator->getBarcode($code, $generator::TYPE_CODE_128, 3, 50));
     }
+
+    public function img($id = 0)
+    {
+        $namaKolom = 'gambar_aset';
+        $query = $this->builder->select($namaKolom)->where('id', $id);
+        $data = [
+            'title' => 'Gambar Aset',
+            'id' => $id,
+            'aset' => $query->get()->getResultArray()[0],
+            'validation' => \Config\Services::validation()
+        ];
+        return view('aset/formimg', $data);
+    }
+
+    public function editImg()
+    {
+        // Fetch Data
+        $idAset = $this->request->getVar('id');
+
+        // Validasi Aset Image
+        $valid = $this->validate([
+            'asetPict' => [
+                'label' => 'Gambar Aset',
+                'rules' => 'max_size[asetPict,5120]|is_image[asetPict]|mime_in[asetPict,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar terlalu besar! (max size: 5 MB)',
+                    'is_image' => 'File yang Anda upload bukan gambar!',
+                    'mime_in' => 'File yang Anda upload bukan gambar!'
+                ]
+            ]
+        ]);
+
+        if (!$valid) {
+            return redirect()->to('aset/img/' . $idAset)->withInput();
+        }
+
+        // kelola Gambar Aset
+        $fileAssetImage = $this->request->getFile('asetPict');
+        // cek gambar
+        if ($fileAssetImage->getError() == 4) $namaAssetImage = $this->request->getVar('oldAssetImage');
+        else {
+            // generate random filename
+            $namaAssetImage = $fileAssetImage->getRandomName();
+            // pindah lokasi gambar
+            $fileAssetImage->move('img', $namaAssetImage);
+            // hapus file yg lama (bila gambar aset tidak default_aset.jpg)
+            if ($this->request->getVar('oldAssetImage') != 'default_aset.jpg') {
+                unlink('img/' . $this->request->getVar('oldAssetImage'));
+            }
+        }
+
+        // update ke DB
+        $updatedData = [
+            'gambar_aset' => $namaAssetImage
+        ];
+        $this->asetModel->builder()->update($updatedData, "id = $idAset");
+
+        // pembuatan flashdata data diubah
+        session()->setFlashdata('pesan', 'Gambar aset berhasil diupdate.');
+
+        return redirect()->to('aset');
+    }
 }
