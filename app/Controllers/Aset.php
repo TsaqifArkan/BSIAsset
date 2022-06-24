@@ -316,6 +316,7 @@ class Aset extends BaseController
 
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
         file_put_contents('img/' . 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '.png', $generator->getBarcode($code, $generator::TYPE_CODE_128, 3, 50));
+        // INI MANA RETURNNYA?!
     }
 
     public function img($id = 0)
