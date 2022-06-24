@@ -31,7 +31,7 @@ class Cetak extends BaseController
             // Penambahan data pada array results utama
             foreach ($results as $i => $result) {
                 // Change Date Format Tanggal Cetak
-                $results[$i]['datefmtrcetak'] = date_format(date_create($result['tanggal']), "d/m/Y H:i:s");
+                $results[$i]['datefmtrcetak'] = date_format(date_create($result['tanggal']), "d/m/Y");
                 // Change Number Formatter
                 $results[$i]['numfmtr'] = numfmt_format($this->numfmt, $result['harga']);
                 // Pembuatan Kode Barang
