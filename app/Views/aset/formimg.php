@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="/aset/editImg" method="POST" enctype="multipart/form-data" id="formAsetImageID">
+                    <form action="/aset/editImg" method="POST" enctype="multipart/form-data">
                         <?= csrf_field(); ?>
                         <!-- menyimpan nama file gambar_aset lama -->
                         <input type="hidden" name="oldAssetImage" value="<?= esc($aset['gambar_aset']); ?>">

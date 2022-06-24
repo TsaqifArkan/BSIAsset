@@ -20,12 +20,12 @@
     <div class="row">
         <div class="col">
             <div class="alert alert-secondary">
-                <strong>Perhatian!</strong> untuk mengupload foto aset, tambah sebuah data aset terlebih dahulu, lalu klik ikon <i class="fa-solid fa-fw fa-image"></i> pada kolom <b>Aksi</b> pada data terkait. <br>
-                Warna <strong>hijau</strong> menunjukkan foto aset telah diubah. <br>
+                <strong>Perhatian!</strong> untuk mengupload foto aset, tambah sebuah data aset terlebih dahulu, lalu klik ikon <button type="button" class="btn btn-sm btn-secondary" disabled><i class="fa-solid fa-fw fa-image"></i></button> pada kolom <b>Aksi</b>. <br>
+                <button type="button" class="btn btn-sm btn-success" disabled><i class="fa-solid fa-fw fa-image"></i></button> : <strong>Foto Aset</strong> telah diubah. <br>
+                <button type="button" class="btn btn-sm btn-secondary" disabled><i class="fa-solid fa-fw fa-image"></i></button> : <strong>Foto Aset</strong> belum diubah.</button>
             </div>
         </div>
     </div>
-
 
     <div class="row mb-3">
         <div class="col">
