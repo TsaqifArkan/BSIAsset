@@ -9,7 +9,7 @@
                 <th scope="col">Harga Sewa</th>
                 <th scope="col">Sisa Waktu</th>
                 <th scope="col">Jatuh Tempo</th>
-                <th scope="col">Aksi</th>
+                <th scope="col" class="col-aksi">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +23,16 @@
                     <td><?= esc($rents['timeLeft'][$i]); ?> hari</td>
                     <td><?= esc($rents['dateFmtrTempo'][$i]); ?></td>
                     <td>
+                        <a href="<?= base_url('sewa/upload/' . $rent['id']); ?>" class="btn <?php if ($rent['gambar_sewa'] != 'default_sewa.jpg' && $rent['file_sewa'] != null) : ?>
+                            <?= 'btn-facebook'; ?>
+                        <?php elseif ($rent['gambar_sewa'] != 'default_sewa.jpg') : ?>
+                            <?= 'btn-success'; ?>
+                        <?php elseif ($rent['file_sewa'] != null) : ?>
+                            <?= 'btn-google'; ?>
+                        <?php else : ?>
+                            <?= 'btn-secondary'; ?>
+                        <?php endif; ?> btn-sm"><i class="fa-solid fa-file-arrow-up"></i></a>
+                        <a href="<?= base_url('sewa/detail/' . $rent['id']); ?>" class="btn btn-info btn-sm">Detail</a>
                         <button type="button" class="btn btn-warning btn-sm" onclick="ubah('<?= $rent['id']; ?>')">Edit</button>
                         <button type="button" class="btn btn-danger btn-sm" onclick="hapus('<?= $rent['id']; ?>')">Hapus</button>
                     </td>

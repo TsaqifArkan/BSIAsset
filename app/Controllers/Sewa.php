@@ -289,4 +289,117 @@ class Sewa extends BaseController
         }
         echo json_encode($msg);
     }
+
+    public function upload($id = 0)
+    {
+        // Working with Image and/or File Upload
+        $namaKolom = 'gambar_sewa, file_sewa';
+        $query = $this->builder->select($namaKolom)->where('id', $id);
+        $data = [
+            'title' => 'Upload File Sewa',
+            'id' => $id,
+            'sewa' => $query->get()->getResultArray()[0],
+            'validation' => \Config\Services::validation()
+        ];
+        return view('sewa/formupload', $data);
+    }
+
+    public function uploadFile()
+    {
+        // Fetch Data
+        $idSewa = $this->request->getVar('id');
+
+        // Validasi Sewa Image
+        $valid = $this->validate([
+            'sewaPict' => [
+                'label' => 'Foto Barang Sewa',
+                'rules' => 'max_size[sewaPict,5120]|is_image[sewaPict]|mime_in[sewaPict,image/jpg,image/jpeg,image/png]',
+                'errors' => [
+                    'max_size' => 'Ukuran gambar terlalu besar! (max size: 5 MB)',
+                    'is_image' => 'File yang Anda upload bukan gambar!',
+                    'mime_in' => 'File yang Anda upload bukan gambar!'
+                ]
+            ],
+            'sewaPDF' => [
+                'label' => 'Berkas Perjanjian Sewa',
+                'rules' => 'max_size[sewaPDF,10240]|ext_in[sewaPDF,pdf]',
+                'errors' => [
+                    'max_size' => 'Ukuran file terlalu besar! (max size: 10 MB)',
+                    'ext_in' => 'File yang dapat diupload harus berupa PDF!'
+                ]
+            ]
+        ]);
+
+        if (!$valid) {
+            return redirect()->to('sewa/upload/' . $idSewa)->withInput();
+        }
+
+        // kelola Gambar Sewa
+        $fileSewaImage = $this->request->getFile('sewaPict');
+        // cek gambar
+        if ($fileSewaImage->getError() == 4) $namaSewaImage = $this->request->getVar('oldSewaImage');
+        else {
+            // generate random filename
+            $namaSewaImage = $fileSewaImage->getRandomName();
+            // pindah lokasi gambar
+            $fileSewaImage->move('img', $namaSewaImage);
+            // hapus file yg lama (bila gambar sewa tidak default_sewa.jpg)
+            if ($this->request->getVar('oldSewaImage') != 'default_sewa.jpg') {
+                unlink('img/' . $this->request->getVar('oldSewaImage'));
+            }
+        }
+
+        // kelola Dokumen Sewa
+        $fileSewaPDF = $this->request->getFile('sewaPDF');
+        $namaSewaPDF = null;
+        // cek PDF
+        if ($fileSewaPDF->getError() != 4) {
+            // generate random filename
+            $namaSewaPDF = $fileSewaPDF->getRandomName();
+            // pindah lokasi PDF
+            $fileSewaPDF->move('pdf', $namaSewaPDF);
+        }
+
+        // update ke DB
+        $updatedData['gambar_sewa'] = $namaSewaImage;
+        if ($namaSewaPDF != null) $updatedData['file_sewa'] = $namaSewaPDF;
+
+        $this->sewaModel->builder()->update($updatedData, "id = $idSewa");
+
+        // pembuatan flashdata data diubah
+        $isiPesan = ($fileSewaImage->getError() != 4 || $fileSewaPDF->getError() != 4) ?  'File barang sewa berhasil diupdate.' : 'Tidak ada perubahan data!';
+        session()->setFlashdata('pesan', $isiPesan);
+
+        return redirect()->to('sewa');
+    }
+
+    public function detail($id = 0)
+    {
+        // Fetch Data
+        $data['title'] = 'Detail Barang Sewa';
+        $data['sewa'] = $this->sewaModel->find($id);
+
+        // Using Date Formatter and Number Formatter
+        $data['tglSewa'] = date_format(date_create($data['sewa']['tgl_sewa']), "d/m/Y");
+        $data['harga'] = numfmt_format($this->numfmt, $data['sewa']['harga']);
+
+        // Count sisa hari sewa
+        $now = strtotime(date('Y-m-d'));
+        $sisaWaktu = (strtotime($data['sewa']['jatuh_tempo']) - $now) / 86400;
+        $data['timeLeft'] = ($sisaWaktu > 0) ? $sisaWaktu : 0;
+
+        // Count tgl jatuh tempo sewa
+        $data['tglSewaJthTempo'] = date_format(date_create($data['sewa']['jatuh_tempo']), "d/m/Y");
+
+        return view('sewa/detail', $data);
+    }
+
+    // public function downloadPDF($id = 0)
+    // {
+    //     $namaKolom = 'file_sewa';
+    //     $query = $this->builder->select($namaKolom)->where('id', $id);
+    //     $result = $query->get()->getResultArray()[0];
+
+    //     return $this->response->download('pdf/' . $result['file_sewa'], null);
+    // }
 }

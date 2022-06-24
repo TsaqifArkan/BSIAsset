@@ -4,6 +4,9 @@
 
 <div class="container-fluid">
 
+    <!-- FLASH DATA -->
+    <div class="flash-data" data-flashdata="<?= session()->getFlashdata('pesan'); ?>"></div>
+
     <!-- Page Heading -->
     <div class="row mb-2">
         <div class="col">
@@ -13,6 +16,18 @@
 
     <?php // dd($getSearch);
     ?>
+
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-secondary">
+                <strong>Perhatian!</strong> untuk mengupload foto barang sewa / perjanjian sewa, tambah sebuah data barang sewa terlebih dahulu, lalu klik ikon <button type="button" class="btn btn-sm btn-secondary" disabled><i class="fa-solid fa-file-arrow-up"></i></button> pada kolom <b>Aksi</b>. <br>
+                <button type="button" class="btn btn-sm btn-facebook" disabled><i class="fa-solid fa-file-arrow-up"></i></button> : <strong>Foto Barang Sewa</strong> dan <strong>File Perjanjian Sewa</strong> telah ditambahkan. <br>
+                <button type="button" class="btn btn-sm btn-success" disabled><i class="fa-solid fa-file-arrow-up"></i></button> : <strong>Foto Barang Sewa</strong> telah diubah. <br>
+                <button type="button" class="btn btn-sm btn-google" disabled><i class="fa-solid fa-file-arrow-up"></i></button> : <strong>File Perjanjian Sewa</strong> telah diupload. <br>
+                <button type="button" class="btn btn-sm btn-secondary" disabled><i class="fa-solid fa-file-arrow-up"></i></button> : Tidak ada <strong>Foto Barang Sewa</strong> maupun <strong>File Perjanjian Sewa</strong> yang diupload.</button>
+            </div>
+        </div>
+    </div>
 
     <div class="row mb-3">
         <div class="col">

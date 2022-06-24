@@ -13,6 +13,17 @@ function previewImg() {
     }
 }
 
+// Preview Uploaded File Name on label
+function previewLabelFile(){
+    const uploadFile = document.querySelector('#uploadPDF');
+    
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(uploadFile.files[0]);
+    fileReader.onload = function(e) {
+        uploadFile.labels[1].innerHTML = uploadFile.files[0].name;
+    }
+}
+
 // SweetAlert2 - JQuery
 // >> Konfigurasi flash data
 const flashData = $('.flash-data').data('flashdata');
