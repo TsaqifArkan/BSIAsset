@@ -314,9 +314,14 @@ class Aset extends BaseController
 
         // dd($code);
 
+        $filename = 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '.png';
+        header("Content-Description: File Transfer");
+        header("Content-Disposition: attachment; filename=$filename");
+        header("Content-Type: image/png;");
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-        file_put_contents('img/' . 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '.png', $generator->getBarcode($code, $generator::TYPE_CODE_128, 3, 50));
+        file_put_contents('php://output', $generator->getBarcode($code, $generator::TYPE_CODE_128, 3, 50));
         // INI MANA RETURNNYA?!
+        exit;
     }
 
     public function img($id = 0)
