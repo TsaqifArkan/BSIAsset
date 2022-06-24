@@ -170,6 +170,7 @@ class Cetak extends BaseController
             // Coba implement saldo
             $saldo += $result['masuk'] - $result['keluar'];
             $results[$i]['saldo'] = $saldo;
+            $results[$i]['tanggal'] = date_format(date_create($result['tanggal']), 'd-M-Y');
         }
         $data['cetaks'] = $results;
         $filename = 'print_' . date('YmdHis') . '.csv';
