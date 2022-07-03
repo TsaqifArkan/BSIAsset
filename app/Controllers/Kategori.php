@@ -18,8 +18,8 @@ class Kategori extends BaseController
         $data['title'] = 'Kategori Barang';
         // $categories = new KategoriModel();
         $data['categories'] = $this->kategoriModel->findAll();
-
-        return view('kategori/index', $data);
+        // return view('kategori/index', $data);
+        return $this->showPages('kategori/index', $data);
     }
 
     public function tambah()

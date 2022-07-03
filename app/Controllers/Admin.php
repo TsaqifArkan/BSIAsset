@@ -31,7 +31,8 @@ class Admin extends BaseController
         // perintah ini akan mengoutputkan sebuah object. Bila ingin array, ubah mjd getResultArray()
         $data['users'] = $query->getResult();
 
-        return view('admin/index', $data);
+        return $this->showPages('admin/index', $data);
+        // return view('admin/index', $data);
     }
 
     public function detail($id = 0)
@@ -54,6 +55,7 @@ class Admin extends BaseController
             return redirect()->to('/admin');
         }
 
-        return view('admin/detail', $data);
+        return $this->showPages('admin/detail', $data);
+        // return view('admin/detail', $data);
     }
 }

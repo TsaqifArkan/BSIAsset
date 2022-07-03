@@ -23,7 +23,8 @@ class Sewa extends BaseController
         $data['title'] = 'Sewa Barang';
         $data['get']['id'] = $this->request->getGet('id');
         $data['get']['hghlt'] = $this->request->getGet('hghlt');
-        return view('sewa/index', $data);
+        return $this->showPages('sewa/index', $data);
+        // return view('sewa/index', $data);
     }
 
     public function getData()
@@ -71,12 +72,14 @@ class Sewa extends BaseController
             ];
 
             $msg = [
-                'data' => view('sewa/tablesewadata', $data)
+                // 'data' => view('sewa/tablesewadata', $data)
+                'data' => $this->showPages('sewa/tablesewadata', $data)
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            // return view('templates/404', $data);
+            return $this->showPages('templates/404', $data);
         }
     }
 
@@ -84,12 +87,14 @@ class Sewa extends BaseController
     {
         if ($this->request->isAJAX()) {
             $msg = [
-                'data' => view('sewa/modaltambah')
+                // 'data' => view('sewa/modaltambah')
+                'data' => $this->showPages('sewa/modaltambah')
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            // return view('templates/404', $data);
+            return $this->showPages('templates/404', $data);
         }
     }
 
@@ -163,8 +168,9 @@ class Sewa extends BaseController
             echo json_encode($msg);
         } else {
             // exit("Woops! seems you're quite curious..");
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            // return view('templates/404', $data);
+            return $this->showPages('templates/404', $data);
         }
     }
 
@@ -189,12 +195,14 @@ class Sewa extends BaseController
             ];
 
             $msg = [
-                'data' => view('sewa/modaledit', $data)
+                // 'data' => view('sewa/modaledit', $data)
+                'data' => $this->showPages('sewa/modaledit', $data)
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            // return view('templates/404', $data);
+            return $this->showPages('templates/404', $data);
         }
     }
 
@@ -266,8 +274,9 @@ class Sewa extends BaseController
             }
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            // return view('templates/404', $data);
+            return $this->showPages('templates/404', $data);
         }
     }
 
@@ -301,7 +310,8 @@ class Sewa extends BaseController
             'sewa' => $query->get()->getResultArray()[0],
             'validation' => \Config\Services::validation()
         ];
-        return view('sewa/formupload', $data);
+        // return view('sewa/formupload', $data);
+        return $this->showPages('sewa/formupload', $data);
     }
 
     public function uploadFile()
@@ -391,7 +401,8 @@ class Sewa extends BaseController
         // Count tgl jatuh tempo sewa
         $data['tglSewaJthTempo'] = date_format(date_create($data['sewa']['jatuh_tempo']), "d/m/Y");
 
-        return view('sewa/detail', $data);
+        // return view('sewa/detail', $data);
+        return $this->showPages('sewa/detail', $data);
     }
 
     // public function downloadPDF($id = 0)

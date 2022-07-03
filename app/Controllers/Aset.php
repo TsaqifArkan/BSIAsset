@@ -20,7 +20,8 @@ class Aset extends BaseController
     public function index()
     {
         $data['title'] = 'Kelola Aset';
-        return view('aset/index', $data);
+        return $this->showPages('aset/index', $data);
+        // return view('aset/index', $data);
     }
 
     public function getData()
@@ -50,12 +51,14 @@ class Aset extends BaseController
             ];
 
             $msg = [
-                'data' => view('aset/tableasetdata', $data)
+                // 'data' => view('aset/tableasetdata', $data)
+                'data' => $this->showPages('aset/tableasetdata', $data)
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            return $this->showPages('templates/404', $data);
+            // return view('templates/404', $data);
         }
     }
 
@@ -63,12 +66,14 @@ class Aset extends BaseController
     {
         if ($this->request->isAJAX()) {
             $msg = [
-                'data' => view('aset/modaltambah')
+                // 'data' => view('aset/modaltambah')
+                'data' => $this->showPages('aset/modaltambah')
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            return $this->showPages('templates/404', $data);
+            // return view('templates/404', $data);
         }
     }
 
@@ -144,8 +149,9 @@ class Aset extends BaseController
             echo json_encode($msg);
         } else {
             // exit("Woops! seems you're quite curious..");
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            return $this->showPages('templates/404', $data);
+            // return view('templates/404', $data);
         }
     }
 
@@ -164,12 +170,14 @@ class Aset extends BaseController
             ];
 
             $msg = [
-                'data' => view('aset/modaledit', $data)
+                // 'data' => view('aset/modaledit', $data)
+                'data' => $this->showPages('aset/modaledit', $data)
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            return $this->showPages('templates/404', $data);
+            // return view('templates/404', $data);
         }
     }
 
@@ -249,8 +257,9 @@ class Aset extends BaseController
             }
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            return $this->showPages('templates/404', $data);
+            // return view('templates/404', $data);
         }
     }
 
@@ -285,7 +294,7 @@ class Aset extends BaseController
 
         // different date and interval month
         $dateInterval = date_diff($dateNow, $dateExp);
-        $intervalMonth = $dateInterval->invert ? 0 : ($dateInterval->m + ($dateInterval->d != 0));
+        $intervalMonth = $dateInterval->invert ? 0 : ($dateInterval->y * 12 + $dateInterval->m + ($dateInterval->d != 0));
 
         // Menghitung nilaiBuku
         $nilaiBuku = ($data['aset']['harga'] / $data['aset']['usia_teknis']) * $intervalMonth;
@@ -303,7 +312,8 @@ class Aset extends BaseController
             return redirect()->to('/aset');
         }
 
-        return view('aset/detail', $data);
+        // return view('aset/detail', $data);
+        return $this->showPages('aset/detail', $data);
     }
 
     public function barcode($id)
@@ -334,7 +344,8 @@ class Aset extends BaseController
             'aset' => $query->get()->getResultArray()[0],
             'validation' => \Config\Services::validation()
         ];
-        return view('aset/formimg', $data);
+        // return view('aset/formimg', $data);
+        return $this->showPages('aset/formimg', $data);
     }
 
     public function editImg()
