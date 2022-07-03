@@ -9,12 +9,14 @@ class Email extends BaseConfig
     /**
      * @var string
      */
-    public $fromEmail = 'scalledcoc@gmail.com';
+    // public $fromEmail = 'scalledcoc@gmail.com';
+    public $fromEmail;
 
     /**
      * @var string
      */
-    public $fromName = 'Aveneraa Scalled';
+    // public $fromName = 'Aveneraa Scalled';
+    public $fromName;
 
     /**
      * @var string
@@ -26,13 +28,15 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $userAgent = 'CodeIgniter';
+    // public $userAgent = 'CodeIgniter';
+    public $userAgent;
 
     /**
      * The mail sending protocol: mail, sendmail, smtp
      *
      * @var string
      */
+    // public $protocol = 'smtp';
     public $protocol = 'mail';
 
     /**
@@ -47,6 +51,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
+    // public $SMTPHost = 'smtp.gmail.com';
     public $SMTPHost;
 
     /**
@@ -54,6 +59,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
+    // public $SMTPUser = 'scalledcoc@gmail.com';
     public $SMTPUser;
 
     /**
@@ -61,6 +67,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
+    // public $SMTPPass = '';
     public $SMTPPass;
 
     /**
@@ -68,6 +75,7 @@ class Email extends BaseConfig
      *
      * @var int
      */
+    // public $SMTPPort = 465;
     public $SMTPPort = 25;
 
     /**
@@ -75,6 +83,7 @@ class Email extends BaseConfig
      *
      * @var int
      */
+    // public $SMTPTimeout = 60;
     public $SMTPTimeout = 5;
 
     /**
@@ -89,6 +98,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
+    // public $SMTPCrypto = 'ssl';
     public $SMTPCrypto = 'tls';
 
     /**
@@ -110,6 +120,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
+    // public $mailType = 'html';
     public $mailType = 'text';
 
     /**
