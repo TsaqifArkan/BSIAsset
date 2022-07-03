@@ -16,9 +16,11 @@ class Notifikasi extends BaseController
     public function index()
     {
         $data['title'] = 'Panel Notifikasi';
-        $query = $this->notifikasiModel->builder()->select('*')->orderBy('waktu', 'ASC');
-        $result = $query->get()->getResultArray();
-        $data['notifikasi'] = $result;
+        // FULLY DEPRECATED!
+        // $query = $this->notifikasiModel->builder()->select('*')->orderBy('waktu', 'ASC');
+        // $result = $query->get()->getResultArray();
+        // $data['notifikasi'] = $result;
+        // Until This Line.
 
         // $data['notifikasi'] = $this->notifikasiModel->findAll();
         // dd($data);
@@ -29,7 +31,8 @@ class Notifikasi extends BaseController
         // } else {
         //     $data['jatuhTempo'] = [];
         // }
-        return view('notifikasi/index', $data);
+        return $this->showPages('notifikasi/index', $data);
+        // return view('notifikasi/index', $data);
     }
 
     public function delNotif($id = NULL)
@@ -41,8 +44,9 @@ class Notifikasi extends BaseController
             // session();
             // unset($_SESSION["notif"][$id]);
         } else {
-            $data['title'] = 'Woops!';
-            return view('templates/404', $data);
+            $data['title'] = 'Whoops!';
+            return $this->showPages('templates/404', $data);
+            // return view('templates/404', $data);
         }
     }
 }

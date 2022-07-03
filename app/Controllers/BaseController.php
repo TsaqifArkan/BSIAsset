@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\NotifikasiModel;
 use App\Models\SewaModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
@@ -62,5 +63,15 @@ class BaseController extends Controller
         //         ->get()->getResultArray();
         //     $sessionNotif->set('notif', $result);
         // }
+    }
+
+    // Function to show pages
+    protected function showPages(String $view, $data = [])
+    {
+        $notifikasiModel = new NotifikasiModel();
+        $query = $notifikasiModel->builder()->select('*')->orderBy('waktu', 'ASC');
+        $result = $query->get()->getResultArray();
+        $data['notifikasi'] = $result;
+        return view($view, $data);
     }
 }
