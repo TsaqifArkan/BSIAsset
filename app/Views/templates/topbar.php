@@ -1,3 +1,6 @@
+<?php // dd($notifikasi); 
+?>
+
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
     <!-- Sidebar Toggle (Topbar) -->
@@ -7,6 +10,42 @@
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
+
+        <!-- Nav Item - Alerts -->
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-fw fa-bell"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter" id="numberNotif"><?= sizeof($notifikasi); ?></span>
+            </a>
+            <!-- Dropdown - Alerts -->
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="min-width: 22rem;">
+                <h6 class="dropdown-header">
+                    Notifikasi
+                </h6>
+                <?php foreach ($notifikasi as $i => $notif) : ?>
+                    <a class="dropdown-item d-flex align-items-center alert-<?= esc($notif['tipe']); ?>" href="<?= base_url($notif['link']); ?>" style="<?= ($i > 3) ? 'display: none;' : 'display:inline-block;' ?>">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fa-solid fa-fw fa-truck-ramp-box text-white"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-gray-700" style="font-size:small;"><?= esc($notif['info']); ?></div>
+                            <div class="font-weight-bold text-gray-800" style="font-size: small;"><?= esc($notif['judul']); ?></div>
+                            <span style="font-style: italic;"><?= esc($notif['konten']); ?></span>
+                            <div class="small text-gray-600"><?= esc($notif['sub_konten']); ?></div>
+                        </div>
+                        <div class="ml-4">
+                            <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?= $notif['id']; ?>">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+                <!-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> -->
+            </div>
+        </li>
 
         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -33,3 +72,18 @@
     </ul>
 
 </nav>
+
+<script>
+    $('.btnClose').click(function(e) {
+        e.preventDefault();
+
+        let id = $(this).data('id');
+        // console.log(id);
+        $.ajax({
+            url: "<?= base_url('notifikasi/delnotif'); ?>" + '/' + id,
+        });
+        this.parentElement.parentElement.remove();
+
+        $('#numberNotif')[0].innerHTML--;
+    });
+</script>
