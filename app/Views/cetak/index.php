@@ -4,10 +4,13 @@
 
 <div class="container-fluid">
 
+    <?php //dd($brgcetakdata); 
+    ?>
+
     <!-- Page Heading -->
     <div class="row mb-2">
         <div class="col">
-            <h1 class="h3 text-gray-800">Daftar Barang Cetakan</h1>
+            <h1 class="h3 text-gray-800">Daftar Transaksi Barang Cetakan</h1>
         </div>
     </div>
 
@@ -19,7 +22,7 @@
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-facebook tombolTambahCetak" data-toggle="modal" data-target="#formModalCetak">
                 <!-- value data-bs-target harus sama dg nama modalnya -->
-                <i class="fa-solid fa-fw fa-circle-plus mr-1"></i>Tambah Barang Cetak
+                <i class="fa-solid fa-fw fa-circle-plus mr-1"></i>Tambah Data Transaksi
             </button>
         </div>
         <div class="col text-right">
@@ -32,7 +35,7 @@
         <div class="col">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Tabel Barang Cetakan</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Tabel Transaksi Barang Cetakan</h6>
                 </div>
                 <div class="card-body">
                     <div class="sectioncetakdata">
@@ -55,7 +58,10 @@
                 $('.sectioncetakdata').html(response.data);
             },
             error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                var tab = window.open('about:blank', '_blank');
+                tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                tab.document.close(); // to finish loading the page
             }
         });
     }
@@ -73,7 +79,10 @@
                     $('#modalTambahCetak').modal('show');
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    var tab = window.open('about:blank', '_blank');
+                    tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                    tab.document.close(); // to finish loading the page
                 }
             });
         });

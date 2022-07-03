@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title font-weight-bold" id="judulModalCetak">Tambah Barang Cetak</h5>
+                <h5 class="modal-title font-weight-bold" id="judulModalCetak">Tambah Transaksi Barang Cetakan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,10 +12,30 @@
             <div class="modal-body">
                 <?= csrf_field(); ?>
                 <input type="hidden" name="id" id="id">
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="nama">Nama Barang</label>
                     <input type="text" class="form-control" id="nama" name="nama">
                     <div class="invalid-feedback errorNama"></div>
+                </div> -->
+                <div class="form-group">
+                    <label for="nama">Nama Barang</label>
+                    <select class="form-control" id="nama" name="nama">
+                        <option value="">--Pilih Barang--</option>
+                        <?php foreach ($brgcetakdata as $brgcetak) : ?>
+                            <option value="<?= esc($brgcetak['id']); ?>"><?= esc($brgcetak['nama']); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <div class="invalid-feedback errorNama"></div>
+                </div>
+                <div class="form-group">
+                    <label for="jmlCetak">Jumlah</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="jmlCetak" name="jmlCetak" min="1" placeholder="(minimal 1)">
+                        <div class="input-group-append">
+                            <span class="input-group-text">(pcs)</span>
+                        </div>
+                        <div class="invalid-feedback errorJmlCetak"></div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="hargaSatuan">Harga Satuan</label>
@@ -31,24 +51,22 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="keluar">Keluar</label>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="keluar" name="keluar" placeholder="(min 0)">
-                        <div class="input-group-append">
-                            <span class="input-group-text">(pcs)</span>
+                    <label for="jenisMutasi">Jenis Mutasi</label>
+                    <div class="form-row justify-content-around">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="dkOption" id="debit" value="D">
+                            <label class="form-check-label" for="debit">
+                                Debit
+                            </label>
                         </div>
-                        <div class="invalid-feedback errorKeluar"></div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="masuk">Masuk</label>
-                    <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="masuk" name="masuk" placeholder="(min 0)">
-                        <div class="input-group-append">
-                            <span class="input-group-text">(pcs)</span>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="dkOption" id="kredit" value="K">
+                            <label class="form-check-label" for="kredit">
+                                Kredit
+                            </label>
                         </div>
-                        <div class="invalid-feedback errorMasuk"></div>
                     </div>
+                    <div class="text-danger errorJenisMutasi" style="font-size: 83%;"></div>
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
@@ -95,6 +113,15 @@
                             $('.errorNama').html('');
                         }
 
+                        if (response.error.jmlCetak) {
+                            $('#jmlCetak').addClass('is-invalid');
+                            $('.errorJmlCetak').html(response.error.jmlCetak);
+                        } else {
+                            $('#jmlCetak').removeClass('is-invalid');
+                            $('#jmlCetak').addClass('is-valid');
+                            $('.errorJmlCetak').html('');
+                        }
+
                         if (response.error.hargaSatuan) {
                             $('#hargaSatuan').addClass('is-invalid');
                             $('.errorHrg').html(response.error.hargaSatuan);
@@ -104,23 +131,12 @@
                             $('.errorHrg').html('');
                         }
 
-                        if (response.error.keluar) {
-                            $('#keluar').addClass('is-invalid');
-                            $('.errorKeluar').html(response.error.keluar);
+                        if (response.error.jenisMutasi) {
+                            $('.errorJenisMutasi').html(response.error.jenisMutasi);
                         } else {
-                            $('#keluar').removeClass('is-invalid');
-                            $('#keluar').addClass('is-valid');
-                            $('.errorKeluar').html('');
+                            $('.errorJenisMutasi').html('');
                         }
 
-                        if (response.error.masuk) {
-                            $('#masuk').addClass('is-invalid');
-                            $('.errorMasuk').html(response.error.masuk);
-                        } else {
-                            $('#masuk').removeClass('is-invalid');
-                            $('#masuk').addClass('is-valid');
-                            $('.errorMasuk').html('');
-                        }
                     } else {
                         Swal.fire({
                             icon: 'success',
@@ -134,7 +150,10 @@
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    var tab = window.open('about:blank', '_blank');
+                    tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                    tab.document.close(); // to finish loading the page
                 }
             });
             return false;

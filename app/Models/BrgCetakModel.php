@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CetakModel extends Model
+class BrgCetakModel extends Model
 {
-    protected $table = 'cetak';
+    protected $table = 'brgcetak';
     protected $primaryKey = 'id';
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['nama', 'jumlah', 'harga', 'd_k', 'keterangan', 'id_brgcetak'];
+    protected $allowedFields = ['nama', 'tanggal', 'stok'];
     protected $useTimestamps = true;
     protected $dateFormat = 'date';
-    protected $createdField = 'tanggal';
+    protected $createdField = '';
     protected $updatedField = '';
 }
