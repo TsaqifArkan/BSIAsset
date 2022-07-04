@@ -17,6 +17,12 @@ class User extends BaseController
 
     public function index()
     {
+        // dd(
+        //     user()->__get('password_hash'),
+        //     \Myth\Auth\Password::hash('bsisuper123'),
+        //     (base64_encode(hash('sha384', 'bsisuper123', true)))
+        // );
+
         $hour = date('H');
         $dayTerm = ($hour > 17) ? "Evening" : (($hour > 12) ? "Afternoon" : "Morning");
         $data = [
@@ -24,7 +30,8 @@ class User extends BaseController
             'userdata' => user(),
             'greet' => $dayTerm
         ];
-        return view('user/index', $data);
+        // return view('user/index', $data);
+        return $this->showPages('user/index', $data);
     }
 
     public function editprofile()
@@ -38,8 +45,8 @@ class User extends BaseController
             'profilePict' => $result->user_image,
             'validation' => \Config\Services::validation()
         ];
-
-        return view('user/formedit', $data);
+        // return view('user/formedit', $data);
+        return $this->showPages('user/formedit', $data);
     }
 
     public function edit()
@@ -113,5 +120,42 @@ class User extends BaseController
         session()->setFlashdata('pesan', 'Data user berhasil diupdate.');
 
         return redirect()->to('user');
+    }
+
+    public function password()
+    {
+        $data = [
+            'title' => 'Ubah Password',
+            'validation' => \Config\Services::validation()
+        ];
+        return $this->showPages('user/ubahpassword', $data);
+    }
+
+    public function changePassword()
+    {
+        $valid = $this->validate([
+            'newPassword' => [
+                'label' => 'Password Baru',
+                'rules' => 'min_length[5]'
+            ],
+            'konfNewPassword' => [
+                'label' => 'Konfirmasi Password Baru',
+                'rules' => 'matches[newPassword]',
+                'errors' => [
+                    'matches' => '{field} tidak sesuai dengan Password Baru!'
+                ]
+            ],
+            'oldPassword' => [
+                'label' => 'Password Lama',
+                'rules' => ''
+
+            ]
+        ]);
+
+        if ($valid) {
+            $updatedData = 0;
+        }
+
+        return true;
     }
 }
