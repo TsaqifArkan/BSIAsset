@@ -23,27 +23,38 @@
                 <h6 class="dropdown-header">
                     Notifikasi
                 </h6>
-                <?php foreach ($notifikasi as $i => $notif) : ?>
-                    <a class="dropdown-item d-flex align-items-center alert-<?= esc($notif['tipe']); ?>" href="<?= base_url($notif['link']); ?>" style="<?= ($i > 3) ? 'display: none;' : 'display:inline-block;' ?>">
-                        <div class="mr-3">
-                            <div class="icon-circle bg-primary">
-                                <i class="fa-solid fa-fw fa-truck-ramp-box text-white"></i>
-                            </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="alert alert-dark my-1 mx-1 text-center" role="alert">
+                            <strong>Perhatian!</strong> Anda dapat menghapus notifikasi secara permanen dengan menghapus data <strong>barang sewa</strong> yang sudah jatuh tempo.
                         </div>
-                        <div>
-                            <div class="text-gray-700" style="font-size:small;"><?= esc($notif['info']); ?></div>
-                            <div class="font-weight-bold text-gray-800" style="font-size: small;"><?= esc($notif['judul']); ?></div>
-                            <span style="font-style: italic;"><?= esc($notif['konten']); ?></span>
-                            <div class="small text-gray-600"><?= esc($notif['sub_konten']); ?></div>
-                        </div>
-                        <div class="ml-4">
-                            <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?= $notif['id']; ?>">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-                <!-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <?php foreach ($notifikasi as $i => $notif) : ?>
+                            <a class="dropdown-item d-flex align-items-center alert-<?= esc($notif['tipe']); ?>" href="<?= base_url($notif['link']); ?>" style="<?= ($i > 3) ? 'display: none;' : 'display:inline-block;' ?>">
+                                <div class="mr-3">
+                                    <div class="icon-circle bg-primary">
+                                        <i class="fa-solid fa-fw fa-truck-ramp-box text-white"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-gray-700" style="font-size:small;"><?= esc($notif['info']); ?></div>
+                                    <div class="font-weight-bold text-gray-800" style="font-size: small;"><?= esc($notif['judul']); ?></div>
+                                    <span style="font-style: italic;"><?= esc($notif['konten']); ?></span>
+                                    <div class="small text-gray-600"><?= esc($notif['sub_konten']); ?></div>
+                                </div>
+                                <div class="ml-4">
+                                    <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?= $notif['id']; ?>">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </a>
+                        <?php endforeach; ?>
+                        <!-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> -->
+                    </div>
+                </div>
             </div>
         </li>
 
