@@ -50,7 +50,7 @@
 <script>
     $('.btnClose').click(function() {
         let id = $(this).data('id');
-        console.log(id);
+        // console.log(id);
         $.ajax({
             url: "<?= base_url('notifikasi/delnotif'); ?>" + '/' + id,
         });

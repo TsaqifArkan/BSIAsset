@@ -84,12 +84,9 @@
 
                                 <?php if ($config->allowRegistration) : ?>
                                     <div class="text-center">
-                                        <!-- <a class="small" href="<?php // echo route_to('register'); 
-                                                                    ?>"><?php // echo lang('Auth.needAnAccount'); 
-                                                                        ?></a> -->
+                                        <a class="small" href="<?= route_to('register'); ?>"><?= lang('Auth.needAnAccount'); ?></a>
                                     </div>
                                 <?php endif; ?>
-
 
                             </div>
                         </div>
