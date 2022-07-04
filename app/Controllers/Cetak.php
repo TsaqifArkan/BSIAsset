@@ -172,7 +172,7 @@ class Cetak extends BaseController
                 // ];
 
                 $msg = [
-                    'flashData' => 'Data barang cetak berhasil ditambahkan.'
+                    'flashData' => 'Data transaksi barang cetakan berhasil ditambahkan.'
                 ];
 
                 // session()->setFlashdata($dataFlash);
@@ -207,7 +207,7 @@ class Cetak extends BaseController
             $this->cetakModel->delete($id);
 
             $msg = [
-                'flashData' => 'Data barang cetak berhasil dihapus.'
+                'flashData' => 'Data transaksi barang cetakan berhasil dihapus.'
             ];
             // Flash Data
             // $dataFlash = [
