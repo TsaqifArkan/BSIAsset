@@ -2,7 +2,7 @@
     <table class="table table-bordered table-hover" id="dataTable-Sewa">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">No.</th>
+                <th scope="col" class="col-no">No.</th>
                 <th scope="col">Nama Barang</th>
                 <th scope="col">Tanggal Sewa</th>
                 <th scope="col">Periode Sewa</th>
