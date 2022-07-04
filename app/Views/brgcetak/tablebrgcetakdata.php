@@ -3,9 +3,9 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col" class="col-no">No.</th>
-                <th scope="col">Tanggal Input</th>
+                <th scope="col" class="col-tglMutasi">Tanggal Input</th>
                 <th scope="col">Nama Barang</th>
-                <th scope="col">Kode Barang</th>
+                <th scope="col" class="col-kodeBrg">Kode Barang</th>
                 <th scope="col">Stok</th>
                 <th scope="col">Aksi</th>
             </tr>

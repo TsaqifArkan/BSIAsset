@@ -5,7 +5,7 @@
                 <th scope="col" class="col-no">No.</th>
                 <th scope="col" class="col-tglMutasi">Tanggal Mutasi</th>
                 <th scope="col">Nama Barang</th>
-                <th scope="col">Kode Barang</th>
+                <th scope="col" class="col-kodeBrg">Kode Barang</th>
                 <th scope="col">Jumlah</th>
                 <th scope="col">Harga Satuan</th>
                 <th scope="col" class="col-dk">D/K</th>
