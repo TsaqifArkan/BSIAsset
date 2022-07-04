@@ -23,9 +23,9 @@
                     <td><?= esc($rents['timeLeft'][$i]); ?> hari</td>
                     <td><?= esc($rents['dateFmtrTempo'][$i]); ?></td>
                     <td>
-                        <a href="<?= base_url('sewa/upload/' . $rent['id']); ?>" class="btn <?php if ($rent['gambar_sewa'] != 'default_sewa.jpg' && $rent['file_sewa'] != null) : ?>
+                        <a href="<?= base_url('sewa/upload/' . $rent['id']); ?>" class="btn <?php if ($rent['gambar_sewa'] != 'default_img.jpg' && $rent['file_sewa'] != null) : ?>
                             <?= 'btn-facebook'; ?>
-                        <?php elseif ($rent['gambar_sewa'] != 'default_sewa.jpg') : ?>
+                        <?php elseif ($rent['gambar_sewa'] != 'default_img.jpg') : ?>
                             <?= 'btn-success'; ?>
                         <?php elseif ($rent['file_sewa'] != null) : ?>
                             <?= 'btn-google'; ?>

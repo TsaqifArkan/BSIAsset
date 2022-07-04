@@ -19,7 +19,7 @@
                     <td><?= esc($assets['numFmtr'][$i]); ?></td>
                     <td><?= esc($aset['usia_teknis']); ?> bulan</td>
                     <td>
-                        <a href="<?= base_url('aset/img/' . $aset['id']); ?>" class="btn <?= ($aset['gambar_aset'] != 'default_aset.jpg') ? 'btn-success' : 'btn-secondary' ?> btn-sm"><i class="fa-solid fa-fw fa-image"></i></a>
+                        <a href="<?= base_url('aset/img/' . $aset['id']); ?>" class="btn <?= ($aset['gambar_aset'] != 'default_img.jpg') ? 'btn-success' : 'btn-secondary' ?> btn-sm"><i class="fa-solid fa-fw fa-image"></i></a>
                         <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info btn-sm">Detail</a>
                         <button type="button" class="btn btn-warning btn-sm" onclick="ubah('<?= $aset['id']; ?>')">Edit</button>
                         <button type="button" class="btn btn-danger btn-sm" onclick="hapus('<?= $aset['id']; ?>')">Hapus</button>

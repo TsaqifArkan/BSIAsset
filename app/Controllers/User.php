@@ -98,8 +98,8 @@ class User extends BaseController
             $namaUserImage = $fileUserImage->getRandomName();
             // pindahkan gambar
             $fileUserImage->move('img', $namaUserImage);
-            // hapus file yang lama (bila sampul tidak default.png)
-            if ($this->request->getVar('oldUserImage') != 'default.png') {
+            // hapus file yang lama (bila sampul tidak default_profile.png)
+            if ($this->request->getVar('oldUserImage') != 'default_profile.png') {
                 unlink('img/' . $this->request->getVar('oldUserImage'));
             }
         }

@@ -379,8 +379,8 @@ class Aset extends BaseController
             $namaAssetImage = $fileAssetImage->getRandomName();
             // pindah lokasi gambar
             $fileAssetImage->move('img', $namaAssetImage);
-            // hapus file yg lama (bila gambar aset tidak default_aset.jpg)
-            if ($this->request->getVar('oldAssetImage') != 'default_aset.jpg') {
+            // hapus file yg lama (bila gambar aset tidak default_img.jpg)
+            if ($this->request->getVar('oldAssetImage') != 'default_img.jpg') {
                 unlink('img/' . $this->request->getVar('oldAssetImage'));
             }
         }

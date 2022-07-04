@@ -10,10 +10,22 @@
 	background-size: cover;
 }
 
-.bg-gradient-bsi-login {
+/* .bg-gradient-bsi-login {
 	background-color: #8e9c8e;
 	background-image: linear-gradient(180deg, #8e9c8e 10%, #d3e4cd 100%);
 	background-size: cover;
+} */
+
+.bg-gradient-bsi-login {
+	background-image: repeating-radial-gradient(
+		#0d1e20,
+		#0d1e20 20px,
+		#0e2e31 20px,
+		#0e2e31 40px,
+		#203e3d 40px,
+		#203e3d 60px
+	);
+	background-size: 100px 100px;
 }
 
 /* Konfigurasi Tabel */

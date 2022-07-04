@@ -353,8 +353,8 @@ class Sewa extends BaseController
             $namaSewaImage = $fileSewaImage->getRandomName();
             // pindah lokasi gambar
             $fileSewaImage->move('img', $namaSewaImage);
-            // hapus file yg lama (bila gambar sewa tidak default_sewa.jpg)
-            if ($this->request->getVar('oldSewaImage') != 'default_sewa.jpg') {
+            // hapus file yg lama (bila gambar sewa tidak default_img.jpg)
+            if ($this->request->getVar('oldSewaImage') != 'default_img.jpg') {
                 unlink('img/' . $this->request->getVar('oldSewaImage'));
             }
         }
