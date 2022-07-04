@@ -267,6 +267,14 @@ class Aset extends BaseController
     {
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('id');
+
+            // Fetch data on database
+            $aset_img = $this->asetModel->find($id)['gambar_aset'];
+
+            // kelola Gambar Aset
+            if ($aset_img != 'default_img.jpg') unlink('img/' . $aset_img);
+
+            // Delete 1 Row Asset Data
             $this->asetModel->delete($id);
 
             $msg = [

@@ -284,6 +284,14 @@ class Sewa extends BaseController
     {
         if ($this->request->isAJAX()) {
             $id = $this->request->getVar('id');
+
+            // Fetch data on database
+            $sewa_img = $this->sewaModel->find($id)['gambar_sewa'];
+
+            // kelola Gambar Sewa
+            if ($sewa_img != 'default_img.jpg') unlink('img/' . $sewa_img);
+
+            // Delete 1 Row Sewa Data
             $this->sewaModel->delete($id);
 
             $msg = [
