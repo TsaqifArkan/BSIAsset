@@ -28,6 +28,34 @@
 	background-size: 100px 100px;
 }
 
+/* .shimer-btn {
+	background-color: hotpink;
+	background-image: linear-gradient(
+		-60deg,
+		transparent,
+		transparent 40%,
+		#ffffff44 40%,
+		#ffffff44 60%,
+		transparent 60%,
+		transparent 100%
+	);
+	background-size: 200% 100%;
+	background-repeat: no-repeat;
+	background-position-x: 150%;
+}
+
+.shimer-btn:hover {
+	background-position-x: -150x;
+	transition: background-position-x 600ms;
+} */
+
+/* .bord {
+	border: solid 4px;
+	border-image-source: linear-gradient(to bottom right, hotpink, rebeccapurple);
+	border-image-slice: 4;
+	border-radius: 100px;
+} */
+
 /* Konfigurasi Tabel */
 .col-no {
 	width: 5%;
