@@ -286,10 +286,14 @@ class Sewa extends BaseController
             $id = $this->request->getVar('id');
 
             // Fetch data on database
-            $sewa_img = $this->sewaModel->find($id)['gambar_sewa'];
+            $query = $this->builder->select('gambar_sewa, file_sewa')->where('id', $id);
+            $result = $query->get()->getResultArray()[0];
 
             // kelola Gambar Sewa
-            if ($sewa_img != 'default_img.jpg') unlink('img/' . $sewa_img);
+            if ($result['gambar_sewa'] != 'default_img.jpg') unlink('img/' . $result['gambar_sewa']);
+
+            // kelola PDF Sewa
+            if ($result['file_sewa'] != null) unlink('pdf/' . $result['file_sewa']);
 
             // Delete 1 Row Sewa Data
             $this->sewaModel->delete($id);
@@ -370,12 +374,17 @@ class Sewa extends BaseController
         // kelola Dokumen Sewa
         $fileSewaPDF = $this->request->getFile('sewaPDF');
         $namaSewaPDF = null;
+        // $namaSewaPDF = $this->request->getVar('oldSewaPDF');
         // cek PDF
         if ($fileSewaPDF->getError() != 4) {
             // generate random filename
             $namaSewaPDF = $fileSewaPDF->getRandomName();
             // pindah lokasi PDF
             $fileSewaPDF->move('pdf', $namaSewaPDF);
+            // hapus file lama
+            if ($this->request->getVar('oldSewaPDF') != null) {
+                unlink('pdf/' . $this->request->getVar('oldSewaPDF'));
+            }
         }
 
         // update ke DB
