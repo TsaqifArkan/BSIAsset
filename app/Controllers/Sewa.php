@@ -153,6 +153,9 @@ class Sewa extends BaseController
 
                 $this->sewaModel->save($inputData);
 
+                // Panggil Notif
+                $this->updateNotification();
+
                 // Flash Data
                 // $dataFlash = [
                 //     'alert' => 'SUCCESS ! ',
@@ -262,6 +265,9 @@ class Sewa extends BaseController
 
                 $this->sewaModel->update($id, $updatedData);
 
+                // Panggil Notif
+                $this->updateNotification();
+
                 // Flash Data
                 // $dataFlash = [
                 //     'alert' => 'SUCCESS ! ',
@@ -297,6 +303,9 @@ class Sewa extends BaseController
 
             // Delete 1 Row Sewa Data
             $this->sewaModel->delete($id);
+
+            // Panggil Notif
+            $this->updateNotification();
 
             $msg = [
                 'flashData' => 'Data sewa berhasil dihapus.'

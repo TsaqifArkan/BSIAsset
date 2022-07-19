@@ -68,10 +68,43 @@ class BaseController extends Controller
     // Function to show pages
     protected function showPages(String $view, $data = [])
     {
-        $notifikasiModel = new NotifikasiModel();
-        $query = $notifikasiModel->builder()->select('*')->orderBy('waktu', 'ASC');
-        $result = $query->get()->getResultArray();
-        $data['notifikasi'] = $result;
+        // NOTIFIKASI MODEL DEPRECATED
+        // $notifikasiModel = new NotifikasiModel();
+        // $query = $notifikasiModel->builder()->select('*')->orderBy('waktu', 'ASC');
+        // $result = $query->get()->getResultArray();
+        // $data['notifikasi'] = $result;
+        $data['notifikasi'] = session()->get('notif');
         return view($view, $data);
+    }
+
+    // Try to implement Notification (non-DB method)
+    protected function updateNotification()
+    {
+        $notifikasi = [];
+        $sewaModel = new SewaModel();
+        $query1 = $sewaModel->builder()->select('id, nama, tgl_sewa, jatuh_tempo')->where('DATEDIFF(jatuh_tempo, NOW()) <= 0')->orderBy('jatuh_tempo', 'ASC')->get()->getResultArray();
+        foreach ($query1 as $i) {
+            $temp['judul'] = 'Barang Sewa Jatuh Tempo!';
+            $temp['konten'] = $i['nama'];
+            $temp['sub_konten'] = date_diff(date_create('now'), date_create($i['jatuh_tempo']))->format('%a day(s) ago');
+            $temp['info'] = "periode $i[tgl_sewa] - $i[jatuh_tempo]";
+            $temp['tipe'] = 'danger';
+            $temp['waktu'] = $i['jatuh_tempo'];
+            $temp['link'] = "sewa?hghlt=exp&id=$i[id]";
+            array_push($notifikasi, $temp);
+        }
+        $query2 = $sewaModel->builder()->select('id, nama, tgl_sewa, jatuh_tempo')->where('DATEDIFF(jatuh_tempo, NOW()) > 0 AND DATEDIFF(jatuh_tempo, NOW()) <= 7')->orderBy('jatuh_tempo', 'ASC')->get()->getResultArray();
+        foreach ($query2 as $i) {
+            $temp['judul'] = 'Barang Sewa Akan Jatuh Tempo!';
+            $temp['konten'] = $i['nama'];
+            $temp['sub_konten'] = date_diff(date_create(date('Y-m-d')), date_create($i['jatuh_tempo']))->format('%a day(s) remaining');
+            $temp['info'] = "periode $i[tgl_sewa] - $i[jatuh_tempo]";
+            $temp['tipe'] = 'warning';
+            $temp['waktu'] = $i['jatuh_tempo'];
+            $temp['link'] = "sewa?hghlt=warn&id=$i[id]";
+            array_push($notifikasi, $temp);
+        }
+
+        session()->set('notif', $notifikasi);
     }
 }

@@ -38,11 +38,11 @@ class Notifikasi extends BaseController
     public function delNotif($id = NULL)
     {
         if ($this->request->isAJAX()) {
-            $this->notifikasiModel->delete($id);
+            // $this->notifikasiModel->delete($id);
 
-            // DEPRECATED!
-            // session();
-            // unset($_SESSION["notif"][$id]);
+            // DEPRECATED! - Try to implement again 18/07/22
+            session();
+            unset($_SESSION["notif"][$id]);
         } else {
             $data['title'] = 'Whoops!';
             return $this->showPages('templates/404', $data);

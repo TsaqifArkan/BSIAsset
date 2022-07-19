@@ -33,17 +33,17 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
 $routes->get('/', 'User::index');
-$routes->get('/aset', 'Aset::index');
+// $routes->get('/aset', 'Aset::index');
 // $routes->get('/aset/(:num)', 'Aset::detail/$1');
-$routes->get('/notifikasi', 'Notifikasi::index');
-$routes->get('/cetak', 'Cetak::index');
+// $routes->get('/notifikasi', 'Notifikasi::index');
+// $routes->get('/cetak', 'Cetak::index');
 
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
 $routes->get('/admin/(:num)', 'Admin::detail/$1', ['filter' => 'role:admin']);
 
-$routes->get('/kategori', 'Kategori::index');
-$routes->get('/kategori/(:num)', 'Kategori::delete/$1');
+// $routes->get('/kategori', 'Kategori::index');
+// $routes->get('/kategori/(:num)', 'Kategori::delete/$1');
 // $routes->get('/kategori/(:any)', 'Kategori::index');
 
 

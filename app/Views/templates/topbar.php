@@ -46,7 +46,9 @@
                                     <div class="small text-gray-600"><?= esc($notif['sub_konten']); ?></div>
                                 </div>
                                 <div class="ml-4">
-                                    <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?= $notif['id']; ?>">
+                                    <!-- <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?php // echo $notif['id']; 
+                                                                                                                                        ?>"> -->
+                                    <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?= $i; ?>">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>

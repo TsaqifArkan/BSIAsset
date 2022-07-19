@@ -23,6 +23,11 @@ class User extends BaseController
         //     (base64_encode(hash('sha384', 'bsisuper123', true)))
         // );
 
+        // Panggil Notif
+        if (!session()->get('notif')) {
+            $this->updateNotification();
+        }
+
         $hour = date('H');
         $dayTerm = ($hour > 17) ? "Evening" : (($hour > 12) ? "Afternoon" : "Morning");
         $data = [
