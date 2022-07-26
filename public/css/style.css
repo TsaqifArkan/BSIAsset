@@ -63,7 +63,7 @@
 
 .col-tglPrlh,
 .col-hrgPrlh {
-	width: 12%;
+	width: 13%;
 }
 
 .col-usiaTeknis {
@@ -71,19 +71,39 @@
 }
 
 .col-aksi {
-	width: 15%;
+	width: 21%;
 }
 
 .col-dk {
 	width: 4%;
 }
 
+.col-tglInput {
+	width: 13%;
+}
+
 .col-tglMutasi {
-	width: 10%;
+	width: 11%;
 }
 
 .col-kodeBrg {
-	width: 12%;
+	width: 14%;
+}
+
+.col-stok {
+	width: 10%;
+}
+
+.td-stok {
+	text-align: right;
+}
+
+.td-aksi {
+	text-align: center;
+}
+
+.td-dk {
+	text-align: center;
 }
 
 /* table {

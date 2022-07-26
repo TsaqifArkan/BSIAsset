@@ -22,9 +22,9 @@
                     <td><?= esc($cetak['datefmtrcetak']); ?></td>
                     <td><?= esc($cetak['nama']); ?></td>
                     <td><?= esc($cetak['code']); ?></td>
-                    <td><?= esc($cetak['jumlah']); ?></td>
+                    <td class="td-stok"><?= esc($cetak['jumlah']); ?></td>
                     <td><?= esc($cetak['numfmtr']); ?></td>
-                    <td><?= esc($cetak['d_k']); ?></td>
+                    <td class="td-dk"><?= esc($cetak['d_k']); ?></td>
                     <td><?= esc($cetak['nominal']); ?></td>
                     <td><?= esc($cetak['saldo']); ?></td>
                     <td><?= esc($cetak['keterangan']); ?></td>

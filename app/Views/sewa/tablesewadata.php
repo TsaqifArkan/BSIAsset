@@ -22,7 +22,7 @@
                     <td><?= esc($rents['numFmtr'][$i]); ?></td>
                     <td><?= esc($rents['timeLeft'][$i]); ?> hari</td>
                     <td><?= esc($rents['dateFmtrTempo'][$i]); ?></td>
-                    <td>
+                    <td class="td-aksi">
                         <a href="<?= base_url('sewa/upload/' . $rent['id']); ?>" class="btn <?php if ($rent['gambar_sewa'] != 'default_img.jpg' && $rent['file_sewa'] != null) : ?>
                             <?= 'btn-facebook'; ?>
                         <?php elseif ($rent['gambar_sewa'] != 'default_img.jpg') : ?>

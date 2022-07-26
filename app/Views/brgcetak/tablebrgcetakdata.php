@@ -3,10 +3,10 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col" class="col-no">No.</th>
-                <th scope="col" class="col-tglMutasi">Tanggal Input</th>
+                <th scope="col" class="col-tglInput">Tanggal Input</th>
                 <th scope="col">Nama Barang</th>
                 <th scope="col" class="col-kodeBrg">Kode Barang</th>
-                <th scope="col">Stok</th>
+                <th scope="col" class="col-stok">Stok</th>
                 <th scope="col">Aksi</th>
             </tr>
         </thead>
@@ -17,8 +17,8 @@
                     <td><?= esc($brgcetak['datefmtrbrgcetak']); ?></td>
                     <td><?= esc($brgcetak['nama']); ?></td>
                     <td><?= esc($brgcetak['code']); ?></td>
-                    <td><?= esc($brgcetak['stok']); ?></td>
-                    <td>
+                    <td class="td-stok"><?= esc($brgcetak['stok']); ?></td>
+                    <td class="td-aksi">
                         <button type="button" class="btn btn-danger btn-sm" onclick="hapus('<?= $brgcetak['id']; ?>')">Hapus</button>
                     </td>
                 </tr>
