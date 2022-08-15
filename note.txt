@@ -261,3 +261,13 @@ public function edit()
             return view('templates/404', $data);
         }
     }
+
+Catatan app/Config/Routes.php (penghapusan yg tdk perlu agar size kecil 15/08/2022)
+// $routes->get('/aset', 'Aset::index');
+// $routes->get('/aset/(:num)', 'Aset::detail/$1');
+// $routes->get('/notifikasi', 'Notifikasi::index');
+// $routes->get('/cetak', 'Cetak::index');
+
+$routes->get('/admin', 'Admin::index', ['filter' => 'role:admin']);
+$routes->get('/admin/index', 'Admin::index', ['filter' => 'role:admin']);
+$routes->get('/admin/(:num)', 'Admin::detail/$1', ['filter' => 'role:admin']);
