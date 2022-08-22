@@ -11,7 +11,7 @@ class Auth extends BaseController
         if (session('user_session.id') && session('user_session.session_key')) {
             $model = new UserModel();
             if ($model->cek_session_key(session('user_session.id'), session('user_session.session_key'))) {
-                return redirect()->to('/');
+                return redirect()->to(base_url('/'));
             }
         }
         return $this->showPages('auth/login');
@@ -43,7 +43,7 @@ class Auth extends BaseController
         ]);
 
         if (!$valid) {
-            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+            return redirect()->to(base_url('auth'))->withInput()->with('errors', $validation->getErrors());
         }
 
         // Fetch from Database
@@ -65,17 +65,17 @@ class Auth extends BaseController
                     'username' => $result['username'],
                     'user_image' => $result['user_image']
                 ]);
-                return redirect()->to('/');
+                return redirect()->to(base_url('/'));
             }
         }
 
         $err['login'] = 'Username atau Password salah!';
-        return redirect()->back()->withInput()->with('errors', $err);
+        return redirect()->to(base_url('auth'))->withInput()->with('errors', $err);
     }
 
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('auth');
+        return redirect()->to(base_url('auth'));
     }
 }

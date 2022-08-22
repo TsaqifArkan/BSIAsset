@@ -349,7 +349,7 @@ class Sewa extends BaseController
         ]);
 
         if (!$valid) {
-            return redirect()->to('sewa/upload/' . $idSewa)->withInput();
+            return redirect()->to(base_url('sewa/upload/' . $idSewa))->withInput();
         }
 
         // kelola Gambar Sewa
@@ -393,7 +393,7 @@ class Sewa extends BaseController
         $isiPesan = ($fileSewaImage->getError() != 4 || $fileSewaPDF->getError() != 4) ?  'File barang sewa berhasil diupdate.' : 'Tidak ada perubahan data!';
         session()->setFlashdata('pesan', $isiPesan);
 
-        return redirect()->to('sewa');
+        return redirect()->to(base_url('sewa'));
     }
 
     public function detail($id = 0)

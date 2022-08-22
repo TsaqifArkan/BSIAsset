@@ -83,7 +83,7 @@ class User extends BaseController
         ]);
 
         if (!$valid) {
-            return redirect()->to('user/editprofile')->withInput();
+            return redirect()->to(base_url('user/editprofile'))->withInput();
         }
 
         // kelola gambar - pindahkan gambar - insert ke dalam database
@@ -111,10 +111,16 @@ class User extends BaseController
 
         $this->userModel->update($userid, $updatedData);
 
+        // Update session
+        session()->set('sess_user', [
+            'username' => $updatedData['username'],
+            'user_image' => $updatedData['user_image']
+        ]);
+
         // pembuatan flashdata data diubah
         session()->setFlashdata('pesan', 'Data user berhasil diupdate.');
 
-        return redirect()->to('user');
+        return redirect()->to(base_url('user'));
     }
 
     public function password()
@@ -138,7 +144,7 @@ class User extends BaseController
 
         if (!password_verify($oldPass, $userpass)) {
             $err['oldpass'] = 'Password salah!';
-            return redirect()->back()->withInput()->with('errors', $err);
+            return redirect()->to(base_url('user/password'))->withInput()->with('errors', $err);
         }
 
         $valid = $this->validate([
@@ -159,7 +165,7 @@ class User extends BaseController
         ]);
 
         if (!$valid) {
-            return redirect()->to('user/password')->withInput();
+            return redirect()->to(base_url('user/password'))->withInput();
         }
 
         // Update ke DB
@@ -169,6 +175,6 @@ class User extends BaseController
         // pembuatan flashdata data diubah
         session()->setFlashdata('pesan', 'Password user berhasil diupdate.');
 
-        return redirect()->to('/');
+        return redirect()->to(base_url('/'));
     }
 }

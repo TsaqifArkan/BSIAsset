@@ -302,7 +302,7 @@ class Aset extends BaseController
         $data['maksUTeknis'] = date_format(date_create($data['aset']['maks_u_teknis']), "d/m/Y");
 
         if (empty($data['aset'])) {
-            return redirect()->to('/aset');
+            return redirect()->to(base_url('aset'));
         }
 
         return $this->showPages('aset/detail', $data);
@@ -353,7 +353,7 @@ class Aset extends BaseController
         ]);
 
         if (!$valid) {
-            return redirect()->to('aset/img/' . $idAset)->withInput();
+            return redirect()->to(base_url('aset/img/' . $idAset))->withInput();
         }
 
         // kelola Gambar Aset
@@ -380,6 +380,6 @@ class Aset extends BaseController
         // pembuatan flashdata data diubah
         session()->setFlashdata('pesan', 'Gambar aset berhasil diupdate.');
 
-        return redirect()->to('aset');
+        return redirect()->to(base_url('aset'));
     }
 }
