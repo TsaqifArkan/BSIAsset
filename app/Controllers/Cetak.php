@@ -5,13 +5,16 @@ namespace App\Controllers;
 use App\Models\BrgCetakModel;
 use App\Models\CetakModel;
 
+define('ERR_TITLE', 'Whoops!');
+define('ERR_404', 'templates/404');
+
 class Cetak extends BaseController
 {
     protected $cetakModel, $db, $builder;
 
     public function __construct()
     {
-        $this->cetakModel    = new CetakModel();
+        $this->cetakModel   = new CetakModel();
         $this->db           = \Config\Database::connect();
         $this->builder      = $this->db->table('cetak');
     }
@@ -19,19 +22,16 @@ class Cetak extends BaseController
     public function index()
     {
         $data['title'] = 'Transaksi Barang Cetakan';
-        // return view('cetak/index', $data);
         return $this->showPages('cetak/index', $data);
     }
 
     public function getData()
     {
         if ($this->request->isAJAX()) {
-
             // Query
             $resultBrgCetak = $this->builder->join('brgcetak', 'brgcetak.id = cetak.id_brgcetak')->select('brgcetak.id AS idBrgCtk, cetak.id AS id, brgcetak.nama, brgcetak.tanggal AS tglkode, cetak.tanggal AS tgl, jumlah, harga, d_k, keterangan')->get()->getResultArray();
 
             $results = $resultBrgCetak;
-
             // $results = $this->cetakModel->findAll();
 
             $saldo = 0;
@@ -53,14 +53,12 @@ class Cetak extends BaseController
 
             $data['cetaks'] = $results;
             $msg = [
-                // 'data' => view('cetak/tablecetakdata', $data)
                 'data' => $this->showPages('cetak/tablecetakdata', $data)
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Whoops!';
-            // return view('templates/404', $data);
-            return $this->showPages('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -73,14 +71,12 @@ class Cetak extends BaseController
             $data['brgcetakdata'] = $hasilBrgCetak;
 
             $msg = [
-                // 'data' => view('cetak/modaltambah', $data)
                 'data' => $this->showPages('cetak/modaltambah', $data)
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Whoops!';
-            // return view('templates/404', $data);
-            return $this->showPages('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -165,24 +161,21 @@ class Cetak extends BaseController
 
                 $brgCetakModel->update($idBrgCetak, $updateBrgCetak);
 
-                // Flash Data
+                // Creating Flash Data - Deprecated
                 // $dataFlash = [
                 //     'alert' => 'SUCCESS ! ',
                 //     'msg' => 'Data berhasil ditambahkan.'
                 // ];
+                // session()->setFlashdata($dataFlash);
 
                 $msg = [
                     'flashData' => 'Data transaksi barang cetakan berhasil ditambahkan.'
                 ];
-
-                // session()->setFlashdata($dataFlash);
             }
             echo json_encode($msg);
         } else {
-            // exit("Woops! seems you're quite curious..");
-            $data['title'] = 'Whoops!';
-            // return view('templates/404', $data);
-            return $this->showPages('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -209,7 +202,7 @@ class Cetak extends BaseController
             $msg = [
                 'flashData' => 'Data transaksi barang cetakan berhasil dihapus.'
             ];
-            // Flash Data
+            // Creating Flash Data - Deprecated
             // $dataFlash = [
             //     'alert' => 'SUCCESS ! ',
             //     'msg' => 'Data berhasil dihapus.'
@@ -221,7 +214,7 @@ class Cetak extends BaseController
 
     public function printCSV()
     {
-        // This one was deprecated
+        // This method was deprecated
         $results = $this->cetakModel->findAll();
         $saldo = 0;
         // Penambahan data pada array results utama

@@ -1,9 +1,5 @@
 <?= $this->extend('templates/index'); ?>
-
 <?= $this->section('page-content'); ?>
-
-<?php //echo dd($validation); 
-?>
 
 <div class="container" style="max-width: 512px;">
     <div class="row">
@@ -51,10 +47,7 @@
                         </div>
                         <div class="form-group mb-4">
                             <label for="email">Email Address</label>
-                            <input type="email" class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : ''; ?>" id="email" name="email" value="<?= (old('email')) ? (old('email')) : esc($email); ?>">
-                            <div class="invalid-feedback">
-                                <?= $validation->getError('email'); ?>
-                            </div>
+                            <input type="email" class="form-control" id="email" name="email" value="<?= (old('email')) ? (old('email')) : esc($email); ?>" placeholder="(opsional)">
                         </div>
                         <hr>
                         <div class="form-group text-center">

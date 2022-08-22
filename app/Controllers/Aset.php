@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 use App\Models\AsetModel;
-use DateInterval;
 use DateTime;
+
+define('ERR_TITLE', 'Whoops!');
+define('ERR_404', 'templates/404');
 
 class Aset extends BaseController
 {
@@ -21,22 +23,20 @@ class Aset extends BaseController
     {
         $data['title'] = 'Kelola Aset';
         return $this->showPages('aset/index', $data);
-        // return view('aset/index', $data);
     }
 
     public function getData()
     {
         if ($this->request->isAJAX()) {
-
+            // Fetch data from Database
             $results = $this->asetModel->findAll();
-
             // Specify a Generality
             $datefmtr = [];
             $numfmtr = [];
             foreach ($results as $result) {
                 // Change Date Format
                 array_push($datefmtr, date_format(date_create($result['tgl_perolehan']), "d/m/Y"));
-                // Change Number Formatter
+                // Change Number Format
                 array_push($numfmtr, numfmt_format($this->numfmt, $result['harga']));
             }
 
@@ -46,19 +46,15 @@ class Aset extends BaseController
                     'dateFmtr' => $datefmtr,
                     'numFmtr' => $numfmtr
                 ]
-                // 'numFmt' => $this->numfmt
-                // 'dateFmt' => $datefmt
             ];
 
             $msg = [
-                // 'data' => view('aset/tableasetdata', $data)
                 'data' => $this->showPages('aset/tableasetdata', $data)
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Whoops!';
-            return $this->showPages('templates/404', $data);
-            // return view('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -66,14 +62,12 @@ class Aset extends BaseController
     {
         if ($this->request->isAJAX()) {
             $msg = [
-                // 'data' => view('aset/modaltambah')
                 'data' => $this->showPages('aset/modaltambah')
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Whoops!';
-            return $this->showPages('templates/404', $data);
-            // return view('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -113,7 +107,6 @@ class Aset extends BaseController
                     ]
                 ]
             ]);
-            $msg = [];
             if (!$valid) {
                 $msg = [
                     'error' => [
@@ -134,24 +127,21 @@ class Aset extends BaseController
 
                 $this->asetModel->save($inputData);
 
-                // Flash Data
+                // Creating Flash Data - Deprecated
                 // $dataFlash = [
                 //     'alert' => 'SUCCESS ! ',
                 //     'msg' => 'Data berhasil ditambahkan.'
                 // ];
+                // session()->setFlashdata($dataFlash);
 
                 $msg = [
                     'flashData' => 'Data aset berhasil ditambahkan.'
                 ];
-
-                // session()->setFlashdata($dataFlash);
             }
             echo json_encode($msg);
         } else {
-            // exit("Woops! seems you're quite curious..");
-            $data['title'] = 'Whoops!';
-            return $this->showPages('templates/404', $data);
-            // return view('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -170,14 +160,12 @@ class Aset extends BaseController
             ];
 
             $msg = [
-                // 'data' => view('aset/modaledit', $data)
                 'data' => $this->showPages('aset/modaledit', $data)
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Whoops!';
-            return $this->showPages('templates/404', $data);
-            // return view('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -245,7 +233,7 @@ class Aset extends BaseController
                 ];
                 $this->asetModel->update($id, $updatedData);
 
-                // Flash Data
+                // Creating Flash Data - Deprecated
                 // $dataFlash = [
                 //     'alert' => 'SUCCESS ! ',
                 //     'msg' => 'Data berhasil diubah.'
@@ -257,9 +245,8 @@ class Aset extends BaseController
             }
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Whoops!';
-            return $this->showPages('templates/404', $data);
-            // return view('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -280,7 +267,7 @@ class Aset extends BaseController
             $msg = [
                 'flashData' => 'Data aset berhasil dihapus.'
             ];
-            // Flash Data
+            // Creating Flash Data - Deprecated
             // $dataFlash = [
             //     'alert' => 'SUCCESS ! ',
             //     'msg' => 'Data berhasil dihapus.'
@@ -314,31 +301,23 @@ class Aset extends BaseController
         $data['nilaiBuku'] = numfmt_format($this->numfmt, $nilaiBuku);
         $data['maksUTeknis'] = date_format(date_create($data['aset']['maks_u_teknis']), "d/m/Y");
 
-        // dd($data['sisaUTeknis']);
-
         if (empty($data['aset'])) {
             return redirect()->to('/aset');
         }
 
-        // return view('aset/detail', $data);
         return $this->showPages('aset/detail', $data);
     }
 
     public function barcode($id)
     {
         $result = $this->asetModel->find($id);
-
         $code = 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '-' . date_format(date_create($result['tgl_perolehan']), 'd/m/y');
-
-        // dd($code);
-
         $filename = 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '.png';
         header("Content-Description: File Transfer");
         header("Content-Disposition: attachment; filename=$filename");
         header("Content-Type: image/png;");
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
         file_put_contents('php://output', $generator->getBarcode($code, $generator::TYPE_CODE_128, 3, 50));
-        // INI MANA RETURNNYA?!
         exit;
     }
 
@@ -352,7 +331,6 @@ class Aset extends BaseController
             'aset' => $query->get()->getResultArray()[0],
             'validation' => \Config\Services::validation()
         ];
-        // return view('aset/formimg', $data);
         return $this->showPages('aset/formimg', $data);
     }
 

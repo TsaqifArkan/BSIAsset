@@ -21,6 +21,10 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
+// $routes->set404Override(function () {
+//     $data['title'] = 'Whoops!';
+//     return view('templates/404', $data);
+// });
 $routes->setAutoRoute(true);
 
 /*

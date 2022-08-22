@@ -28,6 +28,43 @@
 	background-size: 100px 100px;
 }
 
+/* Profile Card Layout for USER */
+.usr-card {
+	display: grid;
+	grid-template-rows: 2rem 3rem 3rem 3rem 3rem 3rem 1fr;
+	grid-template-columns: 1fr;
+}
+
+.usr-banner {
+	grid-row: 1 / 5; /*<default>First line to third line*/
+	grid-column: 1 / -1; /*<default>First line to last line*/
+}
+
+.usr-banner img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.usr-display-picture {
+	grid-row: 3 / 6;
+	grid-column: 1 / -1;
+	padding: 0 24px;
+	z-index: 1; /*<default>To place this on top of the banner*/
+}
+
+.usr-display-picture img {
+	height: 100%;
+	aspect-ratio: 1 / 1; /*<default>So that width = height*/
+	border-radius: 50%; /*<default>To create a circle*/
+}
+
+.usr-content {
+	grid-row: 6 / 8;
+	grid-column: 1 / -1;
+	padding: 20px 40px 24px 40px; /*top, right, bottom, left*/
+}
+
 /* .shimer-btn {
 	background-color: hotpink;
 	background-image: linear-gradient(

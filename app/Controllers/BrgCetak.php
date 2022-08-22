@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use App\Models\BrgCetakModel;
 
+define('ERR_TITLE', 'Whoops!');
+define('ERR_404', 'templates/404');
+
 class BrgCetak extends BaseController
 {
     protected $brgCetakModel, $db, $builder;
@@ -19,13 +22,12 @@ class BrgCetak extends BaseController
     {
         $data['title'] = 'Barang Cetak';
         return $this->showPages('brgcetak/index', $data);
-        // return view('brgcetak/index', $data);
     }
 
     public function getData()
     {
         if ($this->request->isAJAX()) {
-
+            // Fetch data from Database
             $results = $this->brgCetakModel->findAll();
 
             // Penambahan data pada array results utama
@@ -38,14 +40,12 @@ class BrgCetak extends BaseController
 
             $data['brgcetaks'] = $results;
             $msg = [
-                // 'data' => view('brgcetak/tablebrgcetakdata', $data)
                 'data' => $this->showPages('brgcetak/tablebrgcetakdata', $data)
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Whoops!';
-            // return view('templates/404', $data);
-            return $this->showPages('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -53,14 +53,12 @@ class BrgCetak extends BaseController
     {
         if ($this->request->isAJAX()) {
             $msg = [
-                // 'data' => view('brgcetak/modaltambah')
                 'data' => $this->showPages('brgcetak/modaltambah')
             ];
             echo json_encode($msg);
         } else {
-            $data['title'] = 'Whoops!';
-            // return view('templates/404', $data);
-            return $this->showPages('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -91,24 +89,21 @@ class BrgCetak extends BaseController
 
                 $this->brgCetakModel->save($inputData);
 
-                // Flash Data
+                // Creating Flash Data - Deprecated
                 // $dataFlash = [
                 //     'alert' => 'SUCCESS ! ',
                 //     'msg' => 'Data berhasil ditambahkan.'
                 // ];
+                // session()->setFlashdata($dataFlash);
 
                 $msg = [
                     'flashData' => 'Data barang cetak berhasil ditambahkan.'
                 ];
-
-                // session()->setFlashdata($dataFlash);
             }
             echo json_encode($msg);
         } else {
-            // exit("Woops! seems you're quite curious..");
-            $data['title'] = 'Whoops!';
-            // return view('templates/404', $data);
-            return $this->showPages('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 
@@ -121,7 +116,7 @@ class BrgCetak extends BaseController
             $msg = [
                 'flashData' => 'Data barang cetak berhasil dihapus.'
             ];
-            // Flash Data
+            // Creating Flash Data - Deprecated
             // $dataFlash = [
             //     'alert' => 'SUCCESS ! ',
             //     'msg' => 'Data berhasil dihapus.'

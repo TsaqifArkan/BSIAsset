@@ -41,11 +41,6 @@
                     <label for="fullname">Fullname</label>
                     <input type="text" class="form-control" id="fullname" name="fullname" value="<?= esc($fullname); ?>" placeholder="(opsional)">
                 </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?= esc($email); ?>">
-                    <div class="invalid-feedback errorEmail"></div>
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -84,15 +79,6 @@
                             $('#username').removeClass('is-invalid');
                             $('#username').addClass('is-valid');
                             $('.errorUsername').html('');
-                        }
-
-                        if (response.error.email) {
-                            $('#email').addClass('is-invalid');
-                            $('.errorEmail').html(response.error.email);
-                        } else {
-                            $('#email').removeClass('is-invalid');
-                            $('#email').addClass('is-valid');
-                            $('.errorEmail').html('');
                         }
 
                         if (response.error.profilePict) {

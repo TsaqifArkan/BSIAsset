@@ -2,20 +2,24 @@
 
 namespace App\Controllers;
 
-use App\Models\NotifikasiModel;
+// use App\Models\NotifikasiModel;
+
+define('ERR_TITLE', 'Whoops!');
+define('ERR_404', 'templates/404');
 
 class Notifikasi extends BaseController
 {
-    private $notifikasiModel;
+    // Deprecated since Notif implemented in BaseCont
+    // private $notifikasiModel;
 
-    public function __construct()
-    {
-        $this->notifikasiModel = new NotifikasiModel();
-    }
+    // public function __construct()
+    // {
+    //     $this->notifikasiModel = new NotifikasiModel();
+    // }
 
     public function index()
     {
-        $data['title'] = 'Panel Notifikasi';
+        // $data['title'] = 'Panel Notifikasi';
         // FULLY DEPRECATED!
         // $query = $this->notifikasiModel->builder()->select('*')->orderBy('waktu', 'ASC');
         // $result = $query->get()->getResultArray();
@@ -31,8 +35,12 @@ class Notifikasi extends BaseController
         // } else {
         //     $data['jatuhTempo'] = [];
         // }
-        return $this->showPages('notifikasi/index', $data);
+        // return $this->showPages('notifikasi/index', $data);
         // return view('notifikasi/index', $data);
+
+        // Just in case someone is curious..
+        $data['title'] = ERR_TITLE;
+        return $this->showPages(ERR_404, $data);
     }
 
     public function delNotif($id = NULL)
@@ -44,9 +52,8 @@ class Notifikasi extends BaseController
             session();
             unset($_SESSION["notif"][$id]);
         } else {
-            $data['title'] = 'Whoops!';
-            return $this->showPages('templates/404', $data);
-            // return view('templates/404', $data);
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
         }
     }
 }

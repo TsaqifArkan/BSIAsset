@@ -2,78 +2,70 @@
 
 namespace App\Controllers;
 
-use Myth\Auth\Models\UserModel;
+use App\Models\UserModel;
 
 class User extends BaseController
 {
-    protected $userModel;
+    protected $userModel, $db, $builder;
 
     public function __construct()
     {
-        $this->userModel   = new UserModel();
+        $this->userModel    = new UserModel();
         $this->db           = \Config\Database::connect();
-        $this->builder      = $this->db->table('users');
+        $this->builder      = $this->db->table('user');
     }
 
     public function index()
     {
-        // dd(
-        //     user()->__get('password_hash'),
-        //     \Myth\Auth\Password::hash('bsisuper123'),
-        //     (base64_encode(hash('sha384', 'bsisuper123', true)))
-        // );
-
         // Panggil Notif
         if (!session()->get('notif')) {
             $this->updateNotification();
         }
 
+        // Fetch data from session and database
+        $userid = session('user_session.id');
+        $datadb = $this->userModel->find($userid);
+
         $hour = date('H');
         $dayTerm = ($hour > 17) ? "Evening" : (($hour > 12) ? "Afternoon" : "Morning");
         $data = [
             'title' => 'My Profile',
-            'userdata' => user(),
+            'userdata' => $datadb,
             'greet' => $dayTerm
         ];
-        // return view('user/index', $data);
         return $this->showPages('user/index', $data);
     }
 
     public function editprofile()
     {
-        $result = user();
+        // Fetch data from session and database
+        $userid = session('user_session.id');
+        $datadb = $this->userModel->find($userid);
+
         $data = [
             'title' => 'Edit Profile',
-            'email' => $result->email,
-            'username' => $result->username,
-            'fullname' => $result->fullname,
-            'profilePict' => $result->user_image,
+            'username' => $datadb['username'],
+            'email' => $datadb['email'],
+            'fullname' => $datadb['full_name'],
+            'profilePict' => $datadb['user_image'],
             'validation' => \Config\Services::validation()
         ];
-        // return view('user/formedit', $data);
         return $this->showPages('user/formedit', $data);
     }
 
     public function edit()
     {
-        // Cek email dan username sebelumnya
-        $result = user();
-        $rule_username = ($result->username == $this->request->getVar('username')) ? 'required' : 'required|is_unique[users.username]';
-        $rule_email = ($result->email == $this->request->getVar('email')) ? 'required' : 'required|is_unique[users.email]';
+        // Fetch data from session and database
+        $userid = session('user_session.id');
+        $result = $this->userModel->find($userid);
 
-        // $validation = \Config\Services::validation();
+        // Cek username sebelumnya
+        $rule_username = ($result['username'] == $this->request->getVar('username')) ? 'required' : 'required|is_unique[user.username]';
+
         $valid = $this->validate([
             'username' => [
                 'label' => 'Username',
                 'rules' => $rule_username,
-                'errors' => [
-                    'required' => '{field} tidak boleh kosong!',
-                    'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
-                ]
-            ],
-            'email' => [
-                'label' => 'Email Address',
-                'rules' => $rule_email,
                 'errors' => [
                     'required' => '{field} tidak boleh kosong!',
                     'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
@@ -112,14 +104,12 @@ class User extends BaseController
         // update ke DB
         $updatedData = [
             'username' => $this->request->getVar('username'),
-            'fullname' => $this->request->getVar('fullname'),
+            'full_name' => $this->request->getVar('fullname'),
             'email' => $this->request->getVar('email'),
             'user_image' => $namaUserImage
         ];
 
-        $id = $result->id;
-
-        $this->userModel->builder()->update($updatedData, "id = $id");
+        $this->userModel->update($userid, $updatedData);
 
         // pembuatan flashdata data diubah
         session()->setFlashdata('pesan', 'Data user berhasil diupdate.');
@@ -138,10 +128,26 @@ class User extends BaseController
 
     public function changePassword()
     {
+        // Fetch data from session and database
+        $userid = session('user_session.id');
+        $result = $this->userModel->find($userid);
+        $userpass = $result['password'];
+
+        // Fetch data from POST
+        $oldPass = $this->request->getPost('oldPassword');
+
+        if (!password_verify($oldPass, $userpass)) {
+            $err['oldpass'] = 'Password salah!';
+            return redirect()->back()->withInput()->with('errors', $err);
+        }
+
         $valid = $this->validate([
             'newPassword' => [
                 'label' => 'Password Baru',
-                'rules' => 'min_length[5]'
+                'rules' => 'min_length[5]',
+                'errors' => [
+                    'matches' => '{field} minimal 5 karakter!'
+                ]
             ],
             'konfNewPassword' => [
                 'label' => 'Konfirmasi Password Baru',
@@ -149,18 +155,20 @@ class User extends BaseController
                 'errors' => [
                     'matches' => '{field} tidak sesuai dengan Password Baru!'
                 ]
-            ],
-            'oldPassword' => [
-                'label' => 'Password Lama',
-                'rules' => ''
-
             ]
         ]);
 
-        if ($valid) {
-            $updatedData = 0;
+        if (!$valid) {
+            return redirect()->to('user/password')->withInput();
         }
 
-        return true;
+        // Update ke DB
+        $newPass = $this->request->getPost('newPassword');
+        $this->userModel->update($userid, ['password' => password_hash($newPass, PASSWORD_DEFAULT)]);
+
+        // pembuatan flashdata data diubah
+        session()->setFlashdata('pesan', 'Password user berhasil diupdate.');
+
+        return redirect()->to('/');
     }
 }

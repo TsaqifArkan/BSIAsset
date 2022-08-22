@@ -1,5 +1,4 @@
 <?= $this->extend('templates/index'); ?>
-
 <?= $this->section('page-content'); ?>
 
 <div class="container" style="max-width: 512px;">
@@ -15,13 +14,13 @@
                         <?= csrf_field(); ?>
                         <div class="form-group">
                             <label for="oldPassword">Password Lama</label>
-                            <input type="password" class="form-control <?= ($validation->hasError('oldPassword')) ? 'is-invalid' : ''; ?>" id="oldPassword" name="oldPassword">
+                            <input type="password" class="form-control <?= session('errors.oldpass') ? 'is-invalid' : ''; ?>" id="oldPassword" name="oldPassword" autofocus>
                             <div class="invalid-feedback">
-                                <?= $validation->getError('oldPassword'); ?>
+                                <?= session('errors.oldpass'); ?>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="newPassword">Password Baru</label>
+                            <label for="newPassword">Password Baru (min. 5 karakter)</label>
                             <input type="password" class="form-control <?= ($validation->hasError('newPassword')) ? 'is-invalid' : ''; ?>" id="newPassword" name="newPassword">
                             <div class="invalid-feedback">
                                 <?= $validation->getError('newPassword'); ?>

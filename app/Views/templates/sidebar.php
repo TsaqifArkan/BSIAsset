@@ -8,7 +8,7 @@
     ?>
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('user'); ?>">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('/'); ?>">
         <div class="sidebar-brand-icon mx-3">
             <img src="<?= base_url() ?>/img/logo-bsi.png" alt="logo-bsi" width="80%" height="80%">
         </div>
@@ -74,52 +74,6 @@
             <i class="fa-solid fa-fw fa-dice-d6"></i>
             <span>Transaksi Barang Cetakan</span></a>
     </li>
-
-    <!-- Nav Item - Kategori Barang -->
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="<? // echo base_url('kategori'); 
-                                    ?>">
-            <i class="fa-solid fa-fw fa-list"></i>
-            <span>Kategori Barang</span></a>
-    </li> -->
-
-    <?php // if (in_groups('admin')) : 
-    ?>
-    <!-- Divider -->
-    <!-- <hr class="sidebar-divider"> -->
-
-    <!-- Heading -->
-    <!-- <div class="sidebar-heading"> -->
-    <!-- Admin Panel -->
-    <!-- </div> -->
-
-    <!-- Nav Item - User List -->
-    <!-- <li class="nav-item <?php // echo url('admin'); 
-                                ?>"> -->
-    <!-- <a class="nav-link" href="<?php // echo base_url('admin'); 
-                                    ?>"> -->
-    <!-- <i class="fa-solid fa-fw fa-users"></i> -->
-    <!-- <span>User List</span></a> -->
-    <!-- </li> -->
-    <?php // endif; 
-    ?>
-
-    <!-- Divider -->
-    <!-- <hr class="sidebar-divider"> -->
-
-    <!-- Heading -->
-    <!-- <div class="sidebar-heading"> -->
-    <!-- Settings -->
-    <!-- </div> -->
-
-    <!-- Nav Item - Logout -->
-    <!-- <li class="nav-item <?php //echo url('logout'); 
-                                ?>"> -->
-    <!-- <a class="nav-link" href="<?php //echo base_url('logout'); 
-                                    ?>"> -->
-    <!-- <i class="fa-solid fa-fw fa-right-from-bracket"></i> -->
-    <!-- <span>Logout</span></a> -->
-    <!-- </li> -->
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
