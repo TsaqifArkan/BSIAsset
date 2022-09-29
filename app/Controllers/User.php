@@ -27,7 +27,7 @@ class User extends BaseController
         $datadb = $this->userModel->find($userid);
 
         $hour = date('H');
-        $dayTerm = ($hour > 17) ? "Evening" : (($hour > 12) ? "Afternoon" : "Morning");
+        $dayTerm = ($hour > 17) ? "Evening" : (($hour > 11) ? "Afternoon" : "Morning");
         $data = [
             'title' => 'My Profile',
             'userdata' => $datadb,
