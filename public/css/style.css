@@ -98,7 +98,10 @@
 	width: 5%;
 }
 
-.col-tglPrlh,
+.col-tglPrlh {
+	width: 12%;
+}
+
 .col-hrgPrlh {
 	width: 13%;
 }
@@ -124,23 +127,25 @@
 }
 
 .col-kodeBrg {
-	width: 14%;
+	width: 15%;
 }
 
 .col-stok {
 	width: 10%;
 }
 
-.td-stok {
-	text-align: right;
+/* Coba Konfigurasi Dropdown Notifikasi */
+.dropdown-menu-ave {
+	max-height: 450px;
+	max-width: 24rem;
+	overflow-y: auto;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 }
 
-.td-aksi {
-	text-align: center;
-}
-
-.td-dk {
-	text-align: center;
+.dropdown-menu-ave .col {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 }
 
 /* table {

@@ -19,7 +19,7 @@
                 <span class="badge badge-danger badge-counter" id="numberNotif"><?= sizeof($notifikasi); ?></span>
             </a>
             <!-- Dropdown - Alerts -->
-            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="min-width: 22rem;">
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="min-width: 24rem;">
                 <h6 class="dropdown-header">
                     Notifikasi
                 </h6>
@@ -30,22 +30,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row dropdown-menu-ave">
                     <div class="col">
                         <?php foreach ($notifikasi as $i => $notif) : ?>
                             <a class="dropdown-item d-flex align-items-center alert-<?= esc($notif['tipe']); ?>" href="<?= base_url($notif['link']); ?>" style="<?= ($i > 3) ? 'display: none;' : 'display:inline-block;' ?>">
-                                <div class="mr-3">
+                                <div class="col mr-3">
                                     <div class="icon-circle bg-primary">
                                         <i class="fa-solid fa-fw fa-truck-ramp-box text-white"></i>
                                     </div>
                                 </div>
-                                <div>
+                                <div class="col-9 px-0">
                                     <div class="text-gray-700" style="font-size:small;"><?= esc($notif['info']); ?></div>
                                     <div class="font-weight-bold text-gray-800" style="font-size: small;"><?= esc($notif['judul']); ?></div>
                                     <span style="font-style: italic;"><?= esc($notif['konten']); ?></span>
                                     <div class="small text-gray-600"><?= esc($notif['sub_konten']); ?></div>
                                 </div>
-                                <div class="ml-4">
+                                <div class="col">
                                     <!-- <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?php // echo $notif['id']; 
                                                                                                                                         ?>"> -->
                                     <button type="button" class="close btnClose" data-dismiss="alert" aria-label="Close" data-id="<?= $i; ?>">
@@ -88,6 +88,10 @@
 </nav>
 
 <script>
+    $('.dropdown-menu-ave').on('click', function(e) {
+        e.stopPropagation();
+    });
+
     $('.btnClose').click(function(e) {
         e.preventDefault();
 

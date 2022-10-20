@@ -68,11 +68,11 @@
             <span>Barang Cetak</span></a>
     </li>
 
-    <!-- Nav Item - Barang Cetakan -->
-    <li class="nav-item <?= url('cetak'); ?>">
-        <a class="nav-link" href="<?= base_url('cetak'); ?>">
+    <!-- Nav Item - Transaksi Barang Cetak -->
+    <li class="nav-item <?= url('transaksi'); ?>">
+        <a class="nav-link" href="<?= base_url('transaksi'); ?>">
             <i class="fa-solid fa-fw fa-dice-d6"></i>
-            <span>Transaksi Barang Cetakan</span></a>
+            <span>Transaksi Barang Cetak</span></a>
     </li>
 
     <!-- Divider -->
