@@ -12,7 +12,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <img src="/img/<?= esc($sewa['gambar_sewa']); ?>" alt="" class="img-fluid img-thumbnail d-block m-auto rounded img-preview" style="height:auto; width:500px;">
+                                <img src="/img/<?= esc($sewa['gambar_sewa']); ?>" alt="" class="img-fluid img-thumbnail d-block m-auto rounded img-preview" style="height:auto; width:400px;">
                             </div>
                         </div>
                         <hr>

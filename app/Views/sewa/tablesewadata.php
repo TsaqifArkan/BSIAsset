@@ -1,7 +1,7 @@
 <div class="table-responsive">
     <table class="table table-bordered table-hover" id="dataTable-Sewa">
         <thead class="thead-dark">
-            <tr>
+            <tr class="text-center">
                 <th scope="col" class="col-no">No.</th>
                 <th scope="col">Nama Barang</th>
                 <th scope="col">Tanggal Sewa</th>
@@ -15,14 +15,14 @@
         <tbody>
             <?php foreach ($rents['majority'] as $i => $rent) : ?>
                 <tr class="<?= $rents['highlight'][$i]; ?>">
-                    <th scope="row"><?= $i + 1; ?></th>
+                    <td scope="row" class="text-center"><?= $i + 1; ?></td>
                     <td><?= esc($rent['nama']); ?></td>
-                    <td><?= esc($rents['dateFmtrSewa'][$i]); ?></td>
-                    <td><?= esc($rent['periode_sewa']); ?> bulan</td>
-                    <td><?= esc($rents['numFmtr'][$i]); ?></td>
-                    <td><?= esc($rents['timeLeft'][$i]); ?> hari</td>
-                    <td><?= esc($rents['dateFmtrTempo'][$i]); ?></td>
-                    <td class="td-aksi">
+                    <td class="text-center"><?= esc($rents['dateFmtrSewa'][$i]); ?></td>
+                    <td class="text-center"><?= esc($rent['periode_sewa']); ?> bulan</td>
+                    <td class="text-right"><?= esc($rents['numFmtr'][$i]); ?></td>
+                    <td class="text-center"><?= esc($rents['timeLeft'][$i]); ?> hari</td>
+                    <td class="text-center"><?= esc($rents['dateFmtrTempo'][$i]); ?></td>
+                    <td class="text-center">
                         <a href="<?= base_url('sewa/upload/' . $rent['id']); ?>" class="btn <?php if ($rent['gambar_sewa'] != 'default_img.jpg' && $rent['file_sewa'] != null) : ?>
                             <?= 'btn-facebook'; ?>
                         <?php elseif ($rent['gambar_sewa'] != 'default_img.jpg') : ?>
@@ -43,7 +43,9 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#dataTable-Sewa').DataTable();
+        $('#dataTable-Sewa').DataTable({
+            "pageLength": 25
+        });
     });
 
     // Konfigurasi Tombol Edit
@@ -62,7 +64,10 @@
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                var tab = window.open('about:blank', '_blank');
+                tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                tab.document.close(); // to finish loading the page
             }
         });
     }
