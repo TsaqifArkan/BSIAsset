@@ -34,8 +34,8 @@ class BrgCetak extends BaseController
             foreach ($results as $i => $result) {
                 // Change Date Format Tanggal Cetak
                 $results[$i]['datefmtrbrgcetak'] = date_format(date_create($result['tanggal']), "d/m/Y");
-                // Pembuatan Kode Barang
-                $results[$i]['code'] = str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '-' . date_format(date_create($result['tanggal']), 'd/m/y');
+                // Pembuatan Kode Barang - Deprecated 02/10/22
+                // $results[$i]['code'] = str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '-' . date_format(date_create($result['tanggal']), 'd/m/y');
             }
 
             $data['brgcetaks'] = $results;
@@ -73,18 +73,27 @@ class BrgCetak extends BaseController
                     'errors' => [
                         'required' => '{field} tidak boleh kosong!'
                     ]
+                ],
+                'kode' => [
+                    'label' => 'Kode Barang',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
                 ]
             ]);
             if (!$valid) {
                 $msg = [
                     'error' => [
-                        'nama' => $validation->getError('nama')
+                        'nama' => $validation->getError('nama'),
+                        'kode' => $validation->getError('kode')
                     ]
                 ];
             } else {
                 // insert ke DB
                 $inputData = [
-                    'nama' => $this->request->getVar('nama')
+                    'nama' => $this->request->getVar('nama'),
+                    'kode' => $this->request->getVar('kode')
                 ];
 
                 $this->brgCetakModel->save($inputData);
@@ -98,6 +107,82 @@ class BrgCetak extends BaseController
 
                 $msg = [
                     'flashData' => 'Data barang cetak berhasil ditambahkan.'
+                ];
+            }
+            echo json_encode($msg);
+        } else {
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
+        }
+    }
+
+    public function formEdit()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $result = $this->brgCetakModel->find($id);
+
+            $data = [
+                'id' => $result['id'],
+                'nama' => $result['nama'],
+                'kode' => $result['kode'],
+                'stok' => $result['stok']
+            ];
+
+            $msg = [
+                'data' => $this->showPages('brgcetak/modaledit', $data)
+            ];
+            echo json_encode($msg);
+        } else {
+            $data['title'] = ERR_TITLE;
+            return $this->showPages(ERR_404, $data);
+        }
+    }
+
+    public function edit()
+    {
+        if ($this->request->isAJAX()) {
+            $id = $this->request->getVar('id');
+            $validation = \Config\Services::validation();
+            $valid = $this->validate([
+                'nama' => [
+                    'label' => 'Nama Barang',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
+                'kode' => [
+                    'label' => 'Kode Barang',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ]
+            ]);
+            if (!$valid) {
+                $msg = [
+                    'error' => [
+                        'nama' => $validation->getError('nama'),
+                        'kode' => $validation->getError('kode')
+                    ]
+                ];
+            } else {
+                // update ke DB
+                $updatedData = [
+                    'nama' => $this->request->getVar('nama'),
+                    'kode' => $this->request->getVar('kode')
+                ];
+                $this->brgCetakModel->update($id, $updatedData);
+
+                // Creating Flash Data - Deprecated
+                // $dataFlash = [
+                //     'alert' => 'SUCCESS ! ',
+                //     'msg' => 'Data berhasil diubah.'
+                // ];
+                // session()->setFlashdata($dataFlash);
+                $msg = [
+                    'flashData' => 'Data barang cetak berhasil diupdate.'
                 ];
             }
             echo json_encode($msg);

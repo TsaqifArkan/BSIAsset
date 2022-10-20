@@ -1,7 +1,7 @@
 <div class="table-responsive">
     <table class="table table-bordered table-hover" id="dataTable-BrgCetak">
         <thead class="thead-dark">
-            <tr>
+            <tr class="text-center">
                 <th scope="col" class="col-no">No.</th>
                 <th scope="col" class="col-tglInput">Tanggal Input</th>
                 <th scope="col">Nama Barang</th>
@@ -13,12 +13,13 @@
         <tbody>
             <?php foreach ($brgcetaks as $i => $brgcetak) : ?>
                 <tr>
-                    <td><?= $i + 1; ?></td>
-                    <td><?= esc($brgcetak['datefmtrbrgcetak']); ?></td>
+                    <td class="text-center"><?= $i + 1; ?></td>
+                    <td class="text-center"><?= esc($brgcetak['datefmtrbrgcetak']); ?></td>
                     <td><?= esc($brgcetak['nama']); ?></td>
-                    <td><?= esc($brgcetak['code']); ?></td>
-                    <td class="td-stok"><?= esc($brgcetak['stok']); ?></td>
-                    <td class="td-aksi">
+                    <td class="text-center"><?= esc($brgcetak['kode']); ?></td>
+                    <td class="text-center"><?= esc($brgcetak['stok']); ?></td>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-warning btn-sm" onclick="ubah('<?= $brgcetak['id']; ?>')">Edit</button>
                         <button type="button" class="btn btn-danger btn-sm" onclick="hapus('<?= $brgcetak['id']; ?>')">Hapus</button>
                     </td>
                 </tr>
@@ -28,8 +29,34 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#dataTable-BrgCetak').DataTable();
+        $('#dataTable-BrgCetak').DataTable({
+            "pageLength": 25
+        });
     });
+
+    // Konfigurasi Tombol Edit
+    function ubah(id) {
+        $.ajax({
+            type: "POST",
+            url: "<?= base_url('brgcetak/formedit'); ?>",
+            data: {
+                id: id
+            },
+            dataType: "JSON",
+            success: function(response) {
+                if (response.data) {
+                    $('.viewModalBrgCetak').html(response.data).show();
+                    $('#modalEditBrgCtk').modal('show');
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                var tab = window.open('about:blank', '_blank');
+                tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                tab.document.close(); // to finish loading the page
+            }
+        });
+    }
 
     // Konfigurasi Tombol Hapus
     function hapus(id) {
@@ -63,7 +90,10 @@
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                        // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                        var tab = window.open('about:blank', '_blank');
+                        tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                        tab.document.close(); // to finish loading the page
                     }
                 });
             }

@@ -14,8 +14,8 @@
     <div class="row">
         <div class="col">
             <div class="alert alert-secondary">
-                <strong>Perhatian!</strong> Ini adalah halaman untuk menampilkan daftar <b>Barang Cetak</b>. Barang Cetak yang terdapat di dalam tabel ini akan tersedia dan ditampilkan saat penambahan data <b>Transaksi Barang Cetakan</b>. <br>
-                Menghapus data <b>Barang Cetak</b> akan menghapus <b>Transaksi Barang Cetakan</b> terkait secara otomatis.
+                <strong>Perhatian!</strong> Ini adalah halaman untuk menampilkan daftar <b>Barang Cetak</b>. Tambahkan data <b>Barang Cetak</b> terlebih dahulu sebelum menambah data <b>Transaksi</b>-nya.<br>
+                Menghapus data <b>Barang Cetak</b> akan menghapus data <b>Transaksi Barang Cetak</b> terkait secara otomatis.
             </div>
         </div>
     </div>
@@ -57,10 +57,10 @@
                 $('.sectionbrgcetakdata').html(response.data);
             },
             error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
-                // var tab = window.open('about:blank', '_blank');
-                // tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
-                // tab.document.close(); // to finish loading the page
+                // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                var tab = window.open('about:blank', '_blank');
+                tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                tab.document.close(); // to finish loading the page
             }
         });
     }
@@ -78,7 +78,10 @@
                     $('#modalTambahBrgCetak').modal('show');
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    var tab = window.open('about:blank', '_blank');
+                    tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                    tab.document.close(); // to finish loading the page
                 }
             });
         });

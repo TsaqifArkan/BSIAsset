@@ -10,7 +10,7 @@ class BrgCetakModel extends Model
     protected $primaryKey = 'id';
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['nama', 'tanggal', 'stok'];
+    protected $allowedFields = ['nama', 'kode', 'tanggal', 'stok'];
     protected $useTimestamps = true;
     protected $dateFormat = 'date';
     protected $createdField = '';

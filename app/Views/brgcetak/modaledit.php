@@ -1,43 +1,44 @@
 <!-- Modal -->
-<div class="modal fade" id="modalTambahBrgCetak" tabindex="-1" aria-labelledby="judulModalBrgCetak" aria-hidden="true">
+<div class="modal fade" id="modalEditBrgCtk" tabindex="-1" aria-labelledby="judulModalBrgCtk" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title font-weight-bold" id="judulModalBrgCetak">Tambah Barang Cetak</h5>
+                <h5 class="modal-title font-weight-bold" id="judulModalBrgCtk">Edit Data Barang Cetak</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <?= form_open('brgcetak/tambah', ['class' => 'formBrgCetak']); ?>
+            <?= form_open('brgcetak/edit', ['class' => 'formBrgCtk']); ?>
             <div class="modal-body">
                 <?= csrf_field(); ?>
-                <input type="hidden" name="id" id="id">
+                <input type="hidden" name="id" id="id" value="<?= $id; ?>">
                 <div class="form-group">
                     <label for="nama">Nama Barang</label>
-                    <input type="text" class="form-control" id="nama" name="nama">
+                    <input type="text" class="form-control" id="nama" name="nama" value="<?= esc($nama); ?>">
                     <div class="invalid-feedback errorNama"></div>
                 </div>
                 <div class="form-group">
                     <label for="kode">Kode Barang</label>
-                    <input type="text" class="form-control" id="kode" name="kode">
+                    <input type="text" class="form-control" id="kode" name="kode" value="<?= esc($kode); ?>">
                     <div class="invalid-feedback errorKode"></div>
+                </div>
+                <div class="form-group">
+                    <label for="stok">Stok</label>
+                    <input type="text" class="form-control" id="stok" name="stok" value="<?= esc($stok); ?>" disabled>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary btnSimpan">Tambah Data</button>
+                <button type="submit" class="btn btn-primary btnSimpan">Update Data</button>
             </div>
             <?= form_close(); ?>
         </div>
     </div>
 </div>
 <script>
-    // Konfigurasi Modal Tambah Data Barang Cetak di modaltambah.php
+    // Konfigurasi Modal Edit Barang Cetak di modaledit.php
     $(document).ready(function() {
-        $('#modalTambahBrgCetak').on('shown.bs.modal', function() {
-            $('#nama').focus();
-        })
-        $('.formBrgCetak').submit(function(e) {
+        $('.formBrgCtk').submit(function(e) {
             e.preventDefault();
             $.ajax({
                 type: "POST",
@@ -50,7 +51,7 @@
                 },
                 complete: function() {
                     $('.btnSimpan').removeAttr('disable');
-                    $('.btnSimpan').html('Tambah Data')
+                    $('.btnSimpan').html('Update Data')
                 },
                 success: function(response) {
                     if (response.error) {
@@ -76,10 +77,10 @@
                             icon: 'success',
                             title: 'SUCCESS !',
                             text: response.flashData,
-                        });
-                        $('#modalTambahBrgCetak').modal('hide');
+                        })
+                        $('#modalEditBrgCtk').modal('hide');
                         // simulates similar behavior as an HTTP redirect
-                        // window.location.replace("http://localhost:8080/sewa");
+                        // window.location.replace("http://localhost:8080/aset");
                         tableBrgCetak();
                     }
                 },
