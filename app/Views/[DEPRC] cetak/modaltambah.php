@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade mt-5" id="modalTambahCetak" tabindex="-1" aria-labelledby="judulModalCetak" aria-hidden="true">
+<div class="modal fade" id="modalTambahCetak" tabindex="-1" aria-labelledby="judulModalCetak" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
