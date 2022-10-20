@@ -1,9 +1,10 @@
 <div class="table-responsive">
     <table class="table table-bordered table-hover" id="dataTable-Aset">
         <thead class="thead-dark">
-            <tr>
+            <tr class="text-center">
                 <th scope="col" class="col-no">No.</th>
                 <th scope="col">Nama Barang</th>
+                <th scope="col" class="col-tglPrlh">Kode</th>
                 <th scope="col" class="col-tglPrlh">Tanggal Perolehan</th>
                 <th scope="col" class="col-hrgPrlh">Harga Perolehan</th>
                 <th scope="col" class="col-usiaTeknis">Usia Teknis</th>
@@ -13,12 +14,13 @@
         <tbody>
             <?php foreach ($assets['majority'] as $i => $aset) : ?>
                 <tr>
-                    <th scope="row"><?= $i + 1; ?></th>
+                    <td scope="row" class="text-center"><?= $i + 1; ?></td>
                     <td><?= esc($aset['nama']); ?></td>
-                    <td><?= esc($assets['dateFmtr'][$i]); ?></td>
-                    <td><?= esc($assets['numFmtr'][$i]); ?></td>
-                    <td><?= esc($aset['usia_teknis']); ?> bulan</td>
-                    <td class="td-aksi">
+                    <td class="text-center"><?= esc($aset['kode']); ?></td>
+                    <td class="text-center"><?= esc($assets['dateFmtr'][$i]); ?></td>
+                    <td class="text-right"><?= esc($assets['numFmtr'][$i]); ?></td>
+                    <td class="text-center"><?= esc($aset['usia_teknis']); ?> bulan</td>
+                    <td class="text-center">
                         <a href="<?= base_url('aset/img/' . $aset['id']); ?>" class="btn <?= ($aset['gambar_aset'] != 'default_img.jpg') ? 'btn-success' : 'btn-secondary' ?> btn-sm"><i class="fa-solid fa-fw fa-image"></i></a>
                         <a href="<?= base_url('aset/detail/' . $aset['id']); ?>" class="btn btn-info btn-sm">Detail</a>
                         <button type="button" class="btn btn-warning btn-sm" onclick="ubah('<?= $aset['id']; ?>')">Edit</button>
@@ -31,7 +33,9 @@
 </div>
 <script>
     $(document).ready(function() {
-        $('#dataTable-Aset').DataTable();
+        $('#dataTable-Aset').DataTable({
+            "pageLength": 25
+        });
     });
 
     // Konfigurasi Tombol Edit
@@ -50,7 +54,10 @@
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                var tab = window.open('about:blank', '_blank');
+                tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                tab.document.close(); // to finish loading the page
             }
         });
     }
@@ -87,7 +94,10 @@
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
-                        alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                        // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                        var tab = window.open('about:blank', '_blank');
+                        tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                        tab.document.close(); // to finish loading the page
                     }
                 });
             }

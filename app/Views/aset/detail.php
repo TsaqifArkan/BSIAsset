@@ -1,9 +1,7 @@
 <?= $this->extend('templates/index'); ?>
-
 <?= $this->section('page-content'); ?>
 
 <div class="container">
-
     <div class="row">
         <div class="col">
             <div class="card mb-3 border-bottom-primary shadow">
@@ -14,7 +12,19 @@
                     <div class="container">
                         <div class="row">
                             <div class="col">
-                                <img src="/img/<?= esc($aset['gambar_aset']); ?>" alt="" class="img-fluid img-thumbnail d-block m-auto rounded img-preview" style="height:auto; width:500px;">
+                                <img src="/img/<?= esc($aset['gambar_aset']); ?>" alt="" class="img-fluid img-thumbnail d-block m-auto rounded img-preview" style="height:auto; width:400px;">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col font-weight-bold text-center">
+                                Kode Barang
+                            </div>
+                            <div class="col-1 font-weight-bold text-center">
+                                :
+                            </div>
+                            <div class="col m-auto">
+                                <?= esc($aset['kode']); ?>
                             </div>
                         </div>
                         <hr>
@@ -118,9 +128,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
-
 
 <?= $this->endSection(); ?>

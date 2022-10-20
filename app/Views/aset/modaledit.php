@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade mt-5" id="modalEditAset" tabindex="-1" aria-labelledby="judulModalAset" aria-hidden="true">
+<div class="modal fade" id="modalEditAset" tabindex="-1" aria-labelledby="judulModalAset" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -123,7 +123,10 @@
                     }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    var tab = window.open('about:blank', '_blank');
+                    tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                    tab.document.close(); // to finish loading the page
                 }
             });
             return false;

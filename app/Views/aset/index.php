@@ -64,7 +64,10 @@
                 $('.sectionasetdata').html(response.data);
             },
             error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                var tab = window.open('about:blank', '_blank');
+                tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                tab.document.close(); // to finish loading the page
             }
         });
     }
@@ -82,7 +85,10 @@
                     $('#modalTambahAset').modal('show');
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
-                    alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    // alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);
+                    var tab = window.open('about:blank', '_blank');
+                    tab.document.write(xhr.responseText); // where 'html' is a variable containing your HTML
+                    tab.document.close(); // to finish loading the page
                 }
             });
         });

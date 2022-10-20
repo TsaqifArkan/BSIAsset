@@ -127,6 +127,16 @@ class Aset extends BaseController
 
                 $this->asetModel->save($inputData);
 
+                // Creating Aset Kode - Try to implement 08/10/22
+                // dd($this->asetModel->findAll(), $this->asetModel->getInsertID());
+                $lastInsID = $this->asetModel->getInsertID();
+
+                $updateData = [
+                    'kode' => 'AS' . str_pad($lastInsID, 5, '0', STR_PAD_LEFT)
+                ];
+
+                $this->asetModel->update($lastInsID, $updateData);
+
                 // Creating Flash Data - Deprecated
                 // $dataFlash = [
                 //     'alert' => 'SUCCESS ! ',
@@ -310,14 +320,21 @@ class Aset extends BaseController
 
     public function barcode($id)
     {
-        $result = $this->asetModel->find($id);
-        $code = 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '-' . date_format(date_create($result['tgl_perolehan']), 'd/m/y');
-        $filename = 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '.png';
+        // Deprecated since Oct 2022, now get code from DB
+        // $result = $this->asetModel->find($id);
+        // $code = 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '-' . date_format(date_create($result['tgl_perolehan']), 'd/m/y');
+        // $code = 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT);
+        // $filename = 'AS' . str_pad($result['id'], 5, '0', STR_PAD_LEFT) . '.jpg';
+
+        // Fetch data using Select statement for faster query time
+        $query = $this->builder->select('kode')->where('id', $id)->get()->getResultArray()[0];
+        $code = $query['kode'];
+        $filename = $code . '.jpg';
         header("Content-Description: File Transfer");
         header("Content-Disposition: attachment; filename=$filename");
-        header("Content-Type: image/png;");
-        $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-        file_put_contents('php://output', $generator->getBarcode($code, $generator::TYPE_CODE_128, 3, 50));
+        header("Content-Type: image/jpg;");
+        $generator = new \Picqer\Barcode\BarcodeGeneratorJPG();
+        file_put_contents('php://output', $generator->getBarcode($code, $generator::TYPE_CODE_128, 1, 50));
         exit;
     }
 
