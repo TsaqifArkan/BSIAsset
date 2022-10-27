@@ -84,6 +84,13 @@ class Aset extends BaseController
                         'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
                     ]
                 ],
+                'kode' => [
+                    'label' => 'Kode Barang',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
                 'tglPerolehan' => [
                     'label' => 'Tanggal Perolehan',
                     'rules' => 'required',
@@ -111,6 +118,7 @@ class Aset extends BaseController
                 $msg = [
                     'error' => [
                         'nama' => $validation->getError('nama'),
+                        'kode' => $validation->getError('kode'),
                         'tglPerolehan' => $validation->getError('tglPerolehan'),
                         'hargaPerolehan' => $validation->getError('hargaPerolehan'),
                         'usiaTeknis' => $validation->getError('usiaTeknis')
@@ -120,6 +128,7 @@ class Aset extends BaseController
                 // insert ke DB
                 $inputData = [
                     'nama' => $this->request->getVar('nama'),
+                    'kode' => $this->request->getVar('kode'),
                     'tgl_perolehan' => $this->request->getVar('tglPerolehan'),
                     'harga' => $this->request->getVar('hargaPerolehan'),
                     'usia_teknis' => $this->request->getVar('usiaTeknis')
@@ -127,15 +136,16 @@ class Aset extends BaseController
 
                 $this->asetModel->save($inputData);
 
+                // This line code deprecated since 27/10/22 because of BSI wants to input Asset Code manually
+                // ######################################################################### //
                 // Creating Aset Kode - Try to implement 08/10/22
                 // dd($this->asetModel->findAll(), $this->asetModel->getInsertID());
-                $lastInsID = $this->asetModel->getInsertID();
-
-                $updateData = [
-                    'kode' => 'AS' . str_pad($lastInsID, 5, '0', STR_PAD_LEFT)
-                ];
-
-                $this->asetModel->update($lastInsID, $updateData);
+                // $lastInsID = $this->asetModel->getInsertID();
+                // $updateData = [
+                //     'kode' => 'AS' . str_pad($lastInsID, 5, '0', STR_PAD_LEFT)
+                // ];
+                // $this->asetModel->update($lastInsID, $updateData);
+                // ######################################################################### //
 
                 // Creating Flash Data - Deprecated
                 // $dataFlash = [
@@ -164,6 +174,7 @@ class Aset extends BaseController
             $data = [
                 'id' => $result['id'],
                 'nama' => $result['nama'],
+                'kode' => $result['kode'],
                 'tglPerolehan' => $result['tgl_perolehan'],
                 'hargaPerolehan' => $result['harga'],
                 'usiaTeknis' => $result['usia_teknis']
@@ -201,6 +212,13 @@ class Aset extends BaseController
                         'is_unique' => '{field} sudah terdaftar! {field} tidak boleh sama dengan yang sudah terdaftar'
                     ]
                 ],
+                'kode' => [
+                    'label' => 'Kode Barang',
+                    'rules' => 'required',
+                    'errors' => [
+                        'required' => '{field} tidak boleh kosong!'
+                    ]
+                ],
                 'tglPerolehan' => [
                     'label' => 'Tanggal Perolehan',
                     'rules' => 'required',
@@ -228,6 +246,7 @@ class Aset extends BaseController
                 $msg = [
                     'error' => [
                         'nama' => $validation->getError('nama'),
+                        'kode' => $validation->getError('kode'),
                         'tglPerolehan' => $validation->getError('tglPerolehan'),
                         'hargaPerolehan' => $validation->getError('hargaPerolehan'),
                         'usiaTeknis' => $validation->getError('usiaTeknis')
@@ -237,6 +256,7 @@ class Aset extends BaseController
                 // update ke DB
                 $updatedData = [
                     'nama' => $this->request->getVar('nama'),
+                    'kode' => $this->request->getVar('kode'),
                     'tgl_perolehan' => $this->request->getVar('tglPerolehan'),
                     'harga' => $this->request->getVar('hargaPerolehan'),
                     'usia_teknis' => $this->request->getVar('usiaTeknis')

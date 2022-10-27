@@ -18,6 +18,11 @@
                     <div class="invalid-feedback errorNama"></div>
                 </div>
                 <div class="form-group">
+                    <label for="kode">Kode Barang</label>
+                    <input type="text" class="form-control" id="kode" name="kode">
+                    <div class="invalid-feedback errorKode"></div>
+                </div>
+                <div class="form-group">
                     <label for="tglPerolehan">Tanggal Perolehan</label>
                     <input type="date" class="form-control" id="tglPerolehan" name="tglPerolehan">
                     <div class="invalid-feedback errorTgl"></div>
@@ -85,6 +90,15 @@
                             $('#nama').removeClass('is-invalid');
                             $('#nama').addClass('is-valid');
                             $('.errorNama').html('');
+                        }
+
+                        if (response.error.kode) {
+                            $('#kode').addClass('is-invalid');
+                            $('.errorKode').html(response.error.kode);
+                        } else {
+                            $('#kode').removeClass('is-invalid');
+                            $('#kode').addClass('is-valid');
+                            $('.errorKode').html('');
                         }
 
                         if (response.error.tglPerolehan) {
