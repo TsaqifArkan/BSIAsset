@@ -223,9 +223,10 @@ class Transaksi extends BaseController
         $nama = str_replace(' ', '', strtolower($namaKode['nama']));
 
         $filename = date('YmdHis') . '_' . $nama . '_' . $namaKode['kode'] . '.xlsx';
-        header("Content-Description: File Transfer");
-        header("Content-Disposition: attachment; filename=$filename");
-        header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;");
+        // Try to follow Library Guide on 09/11/22 09.00, so these 3 line Deprecated
+        // header("Content-Description: File Transfer");
+        // header("Content-Disposition: attachment; filename=$filename");
+        // header("Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;");
 
         // Query - Get Data
         $dataTransaksi = $this->builder->join('brgcetak', 'brgcetak.id = transaksi.id_brgcetak')->select('transaksi.tanggal AS tgl, nama, kode, jumlah, harga, d_k, keterangan')->where('transaksi.id_brgcetak', $id)->get()->getResultArray();
@@ -286,7 +287,9 @@ class Transaksi extends BaseController
         // dd($AllArray, $newArray1);
 
         $xlsx = \Shuchkin\SimpleXLSXGen::fromArray($AllArray);
-        $xlsx->saveAs('php://output'); // or downloadAs('books.xlsx') or $xlsx_content = (string) $xlsx 
-        exit;
+        // Try to follow Library Guide on 09/11/22 09.00, so these 2 line Deprecated
+        // $xlsx->saveAs('php://output'); // or downloadAs('books.xlsx') or $xlsx_content = (string) $xlsx 
+        // exit;
+        $xlsx->downloadAs($filename);
     }
 }
