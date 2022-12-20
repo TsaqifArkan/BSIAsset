@@ -13,6 +13,6 @@ class BrgCetakModel extends Model
     protected $allowedFields = ['nama', 'kode', 'tanggal', 'stok'];
     protected $useTimestamps = true;
     protected $dateFormat = 'date';
-    protected $createdField = '';
+    protected $createdField = 'tanggal';
     protected $updatedField = '';
 }
